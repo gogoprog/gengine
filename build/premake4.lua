@@ -25,17 +25,8 @@ solution "gengine"
             }
 
         includedirs {
-            "../src/kernel",
-            "../src/core",
-            "../src/math",
             "../src/application",
-            "../src/graphics",
-            "../src/audio",
-            "../src/input",
-            "../src/script",
-            "../src/entity",
-            "../src/gui",
-            "../src/tiled"
+            "../src/gui"
             }
 
         links {
@@ -62,15 +53,6 @@ solution "gengine"
             flags { "StaticRuntime" }
         end
 
-        includedirs {
-            "../deps/common/include",
-            "../deps/common/jsonxx"
-            }
-
-        files {
-            "../deps/common/jsonxx/*.*"
-            }
-
         configuration "Debug*"
             defines { "DEBUG" }
             flags { "Symbols" }
@@ -86,8 +68,7 @@ solution "gengine"
             libdirs { "../deps/emscripten/lib" }
             includedirs { "../deps/emscripten/include" }
             includedirs {
-                "../deps/emscripten/include/Urho3D/ThirdParty",
-                "../deps/emscripten/include/Urho3D/ThirdParty/Lua"
+                "../deps/emscripten/include/Urho3D/ThirdParty"
                 }
             targetsuffix ".bc"
             if not os.is("windows") then
@@ -95,19 +76,23 @@ solution "gengine"
             end
 
         configuration "not *Emscripten"
+            defines { "CEF" }
+
+            includedirs {
+                "../deps/common/libembindcefv8/src/"
+                }
+
+            files {
+                "../deps/common/libembindcefv8/src/*.*"
+                }
+
             if os.is("linux") then
                 includedirs { "../deps/linux/include" }
                 includedirs { "../deps/linux/include/cef" }
                 includedirs {
-                    "../deps/linux/include/Urho3D/ThirdParty",
-                    "../deps/linux/include/Urho3D/ThirdParty/Lua"
+                    "../deps/linux/include/Urho3D/ThirdParty"
                     }
                 links {
-                    "SDL2",
-                    "SDL2_image",
-                    "SDL2_mixer",
-                    "SDL2_ttf",
-                    "GL",
                     "cef",
                     "cef_dll_wrapper",
                     "pthread",
@@ -121,10 +106,6 @@ solution "gengine"
                 includedirs { "../deps/windows/include/cef" }
                 libdirs { "../deps/windows/lib" }
                 links {
-                    "SDL2",
-                    "SDL2_image",
-                    "SDL2_mixer",
-                    "SDL2_ttf",
                     "OpenGL32",
                     "libcef",
                     "libcef_dll_wrapper",
