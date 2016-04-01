@@ -1,0 +1,3 @@
+[submodule "deps/common/libembindcefv8"]
+	path = deps/common/libembindcefv8
+	url = git@github.com:gogoprog/libembindcefv8.git
