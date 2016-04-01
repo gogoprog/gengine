@@ -26,7 +26,8 @@ solution "gengine"
 
         includedirs {
             "../src/application",
-            "../src/gui"
+            "../src/gui",
+            "../src/kernel"
             }
 
         links {

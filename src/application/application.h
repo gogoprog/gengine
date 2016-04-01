@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Urho3D/Engine/Application.h>
+#include <Urho3D/UI/UI.h>
 
 namespace gengine
 {
@@ -20,6 +21,12 @@ public:
 
     inline void run() { Run(); }
 
+    inline uint getWidth() const { return width; }
+    inline uint getHeight() const { return height; }
+
+    inline Urho3D::Context * getContext() { return context_; }
+    inline Urho3D::UI & getUI() { return *GetSubsystem<Urho3D::UI>(); }
+
     void update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
 
 private:
@@ -29,9 +36,11 @@ private:
         fullscreen,
         mustQuit;
     uint
-        width = 640,
-        height = 480;
+        width,
+        height;
 };
+
+App & get();
 
 }
 }

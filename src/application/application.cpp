@@ -1,5 +1,6 @@
-#include "app.h"
+#include "application.h"
 
+#include "gui_system.h"
 #include <string>
 
 #include <Urho3D/Core/CoreEvents.h>
@@ -22,6 +23,13 @@
 #include <Urho3D/Scene/SceneEvents.h>
 
 using namespace Urho3D;
+
+SharedPtr<gengine::application::App>
+    mainApp;
+int
+    _argc;
+char
+    ** _argv;
 
 namespace gengine
 {
@@ -56,7 +64,7 @@ void App::Setup()
 
 void App::Start()
 {
-    //gui::System::getInstance().init(core::getArgc(), core::getArgv());
+    gui::System::getInstance().init(_argc, _argv);
 
     SubscribeToEvent(E_UPDATE, URHO3D_HANDLER(App, update));
 
@@ -85,5 +93,18 @@ void App::update(StringHash eventType, VariantMap& eventData)
     }
 }
 
+App & get()
+{
+    return *mainApp;
 }
+
+}
+}
+
+int main(int argc, char *argv[])
+{
+    gengine::gui::System::getInstance().preinit(argc, argv);
+    mainApp = new gengine::application::App(new Context());
+
+    return mainApp->Run();
 }
