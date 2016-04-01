@@ -1,0 +1,5 @@
+#!/bin/bash
+
+wget http://dl.bintray.com/gogoprog/gengine/windows-32.tar.gz
+tar xvfz windows-32.tar.gz
+
