@@ -93,6 +93,7 @@ solution "gengine"
                     "../deps/linux/include/Urho3D/ThirdParty"
                     }
                 links {
+                    "GL",
                     "cef",
                     "cef_dll_wrapper",
                     "pthread",

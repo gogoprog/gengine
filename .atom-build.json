@@ -1,0 +1,11 @@
+{
+  "cmd": "make",
+  "name": "debug",
+  "args": [ "config=debug64", "-j8" ],
+  "sh": false,
+  "cwd": "{PROJECT_PATH}/build/",
+  "env": {
+  },
+  "errorMatch": "\n(?<file>[\\/0-9a-zA-Z\\._]+):(?<line>\\d+):(?<col>\\d+)",
+  "keymap": "f7"
+}
