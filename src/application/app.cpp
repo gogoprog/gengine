@@ -1,4 +1,4 @@
-#include "application.h"
+#include "app.h"
 
 #include <string>
 
@@ -21,14 +21,16 @@
 #include <Urho3D/Scene/Scene.h>
 #include <Urho3D/Scene/SceneEvents.h>
 
+using namespace Urho3D;
+
 namespace gengine
 {
 namespace application
 {
 
-Application::Application(Urho3D::Context* context)
+App::App(Context* context)
     :
-    Urho3D::Application(context),
+    Application(context),
     name("Unnamed"),
     fullscreen(false),
     mustQuit(false),
@@ -37,7 +39,7 @@ Application::Application(Urho3D::Context* context)
 {
 }
 
-void Application::Setup()
+void App::Setup()
 {
     engineParameters_["LogName"] = "gengine.log";
     engineParameters_["LogLevel"] = "Debug";
@@ -49,33 +51,33 @@ void Application::Setup()
     engineParameters_["WindowTitle"] = name;
     engineParameters_["ResourcePaths"] = "data;coreData;";
 
-    engineParameters_["ResourcePrefixPaths"] = (Urho3D::String(GetSubsystem<Urho3D::FileSystem>()->GetCurrentDir().CString()) + ";" + Urho3D::String(getenv("GENGINE")) + "/res/");
+    engineParameters_["ResourcePrefixPaths"] = (String(GetSubsystem<FileSystem>()->GetCurrentDir().CString()) + ";" + String(getenv("GENGINE")) + "/res/");
 }
 
-void Application::Start()
+void App::Start()
 {
     //gui::System::getInstance().init(core::getArgc(), core::getArgv());
 
-    SubscribeToEvent(Urho3D::E_UPDATE, URHO3D_HANDLER(Application, update));
+    SubscribeToEvent(E_UPDATE, URHO3D_HANDLER(App, update));
 
-    Urho3D::SharedPtr<Urho3D::Scene> scene_(new Urho3D::Scene(context_));
-    scene_->CreateComponent<Urho3D::Octree>();
+    SharedPtr<Scene> scene_(new Scene(context_));
+    scene_->CreateComponent<Octree>();
 
     auto cameraNode_ = scene_->CreateChild("Camera");
-    auto camera = cameraNode_->CreateComponent<Urho3D::Camera>();
+    auto camera = cameraNode_->CreateComponent<Camera>();
     camera->SetOrthographic(true);
-    camera->SetOrthoSize(Urho3D::Vector2(float(width), float(height)));
+    camera->SetOrthoSize(Vector2(float(width), float(height)));
 
-    auto renderer = GetSubsystem<Urho3D::Renderer>();
-    auto viewport = new Urho3D::Viewport(context_, scene_, cameraNode_->GetComponent<Urho3D::Camera>());
+    auto renderer = GetSubsystem<Renderer>();
+    auto viewport = new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>());
     renderer->SetViewport(0, viewport);
 }
 
-void Application::Stop()
+void App::Stop()
 {
 }
 
-void Application::update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData)
+void App::update(StringHash eventType, VariantMap& eventData)
 {
     if(mustQuit)
     {

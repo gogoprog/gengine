@@ -1,19 +1,18 @@
 #pragma once
 
 #include <Urho3D/Engine/Application.h>
-#include <Urho3D/Scene/Scene.h>
 
 namespace gengine
 {
 namespace application
 {
 
-class Application : public Urho3D::Application
+class App : public Urho3D::Application
 {
-    URHO3D_OBJECT(Application, Application);
+    URHO3D_OBJECT(App, Application);
 
 public:
-    Application(Urho3D::Context* context);
+    App(Urho3D::Context* context);
 
     virtual void Setup() override;
     virtual void Start() override;
