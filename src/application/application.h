@@ -19,7 +19,9 @@ public:
     virtual void Start() override;
     virtual void Stop() override;
 
-    void Update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
+    inline void run() { Run(); }
+
+    void update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
 
 private:
     Urho3D::String

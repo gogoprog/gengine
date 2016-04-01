@@ -56,7 +56,7 @@ void Application::Start()
 {
     //gui::System::getInstance().init(core::getArgc(), core::getArgv());
 
-    SubscribeToEvent(Urho3D::E_UPDATE, URHO3D_HANDLER(Application, Update));
+    SubscribeToEvent(Urho3D::E_UPDATE, URHO3D_HANDLER(Application, update));
 
     Urho3D::SharedPtr<Urho3D::Scene> scene_(new Urho3D::Scene(context_));
     scene_->CreateComponent<Urho3D::Octree>();
@@ -75,7 +75,7 @@ void Application::Stop()
 {
 }
 
-void Application::Update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData)
+void Application::update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData)
 {
     if(mustQuit)
     {
