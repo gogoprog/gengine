@@ -2,6 +2,7 @@
 
 #include <Urho3D/Engine/Application.h>
 #include <Urho3D/UI/UI.h>
+#include <Urho3D/IO/FileSystem.h>
 
 namespace gengine
 {
@@ -26,10 +27,14 @@ public:
 
     inline Urho3D::Context * getContext() { return context_; }
     inline Urho3D::UI & getUI() { return *GetSubsystem<Urho3D::UI>(); }
+    inline Urho3D::FileSystem & getFileSystem() { return *GetSubsystem<Urho3D::FileSystem>(); }
 
     void update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
 
 private:
+
+    void loadScriptFile(const Urho3D::String & str);
+
     Urho3D::String
         name;
     bool

@@ -59,7 +59,7 @@ void App::Setup()
     engineParameters_["WindowTitle"] = name;
     engineParameters_["ResourcePaths"] = "data;coreData;";
 
-    engineParameters_["ResourcePrefixPaths"] = (String(GetSubsystem<FileSystem>()->GetCurrentDir().CString()) + ";" + String(getenv("GENGINE")) + "/res/");
+    engineParameters_["ResourcePrefixPaths"] = (String(getFileSystem().GetCurrentDir().CString()) + ";" + String(getenv("GENGINE")) + "/res/");
 }
 
 void App::Start()
@@ -79,6 +79,8 @@ void App::Start()
     auto renderer = GetSubsystem<Renderer>();
     auto viewport = new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>());
     renderer->SetViewport(0, viewport);
+
+    loadScriptFile("data/main.js");
 }
 
 void App::Stop()
@@ -92,6 +94,12 @@ void App::update(StringHash eventType, VariantMap& eventData)
         engine_->Exit();
     }
 }
+
+void App::loadScriptFile(const Urho3D::String & str)
+{
+
+}
+
 
 App & get()
 {
