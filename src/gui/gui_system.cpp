@@ -71,8 +71,6 @@ void System::init(int argc, char *argv[])
         settings.size = sizeof(CefSettings);
 
         CefInitialize(args, settings, app.get(), nullptr);
-
-        timeSinceLastUpdate = 0.0f;
     }
     #endif
 }
@@ -92,12 +90,10 @@ void System::finalize()
     #endif
 }
 
-void System::update(const float dt)
+void System::update()
 {
     #ifndef EMSCRIPTEN
     {
-        timeSinceLastUpdate += dt;
-
         {
             /*CefMouseEvent mouse_event;
             const input::System & input = input::System::getInstance();

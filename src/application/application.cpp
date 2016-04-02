@@ -1,7 +1,7 @@
 #include "application.h"
 
 #include "gui_system.h"
-#include <string>
+#include "embindcefv8.h"
 
 #include <Urho3D/Core/CoreEvents.h>
 #include <Urho3D/Core/Timer.h>
@@ -89,6 +89,8 @@ void App::Stop()
 
 void App::update(StringHash eventType, VariantMap& eventData)
 {
+    gui::System::getInstance().update();
+
     if(mustQuit)
     {
         engine_->Exit();
@@ -97,7 +99,14 @@ void App::update(StringHash eventType, VariantMap& eventData)
 
 void App::loadScriptFile(const Urho3D::String & str)
 {
+    char
+        buffer[10240+1];
 
+    auto file = getResourceCache().GetFile(str);
+    auto bytes_read = file->Read(buffer, 10240);
+    buffer[bytes_read] = 0;
+
+    embindcefv8::executeJavaScript(buffer);
 }
 
 

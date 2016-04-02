@@ -3,6 +3,7 @@
 
 #include "gui_system.h"
 #include "include/cef_client.h"
+#include "embindcefv8.h"
 
 namespace gengine
 {
@@ -11,8 +12,7 @@ namespace gui
 
 void App::OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context)
 {
-    CefRefPtr<CefV8Value> global_object = context->GetGlobal();
-
+    embindcefv8::onContextCreated(context);
 }
 
 void App::OnContextInitialized()
@@ -25,6 +25,7 @@ void App::OnContextInitialized()
     CefBrowserSettings browser_settings;
 
     System::getInstance().browser = CefBrowserHost::CreateBrowserSync(window_info, & System::getInstance().getHandler(), "about:blank", browser_settings, nullptr);
+    embindcefv8::setBrowser(System::getInstance().browser);
 }
 
 void App::OnRegisterCustomSchemes(CefRefPtr<CefSchemeRegistrar> registrar)

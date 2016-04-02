@@ -3,6 +3,7 @@
 #include <Urho3D/Engine/Application.h>
 #include <Urho3D/UI/UI.h>
 #include <Urho3D/IO/FileSystem.h>
+#include <Urho3D/Resource/ResourceCache.h>
 
 namespace gengine
 {
@@ -28,6 +29,7 @@ public:
     inline Urho3D::Context * getContext() { return context_; }
     inline Urho3D::UI & getUI() { return *GetSubsystem<Urho3D::UI>(); }
     inline Urho3D::FileSystem & getFileSystem() { return *GetSubsystem<Urho3D::FileSystem>(); }
+    inline Urho3D::ResourceCache & getResourceCache() { return *GetSubsystem<Urho3D::ResourceCache>(); }
 
     void update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
 

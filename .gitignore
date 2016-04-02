@@ -42,7 +42,6 @@ deps/*/lib*/*.txt
 deps/*/lib*/libcef_dll_wrapper*
 *.tar.gz
 *.data
-*.js
 deps/**/*.a
 deps/**/*.make
 deps/**/Makefile

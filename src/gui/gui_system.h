@@ -18,7 +18,7 @@ public:
     void preinit(int argc, char *argv[]);
     void init(int argc, char *argv[]);
     void finalize();
-    void update(const float dt);
+    void update();
     void loadFile(const char *file_path);
     void executeScript(const char *code);
     void showPage(const char *name, const char *effect, const int duration);
@@ -31,8 +31,6 @@ private:
         handler;
     CefRefPtr<CefBrowser>
         browser;
-    float
-        timeSinceLastUpdate;
 #endif
 };
 
