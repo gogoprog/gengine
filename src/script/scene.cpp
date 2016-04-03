@@ -6,5 +6,8 @@ using namespace Urho3D;
 
 EMBINDCEFV8_BINDINGS(scene)
 {
-    embindcefv8::Class<Node>("Node");
+    embindcefv8::Class<Node>("Node")
+        //.method("setPosition", &Node::SetPosition)
+        .method("getPosition", &Node::GetPosition)
+        ;
 }
