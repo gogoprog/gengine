@@ -5,6 +5,7 @@
 #include <Urho3D/IO/FileSystem.h>
 #include <Urho3D/Resource/ResourceCache.h>
 #include <Urho3D/Scene/Node.h>
+#include <Urho3D/Input/Input.h>
 
 namespace gengine
 {
@@ -31,6 +32,7 @@ public:
     inline Urho3D::UI & getUI() { return *GetSubsystem<Urho3D::UI>(); }
     inline Urho3D::FileSystem & getFileSystem() { return *GetSubsystem<Urho3D::FileSystem>(); }
     inline Urho3D::ResourceCache & getResourceCache() { return *GetSubsystem<Urho3D::ResourceCache>(); }
+    inline Urho3D::Input & getInput() { return *GetSubsystem<Urho3D::Input>(); }
 
     void update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
 

@@ -66,6 +66,8 @@ void App::Start()
 {
     gui::System::getInstance().init(_argc, _argv);
 
+    getInput().SetMouseVisible(true);
+
     SubscribeToEvent(E_UPDATE, URHO3D_HANDLER(App, update));
 
     SharedPtr<Scene> scene_(new Scene(context_));
