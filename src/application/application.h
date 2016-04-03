@@ -4,6 +4,7 @@
 #include <Urho3D/UI/UI.h>
 #include <Urho3D/IO/FileSystem.h>
 #include <Urho3D/Resource/ResourceCache.h>
+#include <Urho3D/Scene/Node.h>
 
 namespace gengine
 {
@@ -32,6 +33,8 @@ public:
     inline Urho3D::ResourceCache & getResourceCache() { return *GetSubsystem<Urho3D::ResourceCache>(); }
 
     void update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
+
+    Urho3D::Node & createNode();
 
 private:
 

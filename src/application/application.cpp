@@ -97,6 +97,11 @@ void App::update(StringHash eventType, VariantMap& eventData)
     }
 }
 
+Node & App::createNode()
+{
+    return * new Node(context_);
+}
+
 void App::loadScriptFile(const Urho3D::String & str)
 {
     char
