@@ -18,8 +18,11 @@ console.log(v.z);
 
 function update()
 {
-    if(Module.Application.getInput().getScancodeDown(41))
+    if(Module.Application.getInput().getMouseButtonPress(1))
     {
-        console.log('oui!');
+        var mousePosition = Module.Application.getInput().getMousePosition();
+
+        console.log(mousePosition.x);
+        console.log(mousePosition.y);
     }
 }

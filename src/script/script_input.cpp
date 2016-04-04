@@ -11,5 +11,8 @@ EMBINDCEFV8_BINDINGS(input)
         .method("getKeyDown", &Input::GetKeyDown)
         .method("getScancodeDown", &Input::GetScancodePress)
         .method("getScancodeDown", &Input::GetScancodeDown)
+        .method("getMouseButtonPress", &Input::GetMouseButtonPress)
+        .method("getMouseButtonDown", &Input::GetMouseButtonDown)
+        .method("getMousePosition", &Input::GetMousePosition)
         ;
 }
