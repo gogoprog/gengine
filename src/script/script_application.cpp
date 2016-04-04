@@ -7,6 +7,7 @@ using namespace gengine::application;
 EMBINDCEFV8_BINDINGS(application)
 {
     embindcefv8::Class<App>("App")
+        .method("getInput", &App::getInput)
         .method("createNode", &App::createNode)
         ;
 

@@ -11,8 +11,15 @@ console.log(v.z);
 
 node.setPosition(Module.Vector3(4, 5, 6));
 
-
 v = node.getPosition();
 console.log(v.x);
 console.log(v.y);
 console.log(v.z);
+
+function update()
+{
+    if(Module.Application.getInput().getScancodeDown(41))
+    {
+        console.log('oui!');
+    }
+}

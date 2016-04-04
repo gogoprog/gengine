@@ -92,6 +92,7 @@ void App::Stop()
 void App::update(StringHash eventType, VariantMap& eventData)
 {
     gui::System::getInstance().update();
+    embindcefv8::executeJavaScript("update()");
 
     if(mustQuit)
     {
