@@ -1,3 +1,4 @@
+
 console.log('Hello World');
 
 var v = new Module.Vector3(16, 0, 0);
@@ -16,7 +17,11 @@ console.log(v.x);
 console.log(v.y);
 console.log(v.z);
 
-node.createComponentStaticSprite2D(0, 0);
+var sprite = Module.Application.getResourceCache("data/Textures/Spot.png", true);
+
+var static_sprite_2d = node.createComponentStaticSprite2D(0, 0);
+
+static_sprite_2d.setSprite(sprite);
 
 function update(dt)
 {
