@@ -91,8 +91,16 @@ void App::Stop()
 
 void App::update(StringHash eventType, VariantMap& eventData)
 {
+    using namespace Update;
+    float timeStep = eventData[P_TIMESTEP].GetFloat();
+    String code;
+
+    code = "update(";
+    code += timeStep;
+    code += ");";
+
     gui::System::getInstance().update();
-    embindcefv8::executeJavaScript("update()");
+    embindcefv8::executeJavaScript(code.CString());
 
     if(mustQuit)
     {

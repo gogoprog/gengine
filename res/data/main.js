@@ -16,7 +16,7 @@ console.log(v.x);
 console.log(v.y);
 console.log(v.z);
 
-function update()
+function update(dt)
 {
     if(Module.Application.getInput().getMouseButtonPress(1))
     {
@@ -24,5 +24,7 @@ function update()
 
         console.log(mousePosition.x);
         console.log(mousePosition.y);
+
+        console.log("timeStep " + dt);
     }
 }
