@@ -16,6 +16,8 @@ console.log(v.x);
 console.log(v.y);
 console.log(v.z);
 
+node.createComponentStaticSprite2D(0, 0);
+
 function update(dt)
 {
     if(Module.Application.getInput().getMouseButtonPress(1))
