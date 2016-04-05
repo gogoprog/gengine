@@ -5,6 +5,8 @@
 
 using namespace Urho3D;
 
+DECLARE_STRING(String, CString)
+
 EMBINDCEFV8_BINDINGS(resource)
 {
     embindcefv8::Class<ResourceCache>("ResourceCache")
