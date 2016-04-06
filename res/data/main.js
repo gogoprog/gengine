@@ -17,8 +17,7 @@ console.log(v.x);
 console.log(v.y);
 console.log(v.z);
 
-var sprite = Module.Application.getResourceCache().getSprite2D("data/Textures/Spot.png", true);
-
+var sprite = Module.Application.getSprite2D("Textures/Spot.png");
 var static_sprite_2d = node.createComponentStaticSprite2D(0, 0);
 
 static_sprite_2d.setSprite(sprite);

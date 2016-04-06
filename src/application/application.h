@@ -24,6 +24,10 @@ public:
     virtual void Stop() override;
 
     inline void run() { Run(); }
+    int setup();
+    void start();
+    void runFrame();
+    void stop();
 
     inline uint getWidth() const { return width; }
     inline uint getHeight() const { return height; }
@@ -38,6 +42,14 @@ public:
 
     Urho3D::Node & createNode();
 
+    template<class T>
+    T * getResource (const Urho3D::String &name)
+    {
+        return & dynamic_cast<T & >(* resources[name]);
+    }
+
+    static void init();
+
 private:
 
     void loadScriptFile(const Urho3D::String & str);
@@ -50,6 +62,8 @@ private:
     uint
         width,
         height;
+    Urho3D::HashMap<Urho3D::StringHash, Urho3D::SharedPtr<Urho3D::Resource>>
+        resources;
 };
 
 App & get();

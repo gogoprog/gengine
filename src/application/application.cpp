@@ -14,6 +14,7 @@
 #include <Urho3D/Graphics/Octree.h>
 #include <Urho3D/Graphics/Renderer.h>
 #include <Urho3D/Graphics/Texture2D.h>
+#include <Urho3D/Urho2D/Sprite2D.h>
 #include <Urho3D/Input/Input.h>
 #include <Urho3D/Input/InputEvents.h>
 #include <Urho3D/IO/FileSystem.h>
@@ -58,13 +59,12 @@ void App::Setup()
     engineParameters_["WindowHeight"] = height;
     engineParameters_["WindowTitle"] = name;
     engineParameters_["ResourcePaths"] = "data;coreData;";
-
     engineParameters_["ResourcePrefixPaths"] = (String(getFileSystem().GetCurrentDir().CString()) + ";" + String(getenv("GENGINE")) + "/res/");
 }
 
 void App::Start()
 {
-    gui::System::getInstance().init(_argc, _argv);
+    gengine::gui::System::getInstance().init(_argc, _argv);
 
     getInput().SetMouseVisible(true);
 
@@ -82,11 +82,44 @@ void App::Start()
     auto viewport = new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>());
     renderer->SetViewport(0, viewport);
 
+    resources["Textures/Spot.png"] = getResourceCache().GetResource<Sprite2D>("Textures/Spot.png");
+
     loadScriptFile("data/main.js");
 }
 
 void App::Stop()
 {
+}
+
+int App::setup()
+{
+    Setup();
+
+    if (exitCode_)
+       return exitCode_;
+
+    if (!engine_->Initialize(engineParameters_))
+    {
+       ErrorExit();
+       return exitCode_;
+    }
+
+    return 0;
+}
+
+void App::start()
+{
+    Start();
+}
+
+void App::runFrame()
+{
+    engine_->RunFrame();
+}
+
+void App::stop()
+{
+    Stop();
 }
 
 void App::update(StringHash eventType, VariantMap& eventData)
@@ -113,6 +146,11 @@ Node & App::createNode()
     return * new Node(context_);
 }
 
+void App::init()
+{
+    mainApp = new gengine::application::App(new Context());
+}
+
 void App::loadScriptFile(const Urho3D::String & str)
 {
     char
@@ -124,7 +162,6 @@ void App::loadScriptFile(const Urho3D::String & str)
 
     embindcefv8::executeJavaScript(buffer);
 }
-
 
 App & get()
 {
@@ -139,5 +176,5 @@ int main(int argc, char *argv[])
     gengine::gui::System::getInstance().preinit(argc, argv);
     mainApp = new gengine::application::App(new Context());
 
-    return mainApp->Run();
+    mainApp->run();
 }

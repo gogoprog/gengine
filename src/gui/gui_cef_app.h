@@ -21,7 +21,7 @@ public:
     virtual CefRefPtr<CefRenderProcessHandler> GetRenderProcessHandler() override { return this; }
     virtual void OnContextCreated(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefV8Context> context) override;
     virtual void OnContextInitialized() override;
-    virtual void OnRegisterCustomSchemes(CefRefPtr<CefSchemeRegistrar> registrar) override;
+    virtual bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message) override;
 
 private:
 
