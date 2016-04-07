@@ -1,6 +1,6 @@
 var node = application.createNode();
 
-var sprite = application.getSprite2D("Textures/Spot.png");
+var sprite = application.getResourceCache().getSprite2D("Textures/Spot.png", true);
 var static_sprite_2d = node.createComponentStaticSprite2D(0, 0);
 
 static_sprite_2d.setSprite(sprite);

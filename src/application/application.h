@@ -28,7 +28,6 @@ public:
     void start();
     void runFrame();
     void stop();
-    void updateFrame();
 
     inline uint getWidth() const { return width; }
     inline uint getHeight() const { return height; }
@@ -43,13 +42,6 @@ public:
 
     Urho3D::Node & createNode();
 
-    template<class T>
-    T * getResource(const Urho3D::String &name)
-    {
-        auto r = & dynamic_cast<T & >(* resources[name]);
-        return r;
-    }
-
 private:
 
     Urho3D::String
@@ -60,8 +52,6 @@ private:
     uint
         width,
         height;
-    Urho3D::HashMap<Urho3D::StringHash, Urho3D::SharedPtr<Urho3D::Resource>>
-        resources;
     Urho3D::SharedPtr<Urho3D::Scene>
         scene;
 };

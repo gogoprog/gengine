@@ -84,8 +84,6 @@ void App::Start()
     auto renderer = GetSubsystem<Renderer>();
     auto viewport = new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>());
     renderer->SetViewport(0, viewport);
-
-    resources["Textures/Spot.png"] = getResourceCache().GetResource<Sprite2D>("Textures/Spot.png");
 }
 
 void App::Stop()
@@ -124,11 +122,6 @@ void App::stop()
     Stop();
 }
 
-void App::updateFrame()
-{
-    engine_->Update();
-}
-
 void App::update(StringHash eventType, VariantMap& eventData)
 {
     using namespace Update;
@@ -138,9 +131,6 @@ void App::update(StringHash eventType, VariantMap& eventData)
     code = "update(";
     code += timeStep;
     code += ");";
-
-    //gui::System::getInstance().update();
-    //embindcefv8::executeJavaScript(code.CString());
 
     if(mustQuit)
     {
@@ -166,7 +156,6 @@ void loadScriptFile(const char *filename)
     std::ifstream in(filename);
     std::string contents((std::istreambuf_iterator<char>(in)),
     std::istreambuf_iterator<char>());
-
 
     contents = "application = new Module.App(); application.setup(); application.start();" + contents;
     contents += R"(
