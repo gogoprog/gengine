@@ -1,5 +1,5 @@
-#include "gui_system.h"
 
+#include "gui_system.h"
 #include "gui_cef_app.h"
 #include "embindcefv8.h"
 
@@ -72,9 +72,6 @@ void System::init(int argc, char *argv[])
         settings.size = sizeof(CefSettings);
 
         CefInitialize(args, settings, app.get(), nullptr);
-
-        //CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("gengineInit");
-        //browser->SendProcessMessage(PID_RENDERER, msg);
     }
     #endif
 }
@@ -127,9 +124,6 @@ void System::update()
         }
 
         CefDoMessageLoopWork();
-
-        //CefRefPtr<CefProcessMessage> msg = CefProcessMessage::Create("gengineUpdate");
-        //browser->SendProcessMessage(PID_RENDERER, msg);
     }
     #endif
 }

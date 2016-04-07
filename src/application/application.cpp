@@ -2,9 +2,11 @@
 
 #include "gui_system.h"
 #include "embindcefv8.h"
+#include <fstream>
 
 #include <Urho3D/Core/CoreEvents.h>
 #include <Urho3D/Core/Timer.h>
+#include <Urho3D/Core/Thread.h>
 #include <Urho3D/Engine/Application.h>
 #include <Urho3D/Engine/Console.h>
 #include <Urho3D/Engine/DebugHud.h>
@@ -37,9 +39,9 @@ namespace gengine
 namespace application
 {
 
-App::App(Context* context)
+App::App()
     :
-    Application(context),
+    Application(new Context()),
     name("Unnamed"),
     fullscreen(false),
     mustQuit(false),
@@ -71,6 +73,7 @@ void App::Start()
     SubscribeToEvent(E_UPDATE, URHO3D_HANDLER(App, update));
 
     SharedPtr<Scene> scene_(new Scene(context_));
+    scene = scene_;
     scene_->CreateComponent<Octree>();
 
     auto cameraNode_ = scene_->CreateChild("Camera");
@@ -83,8 +86,6 @@ void App::Start()
     renderer->SetViewport(0, viewport);
 
     resources["Textures/Spot.png"] = getResourceCache().GetResource<Sprite2D>("Textures/Spot.png");
-
-    loadScriptFile("data/main.js");
 }
 
 void App::Stop()
@@ -114,12 +115,18 @@ void App::start()
 
 void App::runFrame()
 {
+    Thread::SetMainThread();
     engine_->RunFrame();
 }
 
 void App::stop()
 {
     Stop();
+}
+
+void App::updateFrame()
+{
+    engine_->Update();
 }
 
 void App::update(StringHash eventType, VariantMap& eventData)
@@ -132,8 +139,8 @@ void App::update(StringHash eventType, VariantMap& eventData)
     code += timeStep;
     code += ");";
 
-    gui::System::getInstance().update();
-    embindcefv8::executeJavaScript(code.CString());
+    //gui::System::getInstance().update();
+    //embindcefv8::executeJavaScript(code.CString());
 
     if(mustQuit)
     {
@@ -143,24 +150,7 @@ void App::update(StringHash eventType, VariantMap& eventData)
 
 Node & App::createNode()
 {
-    return * new Node(context_);
-}
-
-void App::init()
-{
-    mainApp = new gengine::application::App(new Context());
-}
-
-void App::loadScriptFile(const Urho3D::String & str)
-{
-    char
-        buffer[10240+1];
-
-    auto file = getResourceCache().GetFile(str);
-    auto bytes_read = file->Read(buffer, 10240);
-    buffer[bytes_read] = 0;
-
-    embindcefv8::executeJavaScript(buffer);
+    return * scene->CreateChild();
 }
 
 App & get()
@@ -171,10 +161,38 @@ App & get()
 }
 }
 
+void loadScriptFile(const char *filename)
+{
+    std::ifstream in(filename);
+    std::string contents((std::istreambuf_iterator<char>(in)),
+    std::istreambuf_iterator<char>());
+
+
+    contents = "application = new Module.App(); application.setup(); application.start();" + contents;
+    contents += R"(
+        while(1)
+        {
+            application.runFrame();
+            if(typeof update !== 'undefined')
+            {
+                update(0);
+            }
+        }
+        )";
+
+
+    embindcefv8::executeJavaScript(contents.c_str());
+}
+
 int main(int argc, char *argv[])
 {
     gengine::gui::System::getInstance().preinit(argc, argv);
-    mainApp = new gengine::application::App(new Context());
+    gengine::gui::System::getInstance().init(_argc, _argv);
 
-    mainApp->run();
+    loadScriptFile("data/main.js");
+
+    while(true)
+    {
+        gengine::gui::System::getInstance().update();
+    }
 }

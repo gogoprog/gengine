@@ -17,7 +17,7 @@ class App : public Urho3D::Application
     URHO3D_OBJECT(App, Application);
 
 public:
-    App(Urho3D::Context* context);
+    App();
 
     virtual void Setup() override;
     virtual void Start() override;
@@ -28,6 +28,7 @@ public:
     void start();
     void runFrame();
     void stop();
+    void updateFrame();
 
     inline uint getWidth() const { return width; }
     inline uint getHeight() const { return height; }
@@ -43,16 +44,13 @@ public:
     Urho3D::Node & createNode();
 
     template<class T>
-    T * getResource (const Urho3D::String &name)
+    T * getResource(const Urho3D::String &name)
     {
-        return & dynamic_cast<T & >(* resources[name]);
+        auto r = & dynamic_cast<T & >(* resources[name]);
+        return r;
     }
 
-    static void init();
-
 private:
-
-    void loadScriptFile(const Urho3D::String & str);
 
     Urho3D::String
         name;
@@ -64,6 +62,8 @@ private:
         height;
     Urho3D::HashMap<Urho3D::StringHash, Urho3D::SharedPtr<Urho3D::Resource>>
         resources;
+    Urho3D::SharedPtr<Urho3D::Scene>
+        scene;
 };
 
 App & get();

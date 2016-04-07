@@ -24,7 +24,7 @@ Handler::Handler()
 
 void Handler::init()
 {
-    uint width = application::get().getWidth();
+    /*uint width = application::get().getWidth();
     uint height = application::get().getHeight();
 
     texture = new Urho3D::Texture2D(application::get().getContext());
@@ -39,6 +39,7 @@ void Handler::init()
     sprite->SetColor(Urho3D::Color(1.0f, 1.0f, 1.0f, 1.0f));
     sprite->SetBlendMode(Urho3D::BLEND_ALPHA);
     application::get().getUI().GetRoot()->AddChild(sprite);
+    */
 }
 
 void Handler::finalize()
@@ -47,13 +48,13 @@ void Handler::finalize()
 
 bool Handler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect &rect)
 {
-    rect = CefRect(0, 0, application::get().getWidth(), application::get().getHeight());
+    //rect = CefRect(0, 0, application::get().getWidth(), application::get().getHeight());
     return true;
 }
 
 void Handler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height)
 {
-    texture->SetData(0, 0, 0, width, height, buffer);
+    //texture->SetData(0, 0, 0, width, height, buffer);
 }
 
 bool Handler::OnBeforeResourceLoad(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request)

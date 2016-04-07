@@ -1,5 +1,5 @@
-#ifndef EMSCRIPTEN
 #include "gui_cef_app.h"
+#ifndef EMSCRIPTEN
 
 #include "gui_system.h"
 #include "include/cef_client.h"
@@ -31,20 +31,6 @@ void App::OnContextInitialized()
 
 bool App::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message)
 {
-    if(message->GetName() == "gengineUpdate")
-    {
-        application::get().runFrame();
-        return true;
-    }
-    else if(message->GetName() == "gengineInit")
-    {
-        application::App::init();
-        //embindcefv8::addGlobalObject(application::get(), "Application");
-        application::get().setup();
-        application::get().start();
-        return true;
-    }
-
     return false;
 }
 
