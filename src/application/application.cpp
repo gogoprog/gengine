@@ -9,7 +9,6 @@
 #include <Urho3D/Core/Thread.h>
 #include <Urho3D/Engine/Application.h>
 #include <Urho3D/Engine/Console.h>
-#include <Urho3D/Engine/DebugHud.h>
 #include <Urho3D/Engine/Engine.h>
 #include <Urho3D/Graphics/Camera.h>
 #include <Urho3D/Graphics/Graphics.h>
