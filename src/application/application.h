@@ -38,7 +38,7 @@ public:
     inline Urho3D::ResourceCache & getResourceCache() { return *GetSubsystem<Urho3D::ResourceCache>(); }
     inline Urho3D::Input & getInput() { return *GetSubsystem<Urho3D::Input>(); }
 
-    void update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
+    inline float getTimeStep() { return engine_->GetNextTimeStep(); };
 
     Urho3D::Node & createNode();
 

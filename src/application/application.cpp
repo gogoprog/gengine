@@ -8,21 +8,20 @@
 #include <Urho3D/Core/Timer.h>
 #include <Urho3D/Core/Thread.h>
 #include <Urho3D/Engine/Application.h>
-#include <Urho3D/Engine/Console.h>
 #include <Urho3D/Engine/Engine.h>
 #include <Urho3D/Graphics/Camera.h>
 #include <Urho3D/Graphics/Graphics.h>
 #include <Urho3D/Graphics/Octree.h>
 #include <Urho3D/Graphics/Renderer.h>
-#include <Urho3D/Graphics/Texture2D.h>
-#include <Urho3D/Urho2D/Sprite2D.h>
 #include <Urho3D/Input/Input.h>
 #include <Urho3D/Input/InputEvents.h>
 #include <Urho3D/IO/FileSystem.h>
 #include <Urho3D/Resource/ResourceCache.h>
-#include <Urho3D/Resource/XMLFile.h>
 #include <Urho3D/Scene/Scene.h>
 #include <Urho3D/Scene/SceneEvents.h>
+
+#define STRING(src) \
+    #src
 
 using namespace Urho3D;
 
@@ -60,8 +59,6 @@ void App::Setup()
 void App::Start()
 {
     getInput().SetMouseVisible(true);
-
-    SubscribeToEvent(E_UPDATE, URHO3D_HANDLER(App, update));
 
     SharedPtr<Scene> scene_(new Scene(context_));
     scene = scene_;
@@ -113,22 +110,6 @@ void App::stop()
     Stop();
 }
 
-void App::update(StringHash eventType, VariantMap& eventData)
-{
-    using namespace Update;
-    float timeStep = eventData[P_TIMESTEP].GetFloat();
-    String code;
-
-    code = "update(";
-    code += timeStep;
-    code += ");";
-
-    if(mustQuit)
-    {
-        engine_->Exit();
-    }
-}
-
 Node & App::createNode()
 {
     return * scene->CreateChild();
@@ -146,32 +127,10 @@ void loadScriptFile(const char *filename)
     std::string contents((std::istreambuf_iterator<char>(in)),
     std::istreambuf_iterator<char>());
 
-    contents += R"(
-        application = application || {}
-        gengine = new Module.App();
+    const char application_js[] =
+        #include "application.js"
 
-        if(typeof application.init !== 'undefined')
-        {
-            application.init();
-        }
-        gengine.setup();
-        gengine.start();
-
-        if(typeof application.start !== 'undefined')
-        {
-            application.start(0);
-        }
-
-        while(1)
-        {
-            gengine.runFrame();
-            if(typeof application.update !== 'undefined')
-            {
-                application.update(0);
-            }
-        }
-        )";
-
+    contents += application_js;
 
     embindcefv8::executeJavaScript(contents.c_str());
 }

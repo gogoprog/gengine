@@ -15,5 +15,6 @@ EMBINDCEFV8_BINDINGS(application)
         .method("runFrame", &App::runFrame)
         .method("setup", &App::setup)
         .method("start", &App::start)
+        .method("getTimeStep", &App::getTimeStep)
         ;
 }
