@@ -33,11 +33,10 @@ namespace application
 App::App()
     :
     Application(new Context()),
-    name("Unnamed"),
+    windowTitle("gengine application"),
     fullscreen(false),
     mustQuit(false),
-    width(640),
-    height(480)
+    windowSize(640, 480)
 {
     instance = this;
 }
@@ -49,9 +48,9 @@ void App::Setup()
     engineParameters_["FullScreen"] = fullscreen;
     engineParameters_["Headless"] = false;
     engineParameters_["Sound"] = false;
-    engineParameters_["WindowWidth"] = width;
-    engineParameters_["WindowHeight"] = height;
-    engineParameters_["WindowTitle"] = name;
+    engineParameters_["WindowWidth"] = windowSize.x_;
+    engineParameters_["WindowHeight"] = windowSize.y_;
+    engineParameters_["WindowTitle"] = windowTitle;
     engineParameters_["ResourcePaths"] = "data;coreData;";
     engineParameters_["ResourcePrefixPaths"] = (String(getFileSystem().GetCurrentDir().CString()) + ";" + String(getenv("GENGINE")) + "/res/");
 }
@@ -67,7 +66,7 @@ void App::Start()
     auto cameraNode_ = scene_->CreateChild("Camera");
     auto camera = cameraNode_->CreateComponent<Camera>();
     camera->SetOrthographic(true);
-    camera->SetOrthoSize(Vector2(float(width), float(height)));
+    camera->SetOrthoSize(Vector2(windowSize.x_, windowSize.y_));
 
     auto renderer = GetSubsystem<Renderer>();
     auto viewport = new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>());

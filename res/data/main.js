@@ -4,6 +4,8 @@ var application = {};
 application.init = function()
 {
     console.log('application.init');
+    gengine.setWindowSize(Module.IntVector2(320, 240));
+    gengine.setWindowTitle("Test application");
 }
 
 application.start = function()

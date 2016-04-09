@@ -29,9 +29,6 @@ public:
     void runFrame();
     void stop();
 
-    inline uint getWidth() const { return width; }
-    inline uint getHeight() const { return height; }
-
     inline Urho3D::Context * getContext() { return context_; }
     inline Urho3D::UI & getUI() { return *GetSubsystem<Urho3D::UI>(); }
     inline Urho3D::FileSystem & getFileSystem() { return *GetSubsystem<Urho3D::FileSystem>(); }
@@ -42,18 +39,20 @@ public:
 
     Urho3D::Node & createNode();
 
+    void setWindowSize(const Urho3D::IntVector2 & size) { windowSize = size; }
+    void setWindowTitle(const Urho3D::String & title) { windowTitle = title; }
+
     static App & getInstance() { return * instance; }
 
 private:
 
     Urho3D::String
-        name;
+        windowTitle;
     bool
         fullscreen,
         mustQuit;
-    uint
-        width,
-        height;
+    Urho3D::IntVector2
+        windowSize;
     Urho3D::SharedPtr<Urho3D::Scene>
         scene;
     static Urho3D::SharedPtr<App>

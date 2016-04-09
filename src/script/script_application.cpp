@@ -5,6 +5,8 @@
 using namespace gengine::application;
 using namespace Urho3D;
 
+DECLARE_STRING(String, CString)
+
 EMBINDCEFV8_BINDINGS(application)
 {
     embindcefv8::Class<App>("App")
@@ -16,5 +18,7 @@ EMBINDCEFV8_BINDINGS(application)
         .method("setup", &App::setup)
         .method("start", &App::start)
         .method("getTimeStep", &App::getTimeStep)
+        .method("setWindowTitle", &App::setWindowTitle)
+        .method("setWindowSize", &App::setWindowSize)
         ;
 }
