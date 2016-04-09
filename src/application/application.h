@@ -42,6 +42,8 @@ public:
 
     Urho3D::Node & createNode();
 
+    static App & getInstance() { return * instance; }
+
 private:
 
     Urho3D::String
@@ -54,9 +56,14 @@ private:
         height;
     Urho3D::SharedPtr<Urho3D::Scene>
         scene;
+    static Urho3D::SharedPtr<App>
+        instance;
 };
 
-App & get();
+inline App & get()
+{
+    return App::getInstance();
+}
 
 }
 }

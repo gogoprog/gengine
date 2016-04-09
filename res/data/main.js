@@ -1,15 +1,28 @@
-var node = application.createNode();
 
-var sprite = application.getResourceCache().getSprite2D("Textures/Spot.png", true);
-var static_sprite_2d = node.createComponentStaticSprite2D(0, 0);
+var application = {};
 
-static_sprite_2d.setSprite(sprite);
-
-function update(dt)
+application.init = function()
 {
-    if(application.getInput().getMouseButtonDown(1))
+    console.log('application.init');
+}
+
+application.start = function()
+{
+    console.log('application.start');
+
+    var node = gengine.createNode();
+
+    var sprite = gengine.getResourceCache().getSprite2D("Textures/Spot.png", true);
+    var static_sprite_2d = node.createComponentStaticSprite2D(0, 0);
+
+    static_sprite_2d.setSprite(sprite);
+}
+
+application.update = function(dt)
+{
+    if(gengine.getInput().getMouseButtonDown(1))
     {
-        var mousePosition = application.getInput().getMousePosition();
+        var mousePosition = gengine.getInput().getMousePosition();
 
         console.log(mousePosition.x);
         console.log(mousePosition.y);

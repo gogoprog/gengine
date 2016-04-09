@@ -26,13 +26,6 @@
 
 using namespace Urho3D;
 
-SharedPtr<gengine::application::App>
-    mainApp;
-int
-    _argc;
-char
-    ** _argv;
-
 namespace gengine
 {
 namespace application
@@ -47,6 +40,7 @@ App::App()
     width(640),
     height(480)
 {
+    instance = this;
 }
 
 void App::Setup()
@@ -65,8 +59,6 @@ void App::Setup()
 
 void App::Start()
 {
-    gengine::gui::System::getInstance().init(_argc, _argv);
-
     getInput().SetMouseVisible(true);
 
     SubscribeToEvent(E_UPDATE, URHO3D_HANDLER(App, update));
@@ -142,10 +134,8 @@ Node & App::createNode()
     return * scene->CreateChild();
 }
 
-App & get()
-{
-    return *mainApp;
-}
+SharedPtr<App>
+    App::instance;
 
 }
 }
@@ -156,14 +146,28 @@ void loadScriptFile(const char *filename)
     std::string contents((std::istreambuf_iterator<char>(in)),
     std::istreambuf_iterator<char>());
 
-    contents = "application = new Module.App(); application.setup(); application.start();" + contents;
     contents += R"(
+        application = application || {}
+        gengine = new Module.App();
+
+        if(typeof application.init !== 'undefined')
+        {
+            application.init();
+        }
+        gengine.setup();
+        gengine.start();
+
+        if(typeof application.start !== 'undefined')
+        {
+            application.start(0);
+        }
+
         while(1)
         {
-            application.runFrame();
-            if(typeof update !== 'undefined')
+            gengine.runFrame();
+            if(typeof application.update !== 'undefined')
             {
-                update(0);
+                application.update(0);
             }
         }
         )";
@@ -175,7 +179,7 @@ void loadScriptFile(const char *filename)
 int main(int argc, char *argv[])
 {
     gengine::gui::System::getInstance().preinit(argc, argv);
-    gengine::gui::System::getInstance().init(_argc, _argv);
+    gengine::gui::System::getInstance().init(argc, argv);
 
     loadScriptFile("data/main.js");
 
