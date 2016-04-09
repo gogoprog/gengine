@@ -8,11 +8,13 @@ application.init = function()
     gengine.setWindowTitle("Test application");
 }
 
+var node;
+var total = 0;
 application.start = function()
 {
     console.log('application.start');
 
-    var node = gengine.createNode();
+    node = gengine.getScene().createChild(0, 0);
 
     var sprite = gengine.getResourceCache().getSprite2D("Textures/Spot.png", true);
     var static_sprite_2d = node.createComponentStaticSprite2D(0, 0);
@@ -22,6 +24,7 @@ application.start = function()
 
 application.update = function(dt)
 {
+    total += dt;
     if(gengine.getInput().getMouseButtonDown(1))
     {
         var mousePosition = gengine.getInput().getMousePosition();
@@ -31,4 +34,6 @@ application.update = function(dt)
 
         console.log("timeStep " + dt);
     }
+
+    node.setPosition(Module.Vector3(100 * Math.sin(total),0 ,0));
 }

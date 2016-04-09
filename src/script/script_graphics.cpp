@@ -7,5 +7,7 @@ using namespace Urho3D;
 EMBINDCEFV8_BINDINGS(graphics)
 {
     embindcefv8::Class<Camera>("Camera")
+        .method("setOrthoSize", static_cast<void (Camera::*)(float)>(&Camera::SetOrthoSize))
+        .method("setOrthographic", &Camera::SetOrthographic)
         ;
 }

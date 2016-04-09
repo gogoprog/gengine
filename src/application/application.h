@@ -36,6 +36,7 @@ public:
     inline Urho3D::Input & getInput() { return *GetSubsystem<Urho3D::Input>(); }
 
     inline float getTimeStep() { return engine_->GetNextTimeStep(); };
+    Urho3D::Scene & getScene() { return *scene; }
 
     Urho3D::Node & createNode();
 
