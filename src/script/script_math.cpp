@@ -2,6 +2,8 @@
 
 #include <Urho3D/Math/Vector3.h>
 #include <Urho3D/Math/Vector2.h>
+#include <Urho3D/Math/Rect.h>
+#include <Urho3D/Math/Color.h>
 
 using namespace Urho3D;
 
@@ -24,5 +26,19 @@ EMBINDCEFV8_BINDINGS(math)
         .constructor<float, float>()
         .property("x", &Vector2::x_)
         .property("y", &Vector2::y_)
+        ;
+
+    embindcefv8::ValueObject<Rect>("Rect")
+        .constructor<Vector2, Vector2>()
+        .property("min", &Rect::min_)
+        .property("max", &Rect::max_)
+        ;
+
+    embindcefv8::ValueObject<Color>("Color")
+        .constructor<float, float, float, float>()
+        .property("r", &Color::r_)
+        .property("g", &Color::g_)
+        .property("b", &Color::b_)
+        .property("a", &Color::a_)
         ;
 }
