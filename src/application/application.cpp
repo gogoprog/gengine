@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
     gengine::gui::System::getInstance().preinit(argc, argv);
     gengine::gui::System::getInstance().init(argc, argv);
 
-    loadScriptFile("data/main.js");
+    loadScriptFile("main.js");
 
     while(true)
     {

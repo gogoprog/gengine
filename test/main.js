@@ -6,7 +6,7 @@ application.init = function()
     console.log('application.init');
     gengine.setWindowSize(Module.IntVector2(320, 240));
     gengine.setWindowTitle("Test application");
-}
+};
 
 var node;
 var total = 0;
@@ -20,7 +20,7 @@ application.start = function()
     var static_sprite_2d = node.createComponentStaticSprite2D(0, 0);
 
     static_sprite_2d.setSprite(sprite);
-}
+};
 
 application.update = function(dt)
 {
@@ -36,4 +36,4 @@ application.update = function(dt)
     }
 
     node.setPosition(Module.Vector3(100 * Math.sin(total),0 ,0));
-}
+};
