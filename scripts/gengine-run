@@ -1,0 +1,17 @@
+#!/usr/bin/python3
+
+import os
+import common
+
+def run():
+    os.chdir(common.targetDir)
+    command = common.binaryPath
+    if common.isLinux():
+        command = "LD_LIBRARY_PATH=" + common.rootPath + "/deps/linux/lib" + ('64' if common.isPlatform64() else '32') + " " + command
+    os.system(command)
+
+common.sanityCheck()
+common.init()
+common.build()
+
+run()

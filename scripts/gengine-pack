@@ -1,0 +1,49 @@
+#!/usr/bin/python3
+
+import os
+import common
+import tempfile
+import shutil
+
+def packHtml():
+    common.log("Packing in HTML5 mode...")
+    current_dir = os.getcwd()
+    tmpPath = tempfile.mkdtemp()
+    os.system("rm -rf packed-html5/*")
+    os.system("mkdir -p packed-html5")
+    os.system("cp -rf " + common.targetDir + "*.png " + common.targetDir + "data " + common.targetDir + "*.lua " + tmpPath + "/")
+    os.chdir(os.environ['GENGINE']+"/build")
+    os.system("emcc " + ('' if common.debugMode else '-O3') + " --bind gengine" + ('d' if common.debugMode else '') + ".bc -o " + current_dir + "/packed-html5/index.html --preload-file " + tmpPath + "@ " + "--preload-file ../res/coreData@coreData " + "--use-preload-plugins -s TOTAL_MEMORY=67108864 -s TOTAL_STACK=1048576 --shell-file " + common.rootPath + "/src/shell.html")
+    os.chdir(current_dir)
+    os.system("cp -rf " + common.targetDir + "gui packed-html5/gui")
+    os.system("mv *.js *.html *.data *.mem packed-html5/")
+    shutil.rmtree(tmpPath)
+
+def packNative():
+    common.log("Packing in native mode...")
+    packedDir = "packed-" + ( 'linux' if common.isLinux() else 'win' )
+    os.system("rm -rf " + packedDir + "/*")
+    os.system("mkdir -p " + packedDir + "/content")
+    os.system("mkdir -p " + packedDir + "/bin")
+    os.system("cp -rf " + common.targetDir + "/* " + packedDir + "/content/")
+    os.system("cp -rf " + common.binaryPath + " " + packedDir + "/bin/")
+    os.system("cp -rf " + common.buildPath + "/*.dll " + packedDir + "/bin/")
+    os.system("cp -rf " + common.buildPath + "/locales " + packedDir + "/bin/")
+    startName =  "start" + ( '' if common.isLinux() else '.bat' )
+    os.chdir(packedDir)
+    fo = open(startName, "w")
+
+    if not common.isLinux():
+        fo.write("cd content && ..\\bin\\gengine.exe\n")
+
+    fo.close()
+    os.system("chmod +x " + startName)
+
+common.sanityCheck()
+common.init()
+common.build(common.html5Mode)
+
+if common.html5Mode:
+    packHtml()
+else:
+    packNative()

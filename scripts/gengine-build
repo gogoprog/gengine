@@ -1,0 +1,7 @@
+#!/usr/bin/python3
+
+import common
+
+common.sanityCheck()
+common.init()
+common.build()

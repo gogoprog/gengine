@@ -1,0 +1,26 @@
+#!/usr/bin/bash
+
+if [[ ${SHELL} == *"/bash"* ]]; then
+    SRC=${BASH_SOURCE}
+
+    if [[ ${SRC} == "" ]] then
+    	SRC=$0
+	fi
+else
+    SRC=$0
+fi
+
+
+BIN_DIR=$(dirname $(readlink -e ${SRC}))
+BASEDIR=${BIN_DIR%/*}
+
+export PATH=${PATH}:${BASEDIR}/scripts
+export GENGINE=${BASEDIR}
+
+if [[ ${SHELL} == *"/bash"* ]]; then
+    export PS1="[gengine]${PS1}"
+else
+    export PROMPT="[gengine]${PROMPT}"
+fi
+
+echo "[gengine] Enabled with ${GENGINE}"
