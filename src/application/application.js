@@ -13,7 +13,7 @@ STRING(
 
     if(typeof application.start !== 'undefined')
     {
-        application.start(0);
+        application.start();
     }
 
     while(1)

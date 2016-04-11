@@ -1,0 +1,5 @@
+-cp ../deps/common/Ash-Haxe/src/
+-cp ../src/haxe/
+-cp ../test/
+-main gengine.Main
+-js ../test/out.js
