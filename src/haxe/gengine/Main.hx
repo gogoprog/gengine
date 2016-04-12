@@ -1,6 +1,8 @@
 package gengine;
 
 import ash.core.Engine;
+import ash.core.*;
+import gengine.systems.RenderSystem;
 
 @:expose
 class Main
@@ -20,12 +22,19 @@ class Main
     static public function start()
     {
         engine = new Engine();
+
+        engine.addSystem(new RenderSystem(), 0);
+
         Application.start();
     }
 
     static public function update(dt:Float)
     {
         engine.update(dt);
-        Application.update(dt);
+    }
+
+    static public function getEngine():Engine
+    {
+        return engine;
     }
 }

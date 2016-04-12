@@ -1,3 +1,7 @@
+import ash.core.*;
+import gengine.*;
+import gengine.components.*;
+
 class Application
 {
     public static function init()
@@ -8,10 +12,10 @@ class Application
     public static function start()
     {
         trace("Application.start()");
-    }
 
-    public static function update(dt)
-    {
-
+        var gameEntity:Entity = new Entity();
+        gameEntity.add(new Transform());
+        gameEntity.add(new StaticSprite2D());
+        Main.getEngine().addEntity(gameEntity);
     }
 }
