@@ -2,4 +2,4 @@
 -cp ../src/haxe/
 -cp ../test/
 -main gengine.Main
--js ../test/out.js
+-js ../test/main.js
