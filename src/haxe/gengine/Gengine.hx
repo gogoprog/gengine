@@ -11,6 +11,12 @@ extern class Gengine
     @:native('getScene')
     static public function getScene():Dynamic;
 
+    @:native('getInput')
+    static public function getInput():Dynamic;
+
+    @:native('getResourceCache')
+    static public function getResourceCache():Dynamic;
+
     @:native('setWindowSize')
     static public function setWindowSize(size:IntVector2):Void;
 

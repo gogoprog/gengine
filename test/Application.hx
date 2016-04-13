@@ -21,7 +21,7 @@ class Application
 
         var gameEntity:Entity = new Entity();
         gameEntity.add(new Transform(p));
-        gameEntity.add(new StaticSprite2D());
+        gameEntity.add(new StaticSprite2D(Gengine.getResourceCache().getSprite2D('Textures/Spot.png', true)));
         engine.addEntity(gameEntity);
     }
 }

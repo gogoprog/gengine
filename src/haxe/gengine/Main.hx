@@ -25,6 +25,9 @@ class Main
         engine.addSystem(new TransformSystem(), 0);
         engine.addSystem(new RenderSystem(), 1);
 
+        untyped __js__("window.dummyNode = gengineApp.getScene().createChild(0, 0);");
+        untyped __js__("window.dummyNode.setEnabled(false)");
+
         Application.start(engine);
     }
 

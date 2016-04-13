@@ -81,6 +81,8 @@ void App::Stop()
 
 int App::setup()
 {
+    Thread::SetMainThread();
+
     Setup();
 
     if (exitCode_)
@@ -97,6 +99,8 @@ int App::setup()
 
 void App::start()
 {
+    Thread::SetMainThread();
+
     Start();
 }
 
