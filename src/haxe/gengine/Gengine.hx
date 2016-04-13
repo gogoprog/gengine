@@ -5,7 +5,6 @@ import ash.core.*;
 import gengine.systems.*;
 import gengine.math.*;
 
-
 @:native('gengineApp')
 extern class Gengine
 {
@@ -14,4 +13,7 @@ extern class Gengine
 
     @:native('setWindowSize')
     static public function setWindowSize(size:IntVector2):Void;
+
+    @:native('setWindowTitle')
+    static public function setWindowTitle(title:String):Void;
 }
