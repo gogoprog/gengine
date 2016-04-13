@@ -30,6 +30,10 @@ class TransformSystem extends System
     private function onTransformNodeAdded(node:TransformNode):Void
     {
         trace('Transform node added!');
+
+        var scene = Main.getScene();
+
+        untyped __js__("scene.addChild(node.transform.node, 1000)");
     }
 
     private function onTransformNodeRemoved(node:TransformNode):Void

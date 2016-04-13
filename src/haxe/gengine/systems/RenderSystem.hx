@@ -30,6 +30,12 @@ class RenderSystem extends System
     private function onNodeAdded(node:StaticSprite2DNode):Void
     {
         trace('Render on node added!');
+        var urhoNode = node.transform.node;
+        var object = node.staticSprite2D.object;
+
+        urhoNode.addComponent(object, 0, 0);
+
+        untyped __js__("object.setSprite(gengine.getResourceCache().getSprite2D('Textures/Spot.png', true))");
     }
 
     private function onNodeRemoved(node:StaticSprite2DNode):Void

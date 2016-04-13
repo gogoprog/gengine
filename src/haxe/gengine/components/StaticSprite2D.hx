@@ -1,9 +1,11 @@
 package gengine.components;
 
-@:native('Module.StaticSprite2D')
 class StaticSprite2D
 {
-    public function new(context:Dynamic)
+    public var object:Dynamic;
+
+    public function new()
     {
+        untyped __js__("this.object = new Module.StaticSprite2D(gengine.getContext());");
     }
 }

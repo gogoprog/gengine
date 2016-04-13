@@ -44,4 +44,10 @@ class Main
         untyped __js__("return gengine.getContext()");
         return 0;
     }
+
+    static public function getScene():Dynamic
+    {
+        untyped __js__("return gengine.getScene()");
+        return 0;
+    }
 }

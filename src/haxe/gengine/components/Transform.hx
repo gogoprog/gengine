@@ -1,9 +1,11 @@
 package gengine.components;
 
-@:native('Module.Node')
 class Transform
 {
-    public function new(context:Dynamic)
+    public var node:Dynamic;
+
+    public function new()
     {
+        untyped __js__("this.node = new Module.Node(gengine.getContext());");
     }
 }

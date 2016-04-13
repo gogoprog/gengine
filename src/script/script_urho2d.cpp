@@ -11,6 +11,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
         ;
 
     embindcefv8::Class<StaticSprite2D>("StaticSprite2D")
+        .constructor<Context*>()
         .method("setSprite", &StaticSprite2D::SetSprite)
         .method("setEnabled", static_cast<void (StaticSprite2D::*)(bool)>(&StaticSprite2D::SetEnabled))
         .method("setDrawRect", &StaticSprite2D::SetDrawRect)
