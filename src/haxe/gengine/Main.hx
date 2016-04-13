@@ -4,7 +4,6 @@ import ash.core.Engine;
 import ash.core.*;
 import gengine.systems.*;
 
-@:expose
 class Main
 {
     private static var engine:Engine;
@@ -26,28 +25,11 @@ class Main
         engine.addSystem(new TransformSystem(), 0);
         engine.addSystem(new RenderSystem(), 1);
 
-        Application.start();
+        Application.start(engine);
     }
 
     static public function update(dt:Float)
     {
         engine.update(dt);
-    }
-
-    static public function getEngine():Engine
-    {
-        return engine;
-    }
-
-    static public function getContext():Dynamic
-    {
-        untyped __js__("return gengine.getContext()");
-        return 0;
-    }
-
-    static public function getScene():Dynamic
-    {
-        untyped __js__("return gengine.getScene()");
-        return 0;
     }
 }

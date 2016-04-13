@@ -8,7 +8,7 @@ class Transform
 
     public function new(?position:Vector3)
     {
-        untyped __js__("this.node = new Module.Node(gengine.getContext());");
+        untyped __js__("this.node = new Module.Node(gengineApp.getContext());");
 
         if(position != null)
         {

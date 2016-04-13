@@ -35,7 +35,7 @@ class RenderSystem extends System
 
         urhoNode.addComponent(object, 0, 0);
 
-        untyped __js__("object.setSprite(gengine.getResourceCache().getSprite2D('Textures/Spot.png', true))");
+        untyped __js__("object.setSprite(gengineApp.getResourceCache().getSprite2D('Textures/Spot.png', true))");
     }
 
     private function onNodeRemoved(node:StaticSprite2DNode):Void

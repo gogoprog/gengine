@@ -31,7 +31,7 @@ class TransformSystem extends System
     {
         trace('Transform node added!');
 
-        var scene = Main.getScene();
+        var scene = Gengine.getScene();
 
         untyped __js__("scene.addChild(node.transform.node, 1000)");
     }

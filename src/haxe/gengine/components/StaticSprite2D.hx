@@ -6,6 +6,6 @@ class StaticSprite2D
 
     public function new()
     {
-        untyped __js__("this.object = new Module.StaticSprite2D(gengine.getContext());");
+        untyped __js__("this.object = new Module.StaticSprite2D(gengineApp.getContext());");
     }
 }

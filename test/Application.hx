@@ -8,9 +8,11 @@ class Application
     public static function init()
     {
         trace("Application.init()");
+
+        Gengine.setWindowSize(new IntVector2(320, 200));
     }
 
-    public static function start()
+    public static function start(engine:Engine)
     {
         trace("Application.start()");
 
@@ -20,6 +22,6 @@ class Application
         var gameEntity:Entity = new Entity();
         gameEntity.add(new Transform(p));
         gameEntity.add(new StaticSprite2D());
-        Main.getEngine().addEntity(gameEntity);
+        engine.addEntity(gameEntity);
     }
 }
