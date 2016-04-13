@@ -11,6 +11,7 @@
 #include <Urho3D/Engine/Engine.h>
 #include <Urho3D/Graphics/Camera.h>
 #include <Urho3D/Graphics/Graphics.h>
+#include <Urho3D/Graphics/GraphicsImpl.h>
 #include <Urho3D/Graphics/Octree.h>
 #include <Urho3D/Graphics/Renderer.h>
 #include <Urho3D/Input/Input.h>
@@ -39,13 +40,10 @@ App::App()
     windowSize(640, 480)
 {
     instance = this;
-    puts("App constructor");
 }
 
 void App::Setup()
 {
-    puts("App::Setup");
-
     engineParameters_["LogName"] = "gengine.log";
     engineParameters_["LogLevel"] = "Debug";
     engineParameters_["FullScreen"] = fullscreen;
@@ -54,14 +52,13 @@ void App::Setup()
     engineParameters_["WindowWidth"] = windowSize.x_;
     engineParameters_["WindowHeight"] = windowSize.y_;
     engineParameters_["WindowTitle"] = windowTitle;
+    engineParameters_["WindowResizable"] = false;
     engineParameters_["ResourcePaths"] = "data;coreData;";
     engineParameters_["ResourcePrefixPaths"] = (String(getFileSystem().GetCurrentDir().CString()) + ";" + String(getenv("GENGINE")) + "/res/");
 }
 
 void App::Start()
 {
-    puts("App::Start");
-
     getInput().SetMouseVisible(true);
 
     SharedPtr<Scene> scene_(new Scene(context_));
