@@ -39,10 +39,13 @@ App::App()
     windowSize(640, 480)
 {
     instance = this;
+    puts("App constructor");
 }
 
 void App::Setup()
 {
+    puts("App::Setup");
+
     engineParameters_["LogName"] = "gengine.log";
     engineParameters_["LogLevel"] = "Debug";
     engineParameters_["FullScreen"] = fullscreen;
@@ -57,6 +60,8 @@ void App::Setup()
 
 void App::Start()
 {
+    puts("App::Start");
+
     getInput().SetMouseVisible(true);
 
     SharedPtr<Scene> scene_(new Scene(context_));
@@ -137,6 +142,10 @@ void loadScriptFile(const char *filename)
 int main(int argc, char *argv[])
 {
     gengine::gui::System::getInstance().preinit(argc, argv);
+
+    auto a = new gengine::application::App();
+    embindcefv8::addGlobalObject(*a, "gengineApp");
+
     gengine::gui::System::getInstance().init(argc, argv);
 
     loadScriptFile("main.js");

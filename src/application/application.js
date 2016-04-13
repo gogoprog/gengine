@@ -1,17 +1,24 @@
 STRING(
 
-    var gengineApp = new Module.App();
+    var gengineApp;
 
-    Main.init();
-
-    gengineApp.setup();
-    gengineApp.start();
-
-    Main.start();
-
-    while(1)
+    function __init()
     {
-        gengineApp.runFrame();
-        Main.update(gengineApp.getTimeStep());
+        gengineApp = Module.gengineApp;
+
+        Main.init();
+
+        gengineApp.setup();
+        gengineApp.start();
+
+        Main.start();
+
+        while(1)
+        {
+            gengineApp.runFrame();
+            Main.update(gengineApp.getTimeStep());
+        }
     }
+
+    __init();
 );
