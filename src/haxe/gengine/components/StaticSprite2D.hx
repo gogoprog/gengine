@@ -8,4 +8,9 @@ class StaticSprite2D
     {
         untyped __js__("this.object = new Module.StaticSprite2D(gengineApp.getContext());");
     }
+
+    public function setSprite(sprite:Dynamic)
+    {
+        untyped __js__("this.object.setSprite(sprite)");
+    }
 }

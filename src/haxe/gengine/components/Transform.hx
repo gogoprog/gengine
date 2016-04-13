@@ -16,4 +16,20 @@ class Transform
         }
     }
 
+    public var position(default, default):Vector3;
+
+    public function set_position(position:Vector3):Vector3
+    {
+        untyped __js__("this.node.setPosition(position)");
+
+        return position;
+    }
+
+    public function get_position():Vector3
+    {
+        untyped __js__("return this.node.getPosition()");
+
+        return new Vector3(0, 0, 0);
+    }
+
 }
