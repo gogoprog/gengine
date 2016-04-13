@@ -37,7 +37,6 @@ public:
 
     inline float getTimeStep() { return engine_->GetNextTimeStep(); };
     Urho3D::Scene & getScene() { return *scene; }
-
     Urho3D::Node & createNode();
 
     void setWindowSize(const Urho3D::IntVector2 & size) { windowSize = size; }

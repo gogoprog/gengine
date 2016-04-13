@@ -18,6 +18,7 @@ EMBINDCEFV8_BINDINGS(application)
         .method("getInput", &App::getInput)
         .method("getTimeStep", &App::getTimeStep)
         .method("getScene", &App::getScene)
+        .method("getContext", &App::getContext)
         .method("setWindowTitle", &App::setWindowTitle)
         .method("setWindowSize", &App::setWindowSize)
         ;

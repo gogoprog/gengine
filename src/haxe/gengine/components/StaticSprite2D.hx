@@ -1,10 +1,9 @@
 package gengine.components;
 
+@:native('Module.StaticSprite2D')
 class StaticSprite2D
 {
-    public var staticSprite2D:Dynamic;
-
-    public function new()
+    public function new(context:Dynamic)
     {
     }
 }

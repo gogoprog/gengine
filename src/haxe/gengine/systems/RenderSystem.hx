@@ -8,7 +8,7 @@ import gengine.nodes.*;
 
 class RenderSystem extends System
 {
-    private var nodes:NodeList<StaticSprite2DNode>;
+    private var staticSprite2DNodes:NodeList<StaticSprite2DNode>;
 
     public function new()
     {
@@ -17,14 +17,14 @@ class RenderSystem extends System
 
     override public function addToEngine(engine:Engine):Void
     {
-        nodes = engine.getNodeList(StaticSprite2DNode);
-        nodes.nodeAdded.add(onNodeAdded);
-        nodes.nodeRemoved.add(onNodeRemoved);
+        staticSprite2DNodes = engine.getNodeList(StaticSprite2DNode);
+        staticSprite2DNodes.nodeAdded.add(onNodeAdded);
+        staticSprite2DNodes.nodeRemoved.add(onNodeRemoved);
     }
 
     override public function removeFromEngine(engine:Engine):Void
     {
-        nodes = null;
+        staticSprite2DNodes = null;
     }
 
     private function onNodeAdded(node:StaticSprite2DNode):Void

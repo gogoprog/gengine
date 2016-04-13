@@ -2,7 +2,7 @@ package gengine;
 
 import ash.core.Engine;
 import ash.core.*;
-import gengine.systems.RenderSystem;
+import gengine.systems.*;
 
 @:expose
 class Main
@@ -23,7 +23,8 @@ class Main
     {
         engine = new Engine();
 
-        engine.addSystem(new RenderSystem(), 0);
+        engine.addSystem(new TransformSystem(), 0);
+        engine.addSystem(new RenderSystem(), 1);
 
         Application.start();
     }
@@ -36,5 +37,11 @@ class Main
     static public function getEngine():Engine
     {
         return engine;
+    }
+
+    static public function getContext():Dynamic
+    {
+        untyped __js__("return gengine.getContext()");
+        return 0;
     }
 }

@@ -1,10 +1,9 @@
 package gengine.components;
 
+@:native('Module.Node')
 class Transform
 {
-    public var node:Dynamic;
-
-    public function new()
+    public function new(context:Dynamic)
     {
     }
 }
