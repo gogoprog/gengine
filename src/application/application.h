@@ -56,8 +56,7 @@ private:
     Urho3D::String
         windowTitle;
     bool
-        fullscreen,
-        mustQuit;
+        fullscreen;
     Urho3D::IntVector2
         windowSize;
     Urho3D::SharedPtr<Urho3D::Scene>

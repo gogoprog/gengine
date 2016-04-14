@@ -36,7 +36,6 @@ App::App()
     Application(new Context()),
     windowTitle("gengine application"),
     fullscreen(false),
-    mustQuit(false),
     windowSize(640, 480)
 {
     instance = this;

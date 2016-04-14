@@ -1,6 +1,7 @@
 #include "embindcefv8.h"
 
 #include "application.h"
+#include <Urho3D/Scene/Scene.h>
 
 using namespace gengine::application;
 using namespace Urho3D;

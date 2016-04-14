@@ -21,13 +21,15 @@ solution "gengine"
 
         files {
             "../src/**.h",
-            "../src/**.cpp"
+            "../src/**.cpp",
+            "../deps/common/libembindcefv8/src/*.*"
             }
 
         includedirs {
             "../src/application",
             "../src/gui",
-            "../src/kernel"
+            "../src/kernel",
+            "../deps/common/libembindcefv8/src/"
             }
 
         links {
@@ -78,14 +80,6 @@ solution "gengine"
 
         configuration "not *Emscripten"
             defines { "CEF" }
-
-            includedirs {
-                "../deps/common/libembindcefv8/src/"
-                }
-
-            files {
-                "../deps/common/libembindcefv8/src/*.*"
-                }
 
             if os.is("linux") then
                 includedirs { "../deps/linux/include" }
