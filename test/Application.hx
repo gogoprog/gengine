@@ -26,6 +26,9 @@ class Application
         staticSprite2D.setDrawRect(new Rect(new Vector2(-32, -32), new Vector2(32, 32)));
         gameEntity.add(staticSprite2D);
 
+        var transform:Transform = gameEntity.get(Transform);
+        transform.scale = new Vector3(0.5, 0.5, 0.5);
+        transform.position.x = 100;
         engine.addEntity(gameEntity);
     }
 }
