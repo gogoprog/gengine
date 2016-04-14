@@ -65,4 +65,9 @@ class Transform
     {
         return untyped __js__("this.node.getScale()");
     }
+
+    public function setRotation2D(angle:Float)
+    {
+        untyped __js__("this.object.setRotation2D(angle)");
+    }
 }
