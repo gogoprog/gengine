@@ -115,6 +115,11 @@ void App::stop()
     Stop();
 }
 
+void App::exit()
+{
+    engine_->Exit();
+}
+
 Node & App::createNode()
 {
     return * scene->CreateChild();
@@ -144,14 +149,15 @@ int main(int argc, char *argv[])
 {
     gengine::gui::System::getInstance().preinit(argc, argv);
 
-    auto a = new gengine::application::App();
-    embindcefv8::addGlobalObject(*a, "gengineApp");
+    auto mainApp = new gengine::application::App();
+    embindcefv8::addGlobalObject(*mainApp, "gengineApp");
 
     gengine::gui::System::getInstance().init(argc, argv);
 
     loadScriptFile("main.js");
 
-    while(true)
+    auto engine = mainApp->getEngine();
+    while(!engine->IsExiting())
     {
         gengine::gui::System::getInstance().update();
     }

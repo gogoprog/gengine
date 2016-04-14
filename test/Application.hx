@@ -15,6 +15,7 @@ class GameSystem extends System
         if(Gengine.getInput().getScancodePress(41))
         {
             trace('Escaped just pressed.');
+            Gengine.exit();
         }
 
         if(Gengine.getInput().getMouseButtonDown(1))

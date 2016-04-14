@@ -9,18 +9,12 @@ import gengine.input.*;
 @:native('gengineApp')
 extern class Gengine
 {
-    @:native('getScene')
     static public function getScene():Dynamic;
-
-    @:native('getInput')
     static public function getInput():Input;
-
-    @:native('getResourceCache')
     static public function getResourceCache():Dynamic;
 
-    @:native('setWindowSize')
     static public function setWindowSize(size:IntVector2):Void;
-
-    @:native('setWindowTitle')
     static public function setWindowTitle(title:String):Void;
+
+    static public function exit():Void;
 }

@@ -13,9 +13,15 @@ STRING(
 
         Main.start();
 
-        while(1)
+        while(true)
         {
             gengineApp.runFrame();
+
+            if(!gengineApp.isRunning())
+            {
+                break;
+            }
+
             Main.update(gengineApp.getTimeStep());
         }
     }
