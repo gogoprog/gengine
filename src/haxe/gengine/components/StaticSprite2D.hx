@@ -1,5 +1,7 @@
 package gengine.components;
 
+import gengine.math.*;
+
 class StaticSprite2D
 {
     public var object:Dynamic;
@@ -18,5 +20,15 @@ class StaticSprite2D
     public function setSprite(sprite:Dynamic)
     {
         untyped __js__("this.object.setSprite(sprite)");
+    }
+
+    public function setDrawRect(rect:Rect)
+    {
+        untyped __js__("this.object.setDrawRect(rect)");
+    }
+
+    public function setTextureRect(rect:Rect)
+    {
+        untyped __js__("this.object.setTextureRect(rect)");
     }
 }
