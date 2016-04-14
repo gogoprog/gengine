@@ -4,6 +4,7 @@ import ash.core.Engine;
 import ash.core.*;
 import gengine.systems.*;
 import gengine.math.*;
+import gengine.input.*;
 
 @:native('gengineApp')
 extern class Gengine
@@ -12,7 +13,7 @@ extern class Gengine
     static public function getScene():Dynamic;
 
     @:native('getInput')
-    static public function getInput():Dynamic;
+    static public function getInput():Input;
 
     @:native('getResourceCache')
     static public function getResourceCache():Dynamic;

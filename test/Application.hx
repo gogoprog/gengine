@@ -3,6 +3,28 @@ import gengine.*;
 import gengine.components.*;
 import gengine.math.*;
 
+class GameSystem extends System
+{
+    public function new()
+    {
+        super();
+    }
+
+    override public function update(dt:Float):Void
+    {
+        if(Gengine.getInput().getScancodePress(41))
+        {
+            trace('Escaped just pressed.');
+        }
+
+        if(Gengine.getInput().getMouseButtonDown(1))
+        {
+            var p = Gengine.getInput().getMousePosition();
+            trace('Mouse position : ' + p.x + ', ' + p.y);
+        }
+    }
+}
+
 class Application
 {
     public static function init()
@@ -16,6 +38,8 @@ class Application
     public static function start(engine:Engine)
     {
         trace("Application.start()");
+
+        engine.addSystem(new GameSystem(), 2);
 
         var p = new Vector3(0, 0, 0);
 
