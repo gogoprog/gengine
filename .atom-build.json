@@ -7,5 +7,18 @@
   "env": {
   },
   "errorMatch": "\n(?<file>[\\/0-9a-zA-Z\\._]+):(?<line>\\d+):(?<col>\\d+)",
-  "keymap": "f7"
+  "keymap": "f7",
+  "targets": {
+      "emscripten": {
+        "cmd": "emmake",
+        "name": "emscripten-debug",
+        "args": [ "make", "config=debugemscripten64", "-j8" ],
+        "sh": false,
+        "cwd": "{PROJECT_PATH}/build/",
+        "env": {
+        },
+        "errorMatch": "\n(?<file>[\\/0-9a-zA-Z\\._]+):(?<line>\\d+):(?<col>\\d+)",
+        "keymap": "f8"
+      }
+  }
 }
