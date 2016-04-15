@@ -3,16 +3,18 @@
 #include "application.h"
 #include <Urho3D/Scene/Scene.h>
 #include <Urho3D/Input/Input.h>
+#include <Urho3D/Core/Context.h>
 #include <Urho3D/Resource/ResourceCache.h>
 
 using namespace gengine::application;
 using namespace Urho3D;
 
 EMBINDCEFV8_DECLARE_STRING(String, CString)
+EMBINDCEFV8_IMPLEMENT_STRING(String)
 EMBINDCEFV8_DECLARE_CLASS(Scene)
 EMBINDCEFV8_DECLARE_CLASS(ResourceCache)
 EMBINDCEFV8_DECLARE_CLASS(Input)
-EMBINDCEFV8_DECLARE_CLASS(App)
+EMBINDCEFV8_DECLARE_CLASS(Context)
 
 EMBINDCEFV8_BINDINGS(application)
 {

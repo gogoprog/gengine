@@ -3,6 +3,7 @@
 #include <Urho3D/Scene/Node.h>
 #include <Urho3D/Scene/Scene.h>
 #include <Urho3D/Scene/Component.h>
+#include <Urho3D/Core/Context.h>
 #include <Urho3D/Graphics/Camera.h>
 #include <Urho3D/Urho2D/StaticSprite2D.h>
 
@@ -11,9 +12,12 @@ using namespace Urho3D;
 EMBINDCEFV8_DECLARE_ENUM(CreateMode)
 EMBINDCEFV8_DECLARE_CLASS(Scene)
 EMBINDCEFV8_DECLARE_CLASS(Node)
+EMBINDCEFV8_DECLARE_CLASS(Context)
 
 EMBINDCEFV8_BINDINGS(scene)
 {
+    embindcefv8::Class<Context>("Context");
+
     embindcefv8::Class<Node>("Node")
         .constructor<Context*>()
         .method("setPosition", &Node::SetPosition)

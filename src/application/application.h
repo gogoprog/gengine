@@ -32,7 +32,7 @@ public:
     void stop();
     void exit();
 
-    inline Urho3D::Context * getContext() { return context_; }
+    inline Urho3D::Context& getContext() { return *context_; }
     inline Urho3D::Engine * getEngine() { return engine_; }
     inline Urho3D::UI & getUI() { return *GetSubsystem<Urho3D::UI>(); }
     inline Urho3D::FileSystem & getFileSystem() { return *GetSubsystem<Urho3D::FileSystem>(); }

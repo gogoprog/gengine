@@ -159,6 +159,7 @@ gengine::application::App
     }
 #endif
 
+EMBINDCEFV8_DECLARE_STRING(String, CString)
 EMBINDCEFV8_DECLARE_CLASS(gengine::application::App)
 
 int main(int argc, char *argv[])
