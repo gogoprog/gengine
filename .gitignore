@@ -53,4 +53,5 @@ debug.log
 *.files
 *.includes
 *.log
-main.js
+generated
+/test/packed-*

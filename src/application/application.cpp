@@ -136,28 +136,54 @@ void loadScriptFile(const char *filename)
     std::string contents((std::istreambuf_iterator<char>(in)),
     std::istreambuf_iterator<char>());
 
-    const char application_js[] =
-        #include "application.js"
+    #ifdef CEF
+        const char application_js[] =
+            #include "application.js"
 
-    contents += application_js;
+        contents += application_js;
+    #else
+        contents += " gengineApp = Module.gengineApp;";
+    #endif
 
     embindcefv8::executeJavaScript(contents.c_str());
 }
+
+gengine::application::App
+    *mainApp;
+
+#if EMSCRIPTEN
+    void update()
+    {
+        mainApp->runFrame();
+        embindcefv8::executeJavaScript("Main.update();");
+    }
+#endif
+
+EMBINDCEFV8_DECLARE_CLASS(gengine::application::App)
 
 int main(int argc, char *argv[])
 {
     gengine::gui::System::getInstance().preinit(argc, argv);
 
-    auto mainApp = new gengine::application::App();
+    mainApp = new gengine::application::App();
+
     embindcefv8::addGlobalObject(*mainApp, "gengineApp");
 
     gengine::gui::System::getInstance().init(argc, argv);
 
-    loadScriptFile("main.js");
+    loadScriptFile("generated/main.js");
 
-    auto engine = mainApp->getEngine();
-    while(!engine->IsExiting())
-    {
-        gengine::gui::System::getInstance().update();
-    }
+    #ifdef EMSCRIPTEN
+        embindcefv8::executeJavaScript("Main.init();");
+        mainApp->setup();
+        mainApp->start();
+        embindcefv8::executeJavaScript("Main.start();");
+        emscripten_set_main_loop(update, 0, 0);
+    #else
+        auto engine = mainApp->getEngine();
+        while(!engine->IsExiting())
+        {
+            gengine::gui::System::getInstance().update();
+        }
+    #endif
 }

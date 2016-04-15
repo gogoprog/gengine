@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>[gengine] Emscripten-Generated Code</title>
+    <style>
+      .emscripten { padding-right: 0; margin-left: auto; margin-right: auto; display: block; }
+      textarea.emscripten { font-family: monospace; width: 100%; }
+      div.emscripten { text-align: center; }
+      div.emscripten_border { margin:auto; }
+      canvas.emscripten { border: 0px none; z-index:-128; }
+
+      .spinner {
+        height: 50px;
+        width: 50px;
+        margin: 0px auto;
+        -webkit-animation: rotation .8s linear infinite;
+        -moz-animation: rotation .8s linear infinite;
+        -o-animation: rotation .8s linear infinite;
+        animation: rotation 0.8s linear infinite;
+        border-left: 10px solid rgb(0,150,240);
+        border-right: 10px solid rgb(0,150,240);
+        border-bottom: 10px solid rgb(0,150,240);
+        border-top: 10px solid rgb(100,0,200);
+        border-radius: 100%;
+        background-color: rgb(200,100,250);
+      }
+      @-webkit-keyframes rotation {
+        from {-webkit-transform: rotate(0deg);}
+        to {-webkit-transform: rotate(360deg);}
+      }
+      @-moz-keyframes rotation {
+        from {-moz-transform: rotate(0deg);}
+        to {-moz-transform: rotate(360deg);}
+      }
+      @-o-keyframes rotation {
+        from {-o-transform: rotate(0deg);}
+        to {-o-transform: rotate(360deg);}
+      }
+      @keyframes rotation {
+        from {transform: rotate(0deg);}
+        to {transform: rotate(360deg);}
+      }
+
+      #output {
+        color:white;
+        background:black;
+        font-size:10px;
+      }
+
+      #holder{
+          width: 100%;
+          height:100%;
+          position:relative;
+      }
+
+      #gui{
+          position:absolute;
+          top:0;
+          left:0;
+          width:100%;
+          height:100%;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+  </head>
+  <body>
+    <figure style="overflow:visible;" id="spinner"><div class="spinner"></div><center style="margin-top:0.5em"><strong>Loading...</strong></center></figure>
+    <div class="emscripten">
+      <progress value="0" max="100" id="progress" hidden=1></progress>
+    </div>
+    <div class="emscripten_border" id="canvas_holder">
+      <div id="holder">
+        <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+        <div id="gui" oncontextmenu="event.preventDefault()"></div>
+      </div>​
+    </div>
+
+    <script type='text/javascript'>
+
+      function setupListeners() {
+        document.getElementById("gui").addEventListener("mousedown", SDL.receiveEvent, true);
+        document.getElementById("gui").addEventListener("mousemove", SDL.receiveEvent, true);
+        document.getElementById("gui").addEventListener("mouseup", SDL.receiveEvent, true);
+        document.getElementById("gui").addEventListener("mousewheel", SDL.receiveEvent, true);
+        document.getElementById("gui").addEventListener("touchstart", SDL.receiveEvent, true);
+        document.getElementById("gui").addEventListener("touchmove", SDL.receiveEvent, true);
+        document.getElementById("gui").addEventListener("touchend", SDL.receiveEvent, true);
+        document.getElementById("gui").addEventListener("touchenter", SDL.receiveEvent, true);
+        document.getElementById("gui").addEventListener("touchleave", SDL.receiveEvent, true);
+        document.getElementById("gui").addEventListener("touchcancel", SDL.receiveEvent, true);
+      }
+
+      var spinnerElement = document.getElementById('spinner');
+
+      var Module = {
+        preRun: [
+          function() {
+            setupListeners();
+          }
+          ],
+        postRun: [],
+        print: (function() {
+          return function(text) {
+            text = Array.prototype.slice.call(arguments).join(' ');
+            console.log(text);
+          };
+        })(),
+        printErr: function(text) {
+          text = Array.prototype.slice.call(arguments).join(' ');
+          console.error(text);
+        },
+        canvas: (function() {
+          var canvas = document.getElementById('canvas');
+          canvas.addEventListener("webglcontextlost", function(e) { alert('WebGL context lost. You will need to reload the page.'); e.preventDefault(); }, false);
+
+          return canvas;
+        })(),
+        setStatus: function(text) {
+          if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: '' };
+          if (text === Module.setStatus.text) return;
+          var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+          var now = Date.now();
+          if (m && now - Date.now() < 30) return;
+          if (m) {
+            text = m[1];
+            spinnerElement.hidden = false;
+          } else {
+            if (!text) spinnerElement.hidden = true;
+          }
+        },
+        totalDependencies: 0,
+        monitorRunDependencies: function(left) {
+          this.totalDependencies = Math.max(this.totalDependencies, left);
+          Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+        }
+      };
+      Module.setStatus('Downloading...');
+      window.onerror = function() {
+        Module.setStatus('Exception thrown, see JavaScript console');
+        spinnerElement.style.display = 'none';
+        Module.setStatus = function(text) {
+          if (text) Module.printErr('[post-exception status] ' + text);
+        };
+      };
+
+      function loadFile(filePath) {
+          $("#gui").load(filePath, function() {
+            gengine.execute("if gengine.gui.onPageLoaded then gengine.gui.onPageLoaded() end");
+            });
+      }
+
+      function gengineInitialize(width, height, fullscreen)
+      {
+          if(fullscreen)
+          {
+              document.getElementById('canvas_holder').style.width = '100%';
+              document.getElementById('canvas_holder').style.height = '100%';
+              document.getElementById('canvas').style.width = '100%';
+              document.getElementById('canvas').style.height = '100%';
+              document.getElementById('canvas').style.position = 'absolute';
+              document.getElementById('holder').style.position = 'static';
+              document.getElementsByTagName('BODY')[0].style.margin = '0';
+          }
+          else
+          {
+              document.getElementById('canvas_holder').style.width = "'" + width + "px'";
+              document.getElementById('canvas_holder').style.height = "'" + height + "px'";
+          }
+      }
+
+      var gengine = {
+          execute: function(a) { Module.execute(a) },
+          gui: {
+              showPage: function(a, b, c) { Module.gengine_gui_showpage(a, b, c) }
+          }
+      };
+    </script>
+    {{{ SCRIPT }}}
+  </body>
+</html>
