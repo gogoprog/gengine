@@ -11,7 +11,7 @@ def packHtml():
     os.system("rm -rf packed-html5/*")
     os.system("mkdir -p packed-html5")
     os.chdir(os.environ['GENGINE']+"/build")
-    os.system("emcc " + ('' if common.debugMode else '-O3') + " --bind gengine" + ('d' if common.debugMode else '') + ".bc -o " + current_dir + "/packed-html5/index.html --preload-file " + common.targetDir + "data@data " + "--preload-file " + common.targetDir + "generated@generated " + "--preload-file " + common.rootPath + "/res/coreData@coreData " + "--use-preload-plugins -s TOTAL_MEMORY=67108864 -s TOTAL_STACK=1048576 --shell-file " + common.rootPath + "/src/shell.html")
+    os.system("emcc " + ('' if common.debugMode else '-O3') + " --bind gengine" + ('d' if common.debugMode else '') + ".bc -o " + current_dir + "/packed-html5/index.html --preload-file " + common.targetDir + "data@data " + "--preload-file " + common.targetDir + "generated@generated " + "--preload-file " + common.rootPath + "/res/coreData@coreData " + " -s TOTAL_MEMORY=67108864 -s TOTAL_STACK=1048576 --shell-file " + common.rootPath + "/src/shell.html")
     os.chdir(current_dir)
     os.system("cp -rf " + common.targetDir + "gui packed-html5/gui")
 

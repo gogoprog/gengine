@@ -1,5 +1,6 @@
 #include "embindcefv8.h"
 
+#include <Urho3D/Scene/Component.h>
 #include <Urho3D/Urho2D/StaticSprite2D.h>
 #include <Urho3D/Urho2D/Sprite2D.h>
 #include <Urho3D/Core/Context.h>
@@ -7,14 +8,18 @@
 using namespace Urho3D;
 
 EMBINDCEFV8_DECLARE_CLASS(Context);
-extern template struct emscripten::internal::TypeID<Context>;
+EMBINDCEFV8_DECLARE_CLASS(Component);
+
+#ifdef EMSCRIPTEN
+    extern template struct emscripten::internal::TypeID<Context>;
+#endif
 
 EMBINDCEFV8_BINDINGS(urho2d)
 {
     embindcefv8::Class<Sprite2D>("Sprite2D")
         ;
 
-    embindcefv8::Class<StaticSprite2D>("StaticSprite2D")
+    embindcefv8::Class<StaticSprite2D, Component>("StaticSprite2D")
         .constructor<Context*>()
         .method("setSprite", &StaticSprite2D::SetSprite)
         .method("setEnabled", static_cast<void (StaticSprite2D::*)(bool)>(&StaticSprite2D::SetEnabled))
