@@ -3,6 +3,7 @@
 #include "gui_system.h"
 #include "embindcefv8.h"
 #include <fstream>
+#include <sstream>
 
 #include <Urho3D/Core/CoreEvents.h>
 #include <Urho3D/Core/Timer.h>
@@ -154,8 +155,10 @@ gengine::application::App
 #if EMSCRIPTEN
     void update()
     {
+        static std::stringstream ss;
         mainApp->runFrame();
-        embindcefv8::executeJavaScript("Main.update();");
+        ss << "Main.update(" << mainApp->getTimeStep() << ");";
+        embindcefv8::executeJavaScript(ss.str().c_str());
     }
 #endif
 
@@ -175,11 +178,11 @@ int main(int argc, char *argv[])
     loadScriptFile("generated/main.js");
 
     #ifdef EMSCRIPTEN
+        emscripten_set_main_loop(update, 0, 0);
         embindcefv8::executeJavaScript("Main.init();");
         mainApp->setup();
         mainApp->start();
         embindcefv8::executeJavaScript("Main.start();");
-        emscripten_set_main_loop(update, 0, 0);
     #else
         auto engine = mainApp->getEngine();
         while(!engine->IsExiting())
