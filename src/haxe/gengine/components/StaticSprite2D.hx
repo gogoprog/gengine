@@ -41,4 +41,14 @@ class StaticSprite2D
     {
         return untyped __js__("this.object.getLayer()");
     }
+
+    public function setHotSpot(hotSpot:Vector2)
+    {
+        untyped __js__("this.object.setHotSpot(hotSpot)");
+    }
+
+    public function setUseHotSpot(useHotSpot:Bool)
+    {
+        untyped __js__("this.object.setUseHotSpot(useHotSpot)");
+    }
 }
