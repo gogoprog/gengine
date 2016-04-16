@@ -29,8 +29,6 @@ class TransformSystem extends System
 
     private function onTransformNodeAdded(node:TransformNode):Void
     {
-        trace('Transform node added!');
-
         var scene = Gengine.getScene();
 
         untyped __js__("scene.addChild(node.transform.node, 1000)");

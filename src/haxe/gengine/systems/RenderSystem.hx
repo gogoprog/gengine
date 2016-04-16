@@ -34,7 +34,6 @@ class RenderSystem extends System
 
     private function onNodeAdded(node:Dynamic):Void
     {
-        trace('Render on node added!');
         var urhoNode = node.transform.node;
         var object = node.component.object;
 
