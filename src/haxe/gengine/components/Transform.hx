@@ -70,4 +70,24 @@ class Transform
     {
         untyped __js__("this.node.setRotation2D(angle)");
     }
+
+    public function getRotation2D():Float
+    {
+        return untyped __js__("this.node.getRotation2D()");
+    }
+
+    public function getDirection():Vector3
+    {
+        return untyped __js__("this.node.getDirection()");
+    }
+
+    public function getUp():Vector3
+    {
+        return untyped __js__("this.node.getUp()");
+    }
+
+    public function getRight():Vector3
+    {
+        return untyped __js__("this.node.getRight()");
+    }
 }
