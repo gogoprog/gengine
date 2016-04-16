@@ -2,15 +2,17 @@
 
 #include <Urho3D/Resource/ResourceCache.h>
 #include <Urho3D/Urho2D/Sprite2D.h>
+#include <Urho3D/Urho2D/AnimationSet2D.h>
 
 using namespace Urho3D;
 
-EMBINDCEFV8_DECLARE_STRING(String, CString)
-EMBINDCEFV8_DECLARE_CLASS(ResourceCache)
+EMBINDCEFV8_DECLARE_STRING(String, CString);
+EMBINDCEFV8_DECLARE_CLASS(ResourceCache);
 
 EMBINDCEFV8_BINDINGS(resource)
 {
     embindcefv8::Class<ResourceCache>("ResourceCache")
         .method("getSprite2D", &ResourceCache::GetResource<Sprite2D>)
+        .method("getAnimationSet2D", &ResourceCache::GetResource<AnimationSet2D>)
         ;
 }
