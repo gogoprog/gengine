@@ -31,4 +31,14 @@ class StaticSprite2D
     {
         untyped __js__("this.object.setTextureRect(rect)");
     }
+
+    public function setLayer(layer:Int)
+    {
+        untyped __js__("this.object.setLayer(layer)");
+    }
+
+    public function getLayer():Int
+    {
+        return untyped __js__("this.object.getLayer()");
+    }
 }

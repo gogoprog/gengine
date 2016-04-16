@@ -42,6 +42,8 @@ class RenderSystem extends System
 
     private function onNodeRemoved(node:Dynamic):Void
     {
+        var object = node.component.object;
 
+        object.remove();
     }
 }

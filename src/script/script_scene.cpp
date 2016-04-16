@@ -34,6 +34,7 @@ EMBINDCEFV8_BINDINGS(scene)
         .method("removeChild", static_cast<void (Node::*)(Node*)>(&Node::RemoveChild))
         .method("removeAllChildren", &Node::RemoveAllChildren)
         .method("addComponent", &Node::AddComponent)
+        .method("removeComponent", static_cast<void (Node::*)(Component*)>(&Node::RemoveComponent))
         ;
 
     embindcefv8::Class<Scene>("Scene")

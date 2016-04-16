@@ -32,4 +32,14 @@ class AnimatedSprite2D
     {
         untyped __js__("this.object.setAnimation(name, loopMode)");
     }
+
+    public function setLayer(layer:Int)
+    {
+        untyped __js__("this.object.setLayer(layer)");
+    }
+
+    public function getLayer():Int
+    {
+        return untyped __js__("this.object.getLayer()");
+    }
 }
