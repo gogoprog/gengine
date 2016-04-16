@@ -22,6 +22,10 @@ def log(*args):
     sys.stdout.write("[gengine] ")
     print(*args)
 
+def logError(*args):
+    sys.stdout.write("[gengine] Error: ")
+    print(*args)
+
 def isPlatform64():
     if getPlatformName() == "Windows":
         return False
@@ -69,6 +73,10 @@ def init():
     buildPath = rootPath + "/build/"
     binaryPath = rootPath + "/build/gengine" + ('d' if debugMode else '')
 
+    if not os.path.isdir(targetDir):
+        logError("Target directroy does not exist.")
+        sys.exit(1)
+
 def getDeps():
     log("Downloading dependencies...")
     directory = rootPath+"/deps/"+getPlatformName().lower()+"/lib"+('64' if isPlatform64() else ('32' if isLinux() else ''))
@@ -106,5 +114,8 @@ def build(emscripten=False):
         os.system("./premake4.exe vs2012")
         os.system("sed -i 's/v110/v120/g' *.vcxproj")
         os.system(msbuild + " /p:Configuration=Release")
+
+    log("Running haxe...")
+    os.system("haxe -cp $GENGINE/deps/common/Ash-Haxe/src/ -cp $GENGINE/src/haxe/ -cp " + targetDir + " -main gengine.Main -js " + targetDir + "generated/main.js")
 
     os.chdir(current_dir)
