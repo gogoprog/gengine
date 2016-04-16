@@ -73,6 +73,11 @@ void App::Start()
     auto renderer = GetSubsystem<Renderer>();
     auto viewport = new Viewport(context_, scene_, cameraNode_->GetComponent<Camera>());
     renderer->SetViewport(0, viewport);
+
+    #ifdef EMSCRIPTEN
+        SubscribeToEvent(Urho3D::E_UPDATE, URHO3D_HANDLER(App, update));
+        embindcefv8::executeJavaScript("Main.start();");
+    #endif
 }
 
 void App::Stop()
@@ -125,6 +130,14 @@ Node & App::createNode()
     return * scene->CreateChild();
 }
 
+void App::update(StringHash eventType, VariantMap& eventData)
+{
+    static std::stringstream ss;
+    ss.str("");
+    ss << "Main.update(" << getTimeStep() << ");";
+    embindcefv8::executeJavaScript(ss.str().c_str());
+}
+
 SharedPtr<App>
     App::instance;
 
@@ -152,16 +165,6 @@ void loadScriptFile(const char *filename)
 gengine::application::App
     *mainApp;
 
-#if EMSCRIPTEN
-    void update()
-    {
-        static std::stringstream ss;
-        mainApp->runFrame();
-        ss << "Main.update(" << mainApp->getTimeStep() << ");";
-        embindcefv8::executeJavaScript(ss.str().c_str());
-    }
-#endif
-
 EMBINDCEFV8_DECLARE_STRING(String, CString)
 EMBINDCEFV8_DECLARE_CLASS(gengine::application::App)
 
@@ -178,11 +181,8 @@ int main(int argc, char *argv[])
     loadScriptFile("generated/main.js");
 
     #ifdef EMSCRIPTEN
-        emscripten_set_main_loop(update, 0, 0);
         embindcefv8::executeJavaScript("Main.init();");
-        mainApp->setup();
-        mainApp->start();
-        embindcefv8::executeJavaScript("Main.start();");
+        mainApp->run();
     #else
         auto engine = mainApp->getEngine();
         while(!engine->IsExiting())

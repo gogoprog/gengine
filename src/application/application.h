@@ -51,6 +51,8 @@ public:
 
     static App & getInstance() { return * instance; }
 
+    void update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
+
 private:
 
     Urho3D::String
