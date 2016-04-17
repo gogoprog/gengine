@@ -14,6 +14,7 @@ EMBINDCEFV8_DECLARE_STRING(String, CString);
 EMBINDCEFV8_DECLARE_CLASS(Context);
 EMBINDCEFV8_DECLARE_CLASS(Component);
 EMBINDCEFV8_DECLARE_ENUM(LoopMode2D);
+EMBINDCEFV8_DECLARE_ENUM(BlendMode);
 
 #ifdef EMSCRIPTEN
     extern template struct emscripten::internal::TypeID<Context>;
@@ -36,6 +37,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("setColor", &StaticSprite2D::SetColor)
         .method("setHotSpot", &StaticSprite2D::SetHotSpot)
         .method("setUseHotSpot", &StaticSprite2D::SetUseHotSpot)
+        .method("setBlendMode", &StaticSprite2D::SetBlendMode)
         .method("remove", static_cast<void (StaticSprite2D::*)()>(&StaticSprite2D::Remove))
         .method("setLayer", static_cast<void (StaticSprite2D::*)(int)>(&StaticSprite2D::SetLayer))
         .method("getLayer", static_cast<int (StaticSprite2D::*)() const>(&StaticSprite2D::GetLayer))
