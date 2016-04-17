@@ -101,6 +101,11 @@ class Transform
         untyped __js__("this.node.setWorldPosition(position)");
     }
 
+    public function setWorldScale(scale:Vector3)
+    {
+        untyped __js__("this.node.setWorldScale(scale)");
+    }
+
     public function setParent(parent:Transform)
     {
         untyped __js__("this.node.setParent(parent.node)");
