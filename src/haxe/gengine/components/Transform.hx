@@ -90,4 +90,19 @@ class Transform
     {
         return untyped __js__("this.node.getRight()");
     }
+
+    public function getWorldPosition():Vector3
+    {
+        return untyped __js__("this.node.getWorldPosition()");
+    }
+
+    public function setWorldPosition(position:Vector3)
+    {
+        untyped __js__("this.node.setWorldPosition(position)");
+    }
+
+    public function setParent(parent:Transform)
+    {
+        untyped __js__("this.node.setParent(parent.node)");
+    }
 }
