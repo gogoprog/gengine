@@ -51,4 +51,10 @@ class StaticSprite2D
     {
         untyped __js__("this.object.setUseHotSpot(useHotSpot)");
     }
+
+    public function setColor(color:Color)
+    {
+        untyped __js__("this.object.setColor(color)");
+    }
+
 }
