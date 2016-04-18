@@ -1,6 +1,6 @@
 [submodule "deps/common/libembindcefv8"]
 	path = deps/common/libembindcefv8
-	url = git@github.com:gogoprog/libembindcefv8.git
+	url = https://github.com/gogoprog/libembindcefv8.git
 [submodule "deps/common/Ash-Haxe"]
 	path = deps/common/Ash-Haxe
 	url = https://github.com/nadako/Ash-Haxe.git
