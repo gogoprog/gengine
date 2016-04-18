@@ -5,68 +5,105 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>[gengine] Emscripten-Generated Code</title>
     <style>
-      .emscripten { padding-right: 0; margin-left: auto; margin-right: auto; display: block; }
-      textarea.emscripten { font-family: monospace; width: 100%; }
-      div.emscripten { text-align: center; }
-      div.emscripten_border { margin:auto; }
-      canvas.emscripten { border: 0px none; z-index:-128; }
-
-      .spinner {
-        height: 50px;
-        width: 50px;
-        margin: 0px auto;
-        -webkit-animation: rotation .8s linear infinite;
-        -moz-animation: rotation .8s linear infinite;
-        -o-animation: rotation .8s linear infinite;
-        animation: rotation 0.8s linear infinite;
-        border-left: 10px solid rgb(0,150,240);
-        border-right: 10px solid rgb(0,150,240);
-        border-bottom: 10px solid rgb(0,150,240);
-        border-top: 10px solid rgb(100,0,200);
-        border-radius: 100%;
-        background-color: rgb(200,100,250);
-      }
-      @-webkit-keyframes rotation {
-        from {-webkit-transform: rotate(0deg);}
-        to {-webkit-transform: rotate(360deg);}
-      }
-      @-moz-keyframes rotation {
-        from {-moz-transform: rotate(0deg);}
-        to {-moz-transform: rotate(360deg);}
-      }
-      @-o-keyframes rotation {
-        from {-o-transform: rotate(0deg);}
-        to {-o-transform: rotate(360deg);}
-      }
-      @keyframes rotation {
-        from {transform: rotate(0deg);}
-        to {transform: rotate(360deg);}
-      }
-
-      #output {
-        color:white;
-        background:black;
-        font-size:10px;
-      }
-
-      #holder{
-          width: 100%;
-          height:100%;
-          position:relative;
-      }
-
-      #gui{
-          position:absolute;
-          top:0;
-          left:0;
-          width:100%;
-          height:100%;
-      }
+        .emscripten{padding-right:0;margin-left:auto;margin-right:auto;display:block}
+        textarea.emscripten{font-family:monospace;width:100%}
+        div.emscripten{text-align:center}
+        div.emscripten_border{margin:auto}
+        canvas.emscripten{border:0 none;z-index:-128}
+        .spinner{display:block;height:150px;width:150px;margin:0 auto;font-family:monospace;text-align:center}
+        .element-animation{animation:animationFrames linear 4000ms;animation-iteration-count:infinite;transform-origin:50% 50%}
+        @keyframes animationFrames {
+        0%{transform:rotate(0deg) scaleX(1.00) scaleY(1.00)}
+        20%{transform:rotate(0deg) scaleX(1.20) scaleY(1.20)}
+        30%{transform:rotate(3deg) scaleX(1.20) scaleY(1.20)}
+        40%{transform:rotate(-3deg) scaleX(1.20) scaleY(1.20)}
+        50%{transform:rotate(3deg) scaleX(1.20) scaleY(1.20)}
+        60%{transform:rotate(-3deg) scaleX(1.20) scaleY(1.20)}
+        70%{transform:rotate(3deg) scaleX(1.20) scaleY(1.20)}
+        80%{transform:rotate(-3deg) scaleX(1.20) scaleY(1.20)}
+        90%{transform:rotate(0deg) scaleX(1.20) scaleY(1.20)}
+        100%{transform:rotate(0deg) scaleX(1.00) scaleY(1.00)}
+        }
+        .spinner::after{position:relative;top:20px;display:block;width:100%;text-align:center;font-family:monospace;font-weight:700;content:'LOADING'}
+        .dotContainer{position:absolute;display:inline-block;top:200px;left:50%;transform:translate(-50%,-50%)}
+        .dot{width:10px;height:10px;border:2px solid #000;border-radius:50%;float:left;margin:0 5px;transform:scale(0);animation:fx 1000ms ease infinite 0ms}
+        .dot:nth-child(2){animation:fx 1000ms ease infinite 300ms}
+        .dot:nth-child(3){animation:fx 1000ms ease infinite 600ms}
+        @-webkit-keyframes fx {
+        50%{transform:scale(1);opacity:1}
+        100%{opacity:0}
+        }
+        @keyframes fx {
+        50%{transform:scale(1);opacity:1}
+        100%{opacity:0}
+        }
+        #output{color:#fff;background:#000;font-size:10px}
+        #holder{width:100%;height:100%;position:relative}
+        #gui{position:absolute;top:0;left:0;width:100%;height:100%}
     </style>
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
   </head>
   <body>
-    <figure style="overflow:visible;" id="spinner"><div class="spinner"></div><center style="margin-top:0.5em"><strong>Loading...</strong></center></figure>
+    <figure style="overflow:visible;" id="spinner">
+        <div class="spinner">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 width="128px" height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve" class="element-animation">
+            <g>
+                <path fill="#350030" d="M82.766,50.07c2.254-1.943,4.319-4.223,6.14-6.775L64,0.157L38.391,44.51
+                    c1.618,2.097,3.405,3.988,5.313,5.623c5.75,4.93,12.491,7.535,19.494,7.535C70.232,57.667,76.998,55.041,82.766,50.07z"/>
+                <path fill="#350030" d="M91.938,51.911l13.084,39.855l-0.239,0.212L95.491,98.5h27.929L94.022,47.251
+                    c-1.941-14.598-9.741-26.53-20.074-31.427l15.898,27.524l-0.146,0.202c-1.829,2.596-3.957,4.91-6.225,6.901
+                    C86.005,50.809,85.986,50.796,91.938,51.911z"/>
+                <path fill="#350030" d="M34.933,51.911l-0.046-0.092c0,0,0,0.005,0,0.005c4-0.502,5.222-0.939,7.757-1.31
+                    c-1.921-1.677-3.569-3.598-5.193-5.732l-0.085-0.21l0.17-0.228l16.857-29.167c-11.618,4.689-20.325,18.18-21.724,34.57L4.58,98.5
+                    h26.653l-9.546-6.65L34.933,51.911z"/>
+                <g>
+                    <polygon points="70.091,76.5 76.873,84.44 75.121,86.578 70.093,80.5 65.887,80.5 65.887,76.5         "/>
+                    <polygon points="56.947,76.5 50.165,84.44 51.917,86.578 56.945,80.5 61.887,80.5 61.887,76.5         "/>
+                </g>
+                <polygon points="63.646,93.981 61.918,91.24 60.19,88.5 63.646,88.5 67.102,88.5 65.375,91.24     "/>
+                <path d="M92.256,55.386l-0.408-1.246c-0.714,17.564-8.58,32.741-19.033,38.563c-2.942,1.639-6.09,2.536-9.34,2.536
+                    c-4.182,0-8.153-1.343-11.735-3.741c-9.598-6.421-16.38-20.455-16.775-36.856l-0.608,1.824L22.679,91.537l9.941,6.962l5.696,3.965
+                    h50.1l5.688-3.965l9.987-7.004L92.256,55.386z"/>
+                <path fill="#350030" d="M88.416,102.464h-50.1H6.808v25.379h114.205v-25.379H88.416z M99.137,110.07h4.856v1.213h-4.856V110.07z
+                     M99.137,112.498h9.716v1.215h-9.716V112.498z M99.137,114.928h9.716v1.214h-9.716V114.928z M99.137,117.356h4.856v1.216h-4.856
+                    V117.356z M85.775,105.21h9.717v1.215h-9.717V105.21z M61.483,110.07h4.858v1.213h-4.858V110.07z M61.483,112.498h4.858v1.215
+                    h-4.858V112.498z M61.483,114.928h4.858v1.214h-4.858V114.928z M61.483,117.896v-0.54h4.858v1.195v0.021h-0.027h-3.862h-0.969
+                    V117.896z M48.123,105.21h9.717v1.215h-9.717V105.21z M29.904,110.07h4.859v1.213h-4.859V110.07z M29.904,112.498h9.717v1.215
+                    h-9.717V112.498z M29.904,114.928h9.717v1.214h-9.717V114.928z M29.904,117.356h4.859v1.216h-4.859V117.356z M14.115,110.07h4.857
+                    v1.213h-4.857V110.07z M14.115,112.498h4.857v1.215h-4.857V112.498z M14.115,114.928h4.857v1.214h-4.857V114.928z M14.115,117.356
+                    h4.857v1.216h-4.857V117.356z M26.261,123.431h-9.717v-1.215h9.717V123.431z M28.689,121.001H14.115v-1.215h14.574V121.001z
+                     M28.689,118.572h-4.857v-1.216h4.857V118.572z M28.689,116.142h-7.287v-1.214h7.287V116.142z M28.689,113.713h-7.287v-1.215h7.287
+                    V113.713z M28.689,108.855H14.115v-1.217h14.574V108.855z M28.689,106.425H16.544v-1.215h12.146V106.425z M44.479,123.431H32.334
+                    v-1.215h12.146V123.431z M44.479,121.001H29.904v-1.215h14.576V121.001z M44.479,108.855H29.904v-1.217h14.576V108.855z
+                     M44.479,106.06v0.365H32.334v-1.215h10.927h1.219V106.06z M50.551,123.431h-4.857v-1.215h4.857V123.431z M50.551,121.001h-4.857
+                    v-1.215h4.857V121.001z M50.551,118.572h-4.857v-1.216h4.857V118.572z M50.551,116.142h-4.857v-1.214h4.857V116.142z
+                     M50.551,113.713h-4.857v-1.215h4.857V113.713z M50.551,110.287v0.996h-4.857v-1.213h4.545h0.313V110.287z M60.269,123.431h-4.858
+                    v-1.215h4.858V123.431z M60.269,121.001h-4.858v-1.215h4.858V121.001z M60.269,118.572h-4.858v-1.216h4.858V118.572z
+                     M60.269,116.142h-1.307h-3.551v-1.214h1.808h3.05V116.142z M60.269,113.713h-4.795h-0.063v-0.043v-1.172h4.858V113.713z
+                     M60.269,111.283h-4.858v-1.213h4.858V111.283z M60.269,108.855H48.495h-2.801v-1.217h1.056h13.519V108.855z M73.629,123.431
+                    h-9.715v-1.215h9.715V123.431z M76.059,121.001H61.483v-1.215h2.712h0.377h11.486V121.001z M76.059,118.572h-4.859v-1.216h4.859
+                    V118.572z M76.059,116.142h-6.26h-1.027v-1.214h2.77h4.518V116.142z M76.059,113.713h-2.775h-4.512v-1.215h6.254h1.033V113.713z
+                     M76.059,108.855H61.483v-1.217h14.575V108.855z M76.059,106.425H63.914v-1.215h12.145V106.425z M82.131,123.431h-4.857v-1.215
+                    h4.857V123.431z M82.131,121.001h-4.857v-1.215h4.857V121.001z M82.131,118.572h-4.857v-1.216h4.857V118.572z M82.131,116.142
+                    h-4.857v-1.214h4.857V116.142z M82.131,113.713h-4.857v-1.215h4.857V113.713z M82.131,111.283h-4.857v-0.353v-0.86h1.235h3.622
+                    V111.283z M82.131,108.855h-1.88h-2.978v-1.217h4.721h0.137V108.855z M82.131,106.425h-4.857v-1.215h4.857V106.425z
+                     M88.205,123.431h-4.859v-1.215h4.859V123.431z M88.205,121.001h-4.859v-1.215h4.859V121.001z M88.205,118.572h-4.859v-1.216h4.859
+                    V118.572z M88.205,116.142h-4.859v-1.214h4.859V116.142z M88.205,113.713h-4.859v-1.215h4.859V113.713z M88.205,111.283h-4.859
+                    v-1.213h4.859V111.283z M97.922,123.431h-4.859v-1.215h4.859V123.431z M97.922,121.001h-4.859v-1.215h4.859V121.001z
+                     M97.922,118.572h-4.859v-1.216h4.859V118.572z M97.922,116.142h-4.859v-1.214h4.859V116.142z M97.922,113.713h-4.859v-1.215h4.859
+                    V113.713z M97.922,111.283h-4.859v-1.213h4.859V111.283z M97.922,108.855H83.346v-1.217h14.576V108.855z M113.71,123.431h-12.146
+                    v-1.215h12.146V123.431z M113.71,121.001H99.137v-1.215h14.573V121.001z M113.71,108.855H99.137v-1.217h14.573V108.855z
+                     M113.71,106.425h-12.146v-1.215h12.146V106.425z"/>
+            </g>
+            </svg>
+            <div class="dotContainer">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+    </figure>
     <div class="emscripten">
       <progress value="0" max="100" id="progress" hidden=1></progress>
     </div>
