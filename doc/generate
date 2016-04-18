@@ -1,0 +1,4 @@
+#!/bin/bash
+
+haxe generate.hxml
+haxelib run dox -i generated/output.xml

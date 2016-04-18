@@ -16,10 +16,6 @@ EMBINDCEFV8_DECLARE_CLASS(Component);
 EMBINDCEFV8_DECLARE_ENUM(LoopMode2D);
 EMBINDCEFV8_DECLARE_ENUM(BlendMode);
 
-#ifdef EMSCRIPTEN
-    extern template struct emscripten::internal::TypeID<Context>;
-#endif
-
 EMBINDCEFV8_BINDINGS(urho2d)
 {
     embindcefv8::Class<Sprite2D>("Sprite2D")

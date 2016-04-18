@@ -1,0 +1,5 @@
+-cp ../deps/common/Ash-Haxe/src/
+-cp ../src/haxe/
+-cp ./src/
+-main gengine.Main
+-xml generated/output.xml
