@@ -2,12 +2,12 @@ package gengine.components;
 
 import gengine.math.*;
 
-class StaticSprite2D
+class StaticSprite2D extends UrhoComponent
 {
-    public var object:Dynamic;
-
     public function new(?sprite)
     {
+        super();
+
         untyped __js__("this.object = new Module.StaticSprite2D(gengineApp.getContext())");
         untyped __js__("window.dummyNode.addComponent(this.object, 0, 0);");
 
