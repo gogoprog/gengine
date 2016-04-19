@@ -27,7 +27,6 @@ class AnimatedSprite2D extends UrhoComponent
         untyped __js__("this.object.setAnimationSet(animationSet)");
     }
 
-
     public function setAnimation(name:String, ?loopMode=0)
     {
         untyped __js__("this.object.setAnimation(name, loopMode)");

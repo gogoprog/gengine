@@ -1,8 +1,8 @@
 package gengine;
 
-import ash.core.Engine;
 import ash.core.*;
 import gengine.systems.*;
+import gengine.*;
 
 class Main
 {
