@@ -22,8 +22,7 @@ class Main
     {
         engine = new Engine();
 
-        engine.addSystem(new TransformSystem(), 0);
-        engine.addSystem(new RenderSystem(), 1);
+        engine.entityAdded.add(onEntityAdded);
 
         untyped __js__("window.dummyNode = gengineApp.getScene().createChild(0, 0);");
         untyped __js__("window.dummyNode.setEnabled(false)");
@@ -34,5 +33,12 @@ class Main
     static public function update(dt:Float)
     {
         engine.update(dt);
+    }
+
+    static public function onEntityAdded(entity:ash.core.Entity):Void
+    {
+        var scene = Gengine.getScene();
+
+        untyped __js__("scene.addChild(entity.node, 1000)");
     }
 }
