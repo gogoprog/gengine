@@ -7,6 +7,7 @@
 #include <Urho3D/Scene/Node.h>
 #include <Urho3D/Input/Input.h>
 #include <Urho3D/Graphics/Graphics.h>
+#include <Urho3D/Graphics/Renderer.h>
 #include <Urho3D/Engine/Engine.h>
 
 namespace gengine
@@ -39,6 +40,7 @@ public:
     inline Urho3D::ResourceCache & getResourceCache() { return *GetSubsystem<Urho3D::ResourceCache>(); }
     inline Urho3D::Input & getInput() { return *GetSubsystem<Urho3D::Input>(); }
     inline Urho3D::Graphics & getGraphics() { return *GetSubsystem<Urho3D::Graphics>(); }
+    inline Urho3D::Renderer & getRenderer() { return *GetSubsystem<Urho3D::Renderer>(); }
 
     inline float getTimeStep() { return engine_->GetNextTimeStep(); };
     inline bool isRunning() { return engine_ && !engine_->IsExiting(); }
