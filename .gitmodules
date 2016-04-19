@@ -3,4 +3,4 @@
 	url = https://github.com/gogoprog/libembindcefv8.git
 [submodule "deps/common/Ash-Haxe"]
 	path = deps/common/Ash-Haxe
-	url = https://github.com/nadako/Ash-Haxe.git
+	url = https://github.com/gogoprog/Ash-Haxe.git

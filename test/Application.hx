@@ -2,11 +2,21 @@ import gengine.*;
 import gengine.components.*;
 import gengine.math.*;
 
+class ANode extends Node<ANode>
+{
+    public var sprite:StaticSprite2D;
+}
+
 class GameSystem extends System
 {
     public function new()
     {
         super();
+    }
+
+    override public function addToEngine(engine:Engine)
+    {
+        engine.getNodeList(ANode).nodeAdded.add(onNodeAdded);
     }
 
     override public function update(dt:Float):Void
@@ -22,6 +32,11 @@ class GameSystem extends System
             var p = Gengine.getInput().getMousePosition();
             trace('Mouse position : ' + p.x + ', ' + p.y);
         }
+    }
+
+    public function onNodeAdded(node:ANode)
+    {
+        node.entity.setPosition(new Vector3(0, 0, 0));
     }
 }
 
