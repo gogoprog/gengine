@@ -1,6 +1,7 @@
 import gengine.*;
 import gengine.components.*;
 import gengine.math.*;
+import gengine.graphics.*;
 
 class ANode extends Node<ANode>
 {
@@ -64,5 +65,16 @@ class Application
         e.add(staticSprite2D);
 
         engine.addEntity(e);
+
+        e = new Entity();
+        e.add(new Camera());
+        e.get(Camera).setOrthoSize(new Vector2(64, 64));
+        e.get(Camera).setOrthographic(true);
+        engine.addEntity(e);
+
+        var viewport:Viewport = new Viewport(Gengine.getContext());
+        viewport.setScene(Gengine.getScene());
+        viewport.setCamera(e.get(Camera).getCamera());
+        Gengine.getRenderer().setViewport(0, viewport);
     }
 }

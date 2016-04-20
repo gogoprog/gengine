@@ -4,18 +4,24 @@ import gengine.math.*;
 
 class Camera extends UrhoComponent
 {
-    public function new()
+    public inline function new()
     {
+        super();
         untyped __js__("this.object = new Module.Camera(gengineApp.getContext())");
         untyped __js__("window.dummyNode.addComponent(this.object, 0, 0);");
     }
 
-    public function setOrthoSize(size:Float)
+    public inline function getCamera():Dynamic
+    {
+        return object;
+    }
+
+    public inline function setOrthoSize(size:Vector2)
     {
         untyped __js__("this.object.setOrthoSize(size)");
     }
 
-    public function setOrthographic(orthographic:Bool)
+    public inline function setOrthographic(orthographic:Bool)
     {
         untyped __js__("this.object.setOrthographic(orthographic)");
     }

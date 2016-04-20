@@ -1,9 +1,9 @@
 package gengine.graphics;
 
 @:native('Module.Viewport')
-extern class Color
+extern class Viewport
 {
     public function new(context:Dynamic);
     public function setScene(scene:Dynamic):Void;
-    public function setCamera(camera:Dynamic):Void
+    public function setCamera(camera:Dynamic):Void;
 }
