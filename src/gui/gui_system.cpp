@@ -62,7 +62,6 @@ void System::init(int argc, char *argv[])
         CefRefPtr<App> app(new App);
 
         handler = new Handler();
-        handler->init();
 
         CefSettings settings;
         memset(&settings, 0, sizeof(CefSettings));

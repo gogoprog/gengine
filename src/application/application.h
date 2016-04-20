@@ -12,6 +12,7 @@
 
 namespace gengine
 {
+namespace gui { class System; }
 namespace application
 {
 
@@ -48,8 +49,12 @@ public:
     Urho3D::Scene & getScene() { return *scene; }
     Urho3D::Node & createNode();
 
+    gui::System & getGui();
+
+    const Urho3D::IntVector2 & getWindowSize() const { return windowSize; }
     void setWindowSize(const Urho3D::IntVector2 & size) { windowSize = size; }
     void setWindowTitle(const Urho3D::String & title) { windowTitle = title; }
+    void setGuiFilename(const Urho3D::String & filename) { guiFilename = filename; }
 
     static App & getInstance() { return * instance; }
 
@@ -58,7 +63,8 @@ public:
 private:
 
     Urho3D::String
-        windowTitle;
+        windowTitle,
+        guiFilename;
     bool
         fullscreen;
     Urho3D::IntVector2

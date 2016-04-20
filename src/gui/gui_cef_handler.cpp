@@ -24,22 +24,27 @@ Handler::Handler()
 
 void Handler::init()
 {
-    /*uint width = application::get().getWidth();
-    uint height = application::get().getHeight();
+    static const auto & size = application::get().getWindowSize();
+    uint width = size.x_;
+    uint height = size.y_;
 
-    texture = new Urho3D::Texture2D(application::get().getContext());
+    texture = new Urho3D::Texture2D(&application::get().getContext());
     texture->SetMipsToSkip(Urho3D::QUALITY_LOW, 0);
     texture->SetNumLevels(1);
     texture->SetSize(width, height, Urho3D::Graphics::GetBGRAFormat());
 
-    auto sprite = new Urho3D::Sprite(application::get().getContext());
+    auto sprite = new Urho3D::Sprite(&application::get().getContext());
     sprite->SetTexture(texture);
     sprite->SetSize(Urho3D::IntVector2(width, height));
     sprite->SetHotSpot(Urho3D::IntVector2(0, 0));
     sprite->SetColor(Urho3D::Color(1.0f, 1.0f, 1.0f, 1.0f));
     sprite->SetBlendMode(Urho3D::BLEND_ALPHA);
     application::get().getUI().GetRoot()->AddChild(sprite);
-    */
+
+    char *buffer = new char[width * height * 4];
+    memset(buffer, 0, width * height * 4);
+    texture->SetData(0, 0, 0, width, height, buffer);
+    delete []buffer;
 }
 
 void Handler::finalize()
@@ -48,13 +53,17 @@ void Handler::finalize()
 
 bool Handler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect &rect)
 {
-    //rect = CefRect(0, 0, application::get().getWidth(), application::get().getHeight());
+    static const auto & size = application::get().getWindowSize();
+    rect = CefRect(0, 0, size.x_, size.y_);
     return true;
 }
 
 void Handler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height)
 {
-    //texture->SetData(0, 0, 0, width, height, buffer);
+    if(texture)
+    {
+        texture->SetData(0, 0, 0, width, height, buffer);
+    }
 }
 
 bool Handler::OnBeforeResourceLoad(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request)

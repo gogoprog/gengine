@@ -77,6 +77,8 @@ void App::Start()
     #ifdef EMSCRIPTEN
         SubscribeToEvent(Urho3D::E_UPDATE, URHO3D_HANDLER(App, update));
         embindcefv8::executeJavaScript("Main.start();");
+    #else
+        gui::System::getInstance().getHandler().init();
     #endif
 }
 
@@ -123,6 +125,11 @@ void App::stop()
 void App::exit()
 {
     engine_->Exit();
+}
+
+gui::System & App::getGui()
+{
+    return gui::System::getInstance();
 }
 
 Node & App::createNode()
