@@ -6,5 +6,6 @@ extern class IntVector2
     public var x:Int;
     public var y:Int;
 
+    @:selfCall
     public function new(x:Int, y:Int);
 }

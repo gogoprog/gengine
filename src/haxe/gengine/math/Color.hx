@@ -8,5 +8,6 @@ extern class Color
     public var b:Float;
     public var a:Float;
 
+    @:selfCall
     public function new(r:Float, g:Float, b:Float, a:Float);
 }

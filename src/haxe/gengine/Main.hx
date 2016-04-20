@@ -3,6 +3,7 @@ package gengine;
 import gengine.systems.*;
 import gengine.*;
 
+@:dox(hide)
 class Main
 {
     private static var engine:Engine;
@@ -22,6 +23,7 @@ class Main
         engine = new Engine();
 
         engine.entityAdded.add(onEntityAdded);
+        engine.entityRemoved.add(onEntityRemoved);
 
         untyped __js__("window.dummyNode = gengineApp.getScene().createChild(0, 0);");
         untyped __js__("window.dummyNode.setEnabled(false)");
@@ -39,5 +41,12 @@ class Main
         var scene = Gengine.getScene();
 
         untyped __js__("scene.addChild(entity.node, 1000)");
+    }
+
+    static public function onEntityRemoved(entity:ash.core.Entity):Void
+    {
+        var scene = Gengine.getScene();
+
+        untyped __js__("scene.removeChild(entity.node)");
     }
 }
