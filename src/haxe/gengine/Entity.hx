@@ -6,9 +6,11 @@ import gengine.math.*;
 class Entity extends ash.core.Entity
 {
     private var node:Dynamic;
+    private var internalParent:Entity;
 
     public var position(get, set):Vector3;
     public var scale(get, set):Vector3;
+    public var parent(get, set):Entity;
 
     public function new()
     {
@@ -27,96 +29,135 @@ class Entity extends ash.core.Entity
         return super.add(component, componentClass);
     }
 
-    private function set_position(position:Vector3):Vector3
+    override public function remove<T>(componentClass:Class<Dynamic>):T
+    {
+        var component = super.remove(componentClass);
+
+        if(component != null && Std.is(component, UrhoComponent))
+        {
+            untyped __js__("this.node.removeComponent(component.object)");
+        }
+
+        return component;
+    }
+
+    private inline function set_position(position:Vector3):Vector3
     {
         untyped __js__("this.node.setPosition(position)");
 
         return position;
     }
 
-    private function get_position():Vector3
+    private inline function get_position():Vector3
     {
         return untyped __js__("this.node.getPosition()");
     }
 
-    private function set_scale(scale:Vector3):Vector3
+    private inline function set_scale(scale:Vector3):Vector3
     {
         untyped __js__("this.node.setScale(scale)");
 
         return scale;
     }
 
-    private function get_scale():Vector3
+    private inline function get_scale():Vector3
     {
         return untyped __js__("this.node.getScale()");
     }
 
-    public function setPosition(position:Vector3):Vector3
+    public inline function setPosition(position:Vector3):Vector3
     {
         untyped __js__("this.node.setPosition(position)");
 
         return position;
     }
 
-    public function getPosition():Vector3
+    public inline function getPosition():Vector3
     {
         return untyped __js__("this.node.getPosition()");
     }
 
-    public function setScale(scale:Vector3):Vector3
+    public inline function setScale(scale:Vector3):Vector3
     {
         untyped __js__("this.node.setScale(scale)");
 
         return scale;
     }
 
-    public function getScale():Vector3
+    public inline function getScale():Vector3
     {
         return untyped __js__("this.node.getScale()");
     }
 
-    public function setRotation2D(angle:Float)
+    public inline function setRotation2D(angle:Float)
     {
         untyped __js__("this.node.setRotation2D(angle)");
     }
 
-    public function getRotation2D():Float
+    public inline function getRotation2D():Float
     {
         return untyped __js__("this.node.getRotation2D()");
     }
 
-    public function getDirection():Vector3
+    public inline function setDirection(direction:Vector3)
+    {
+        untyped __js__("this.node.setDirection(direction)");
+    }
+
+    public inline function getDirection():Vector3
     {
         return untyped __js__("this.node.getDirection()");
     }
 
-    public function getUp():Vector3
+    public inline function getUp():Vector3
     {
         return untyped __js__("this.node.getUp()");
     }
 
-    public function getRight():Vector3
+    public inline function getRight():Vector3
     {
         return untyped __js__("this.node.getRight()");
     }
 
-    public function getWorldPosition():Vector3
-    {
-        return untyped __js__("this.node.getWorldPosition()");
-    }
-
-    public function setWorldPosition(position:Vector3)
+    public inline function setWorldPosition(position:Vector3)
     {
         untyped __js__("this.node.setWorldPosition(position)");
     }
 
-    public function setWorldScale(scale:Vector3)
+    public inline function getWorldPosition():Vector3
+    {
+        return untyped __js__("this.node.getWorldPosition()");
+    }
+
+    public inline function setWorldScale(scale:Vector3)
     {
         untyped __js__("this.node.setWorldScale(scale)");
     }
 
-    public function setParent(parent:Entity)
+    public inline function getWorldScale():Vector3
+    {
+        return untyped __js__("this.node.getWorldScale()");
+    }
+
+    public inline function setParent(parent:Entity)
     {
         untyped __js__("this.node.setParent(parent.node)");
+        internalParent = parent;
+    }
+
+    public inline function getParent():Entity
+    {
+        return internalParent;
+    }
+
+    public inline function set_parent(parent:Entity):Entity
+    {
+        setParent(parent);
+        return parent;
+    }
+
+    public inline function get_parent():Entity
+    {
+        return internalParent;
     }
 }

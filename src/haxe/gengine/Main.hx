@@ -1,6 +1,5 @@
 package gengine;
 
-import ash.core.*;
 import gengine.systems.*;
 import gengine.*;
 

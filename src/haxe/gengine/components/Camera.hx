@@ -2,10 +2,8 @@ package gengine.components;
 
 import gengine.math.*;
 
-class Camera
+class Camera extends UrhoComponent
 {
-    public var object:Dynamic;
-
     public function new()
     {
         untyped __js__("this.object = new Module.Camera(gengineApp.getContext())");
