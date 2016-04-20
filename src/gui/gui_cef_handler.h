@@ -13,7 +13,7 @@ namespace gengine
 namespace gui
 {
 
-class Handler : public CefRenderHandler, public CefClient, public CefRequestHandler, public CefLoadHandler
+class Handler : public CefRenderHandler, public CefClient, public CefRequestHandler, public CefLoadHandler, public CefDisplayHandler
 {
 public:
     Handler();
@@ -27,10 +27,11 @@ public:
     virtual CefRefPtr<CefRenderHandler> GetRenderHandler() override { return this; }
     virtual CefRefPtr<CefRequestHandler> GetRequestHandler() override { return this; }
     virtual CefRefPtr<CefLoadHandler> GetLoadHandler() override { return this; }
+    virtual CefRefPtr<CefDisplayHandler> GetDisplayHandler() override { return this; }
 
     virtual bool OnBeforeResourceLoad(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request) override;
-
     virtual void OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode) override;
+    virtual bool OnConsoleMessage(CefRefPtr<CefBrowser> browser, const CefString& message, const CefString& source, int line) override;
 
     IMPLEMENT_REFCOUNTING(Handler)
 
