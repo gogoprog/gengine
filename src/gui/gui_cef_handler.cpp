@@ -113,6 +113,7 @@ void Handler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame
 
 bool Handler::OnConsoleMessage(CefRefPtr<CefBrowser> browser, const CefString& message, const CefString& source, int line)
 {
+    printf("\033[36m(%s:%i) ", source.ToString().c_str(), line);
     printf("\033[33m");
     printf(message.ToString().c_str());
     puts("\033[0m");
