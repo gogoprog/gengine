@@ -20,6 +20,7 @@ public:
 
     void init();
     void finalize();
+    void updateTexture();
 
     virtual bool GetViewRect(CefRefPtr<CefBrowser> browser, CefRect &rect) override;
     virtual void OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height) override;
@@ -42,6 +43,8 @@ private:
         texture;
     std::string
         textToExecute;
+    char
+        *textureBuffer;
 
     IMPLEMENT_LOCKING(Handler)
 };

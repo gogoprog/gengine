@@ -13,17 +13,19 @@ STRING(
 
         Main.start();
 
-        while(true)
+        function update()
         {
             gengineApp.runFrame();
 
-            if(!gengineApp.isRunning())
-            {
-                break;
-            }
-
             Main.update(gengineApp.getTimeStep());
+
+            if(gengineApp.isRunning())
+            {
+                setTimeout(update, 1);
+            }
         }
+
+        update();
     }
 
     __init();

@@ -19,6 +19,8 @@ namespace gui
 {
 
 Handler::Handler()
+    :
+    textureBuffer(nullptr)
 {
 }
 
@@ -41,14 +43,20 @@ void Handler::init()
     sprite->SetBlendMode(Urho3D::BLEND_ALPHA);
     application::get().getUI().GetRoot()->AddChild(sprite);
 
-    char *buffer = new char[width * height * 4];
-    memset(buffer, 0, width * height * 4);
-    texture->SetData(0, 0, 0, width, height, buffer);
-    delete []buffer;
+    textureBuffer = new char[width * height * 4];
+    memset(textureBuffer, 0, width * height * 4);
+    texture->SetData(0, 0, 0, width, height, textureBuffer);
 }
 
 void Handler::finalize()
 {
+    delete []textureBuffer;
+}
+
+void Handler::updateTexture()
+{
+    static const auto & size = application::get().getWindowSize();
+    texture->SetData(0, 0, 0, size.x_, size.y_, textureBuffer);
 }
 
 bool Handler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect &rect)
@@ -60,9 +68,10 @@ bool Handler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect &rect)
 
 void Handler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height)
 {
-    if(texture)
+    if(textureBuffer)
     {
-        texture->SetData(0, 0, 0, width, height, buffer);
+        static const auto & size = application::get().getWindowSize();
+        memcpy(textureBuffer, buffer, size.x_ * size.y_ * 4);
     }
 }
 
@@ -118,6 +127,8 @@ bool Handler::OnBeforeResourceLoad(CefRefPtr<CefBrowser> browser, CefRefPtr<CefF
 
 void Handler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode)
 {
+    puts(frame->GetURL().ToString().c_str());
+    gengine::application::App::loadScriptFile("generated/main.js");
 }
 
 bool Handler::OnConsoleMessage(CefRefPtr<CefBrowser> browser, const CefString& message, const CefString& source, int line)

@@ -56,9 +56,10 @@ public:
     void setWindowTitle(const Urho3D::String & title) { windowTitle = title; }
     void setGuiFilename(const Urho3D::String & filename) { guiFilename = filename; }
 
-    static App & getInstance() { return * instance; }
-
     void update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
+
+    static App & getInstance() { return * instance; }
+    static void loadScriptFile(const char *filename);
 
 private:
 

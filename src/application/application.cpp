@@ -115,6 +115,10 @@ void App::runFrame()
 {
     Thread::SetMainThread();
     engine_->RunFrame();
+
+    #ifdef CEF
+        gengine::gui::System::getInstance().getHandler().updateTexture();
+    #endif
 }
 
 void App::stop()
@@ -145,13 +149,7 @@ void App::update(StringHash eventType, VariantMap& eventData)
     embindcefv8::executeJavaScript(ss.str().c_str());
 }
 
-SharedPtr<App>
-    App::instance;
-
-}
-}
-
-void loadScriptFile(const char *filename)
+void App::loadScriptFile(const char *filename)
 {
     std::ifstream in(filename);
     std::string contents((std::istreambuf_iterator<char>(in)),
@@ -167,6 +165,12 @@ void loadScriptFile(const char *filename)
     #endif
 
     embindcefv8::executeJavaScript(contents.c_str());
+}
+
+SharedPtr<App>
+    App::instance;
+
+}
 }
 
 gengine::application::App
@@ -185,9 +189,8 @@ int main(int argc, char *argv[])
 
     gengine::gui::System::getInstance().init(argc, argv);
 
-    loadScriptFile("generated/main.js");
-
     #ifdef EMSCRIPTEN
+        gengine::application::App::loadScriptFile("generated/main.js");
         embindcefv8::executeJavaScript("Main.init();");
         mainApp->run();
     #else
