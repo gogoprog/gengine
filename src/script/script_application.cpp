@@ -32,6 +32,8 @@ EMBINDCEFV8_BINDINGS(application)
         .method("getContext", &App::getContext)
         .method("isRunning", &App::isRunning)
         .method("setWindowTitle", &App::setWindowTitle)
+        .method("setGuiFilename", &App::setGuiFilename)
         .method("setWindowSize", &App::setWindowSize)
+        .method("setMustLoadGui", &App::setMustLoadGui)
         ;
 }

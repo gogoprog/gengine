@@ -6,8 +6,6 @@ STRING(
     {
         gengineApp = Module.gengineApp;
 
-        Main.init();
-
         gengineApp.setup();
         gengineApp.start();
 

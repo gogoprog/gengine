@@ -54,12 +54,15 @@ public:
     const Urho3D::IntVector2 & getWindowSize() const { return windowSize; }
     void setWindowSize(const Urho3D::IntVector2 & size) { windowSize = size; }
     void setWindowTitle(const Urho3D::String & title) { windowTitle = title; }
+    const Urho3D::String & getGuiFilename() { return guiFilename; }
     void setGuiFilename(const Urho3D::String & filename) { guiFilename = filename; }
 
     void update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
 
     static App & getInstance() { return * instance; }
-    static void loadScriptFile(const char *filename);
+
+    bool mustLoadGui() const { return itMustLoadGui; }
+    void setMustLoadGui(const bool value) { itMustLoadGui = value; }
 
 private:
 
@@ -67,7 +70,8 @@ private:
         windowTitle,
         guiFilename;
     bool
-        fullscreen;
+        fullscreen,
+        itMustLoadGui;
     Urho3D::IntVector2
         windowSize;
     Urho3D::SharedPtr<Urho3D::Scene>
@@ -80,6 +84,13 @@ inline App & get()
 {
     return App::getInstance();
 }
+
+void loadScriptFile(const char *filename, const char *additional_code = "");
+
+#if CEF
+    void preInit();
+    void init();
+#endif
 
 }
 }

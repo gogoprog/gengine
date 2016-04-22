@@ -56,6 +56,7 @@ void Handler::finalize()
 void Handler::updateTexture()
 {
     static const auto & size = application::get().getWindowSize();
+
     texture->SetData(0, 0, 0, size.x_, size.y_, textureBuffer);
 }
 
@@ -127,8 +128,17 @@ bool Handler::OnBeforeResourceLoad(CefRefPtr<CefBrowser> browser, CefRefPtr<CefF
 
 void Handler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode)
 {
-    puts(frame->GetURL().ToString().c_str());
-    gengine::application::App::loadScriptFile("generated/main.js");
+    static bool firstTime = true;
+
+    if(firstTime)
+    {
+        gengine::application::preInit();
+        firstTime = false;
+    }
+    else
+    {
+        gengine::application::init();
+    }
 }
 
 bool Handler::OnConsoleMessage(CefRefPtr<CefBrowser> browser, const CefString& message, const CefString& source, int line)

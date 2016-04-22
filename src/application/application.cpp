@@ -36,7 +36,9 @@ App::App()
     :
     Application(new Context()),
     windowTitle("gengine application"),
+    guiFilename("about:blank"),
     fullscreen(false),
+    itMustLoadGui(false),
     windowSize(640, 480)
 {
     instance = this;
@@ -149,26 +151,37 @@ void App::update(StringHash eventType, VariantMap& eventData)
     embindcefv8::executeJavaScript(ss.str().c_str());
 }
 
-void App::loadScriptFile(const char *filename)
-{
-    std::ifstream in(filename);
-    std::string contents((std::istreambuf_iterator<char>(in)),
-    std::istreambuf_iterator<char>());
-
-    #ifdef CEF
-        const char application_js[] =
-            #include "application.js"
-
-        contents += application_js;
-    #else
-        contents += " gengineApp = Module.gengineApp;";
-    #endif
-
-    embindcefv8::executeJavaScript(contents.c_str());
-}
-
 SharedPtr<App>
     App::instance;
+
+#if CEF
+    void loadScriptFile(const char *filename, const char *additional_code)
+    {
+        std::ifstream in(filename);
+        std::string contents((std::istreambuf_iterator<char>(in)),
+        std::istreambuf_iterator<char>());
+
+        contents += additional_code;
+
+        embindcefv8::executeJavaScript(contents.c_str());
+    }
+
+    void preInit()
+    {
+        const char js_code[] =
+            #include "application_preinit.js"
+
+        loadScriptFile("generated/main.js", js_code);
+    }
+
+    void init()
+    {
+        const char js_code[] =
+            #include "application_init.js"
+
+        loadScriptFile("generated/main.js", js_code);
+    }
+#endif
 
 }
 }
@@ -190,13 +203,20 @@ int main(int argc, char *argv[])
     gengine::gui::System::getInstance().init(argc, argv);
 
     #ifdef EMSCRIPTEN
-        gengine::application::App::loadScriptFile("generated/main.js");
+        gengine::application::loadScriptFile("generated/main.js", " gengineApp = Module.gengineApp;");
         embindcefv8::executeJavaScript("Main.init();");
         mainApp->run();
     #else
         auto engine = mainApp->getEngine();
         while(!engine->IsExiting())
         {
+            if(mainApp->mustLoadGui())
+            {
+                gengine::gui::System::getInstance().loadFile(gengine::application::get().getGuiFilename().CString());
+
+                mainApp->setMustLoadGui(false);
+            }
+
             gengine::gui::System::getInstance().update();
         }
     #endif

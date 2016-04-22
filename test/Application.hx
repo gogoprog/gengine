@@ -49,6 +49,7 @@ class Application
 
         Gengine.setWindowSize(new IntVector2(320, 200));
         Gengine.setWindowTitle("gengine test application");
+        Gengine.setGuiFilename("gui/test.html");
     }
 
     public static function start(engine:Engine)
