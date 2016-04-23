@@ -1,7 +1,7 @@
-
 #include "gui_system.h"
 #include "gui_cef_app.h"
 #include "embindcefv8.h"
+#include "application.h"
 
 #include <sstream>
 
@@ -19,6 +19,8 @@
     #include <emscripten/bind.h>
 
     using namespace emscripten;
+#else
+    using namespace Urho3D;
 #endif
 
 namespace gengine
@@ -95,31 +97,31 @@ void System::update()
     #ifndef EMSCRIPTEN
     {
         {
-            /*CefMouseEvent mouse_event;
-            const input::System & input = input::System::getInstance();
+            CefMouseEvent mouse_event;
+            const auto & input = gengine::application::get().getInput();
             int wheelY;
 
-            mouse_event.x = input.getMousePosition().x_;
-            mouse_event.y = input.getMousePosition().y_;
+            mouse_event.x = input.GetMousePosition().x_;
+            mouse_event.y = input.GetMousePosition().y_;
 
-            if(input.isMouseButtonJustDown(1))
+            if(input.GetMouseButtonDown(1))
             {
                 browser->GetHost()->SendMouseClickEvent(mouse_event, MBT_LEFT, false, 1);
             }
 
-            if(input.isMouseButtonUp(1))
+            if(input.GetMouseButtonPress(1))
             {
                 browser->GetHost()->SendMouseClickEvent(mouse_event, MBT_LEFT, true, 1);
             }
 
-            wheelY = mouse.getWheelY();
+            wheelY = input.GetMouseMoveWheel();
 
             if(wheelY != 0)
             {
                 browser->GetHost()->SendMouseWheelEvent(mouse_event, 0, wheelY * 32);
             }
 
-            browser->GetHost()->SendMouseMoveEvent(mouse_event, false);*/
+            browser->GetHost()->SendMouseMoveEvent(mouse_event, false);
         }
 
         CefDoMessageLoopWork();

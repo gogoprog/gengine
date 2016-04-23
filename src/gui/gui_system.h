@@ -25,6 +25,7 @@ public:
 
 #ifndef EMSCRIPTEN
     Handler & getHandler() { return * handler; }
+    CefBrowser & getBrowser() { return * browser; }
 
 private:
     CefRefPtr<Handler>

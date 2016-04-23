@@ -1,6 +1,7 @@
 #ifndef EMSCRIPTEN
 
 #include "gui_cef_handler.h"
+#include "gui_system.h"
 #include "application.h"
 
 #include "include/cef_client.h"
@@ -26,7 +27,7 @@ Handler::Handler()
 
 void Handler::init()
 {
-    static const auto & size = application::get().getWindowSize();
+    const auto & size = application::get().getWindowSize();
     uint width = size.x_;
     uint height = size.y_;
 
@@ -46,6 +47,8 @@ void Handler::init()
     textureBuffer = new char[width * height * 4];
     memset(textureBuffer, 0, width * height * 4);
     texture->SetData(0, 0, 0, width, height, textureBuffer);
+
+    gui::System::getInstance().getBrowser().GetHost()->WasResized();
 }
 
 void Handler::finalize()
@@ -62,17 +65,21 @@ void Handler::updateTexture()
 
 bool Handler::GetViewRect(CefRefPtr<CefBrowser> browser, CefRect &rect)
 {
-    static const auto & size = application::get().getWindowSize();
-    rect = CefRect(0, 0, size.x_, size.y_);
-    return true;
+    if(textureBuffer)
+    {
+        static const auto & size = application::get().getWindowSize();
+        rect = CefRect(0, 0, size.x_, size.y_);
+        return true;
+    }
+
+    return false;
 }
 
 void Handler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, const RectList &dirtyRects, const void *buffer, int width, int height)
 {
     if(textureBuffer)
     {
-        static const auto & size = application::get().getWindowSize();
-        memcpy(textureBuffer, buffer, size.x_ * size.y_ * 4);
+        memcpy(textureBuffer, buffer, width * height * 4);
     }
 }
 
