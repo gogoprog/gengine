@@ -7,7 +7,8 @@ STRING(
 
         Main.init();
 
-        gengineApp.setMustLoadGui(true);
+        gengineApp.setup();
+        gengineApp.start();
     }
 
     __preinit();

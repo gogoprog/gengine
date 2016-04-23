@@ -61,17 +61,13 @@ public:
 
     static App & getInstance() { return * instance; }
 
-    bool mustLoadGui() const { return itMustLoadGui; }
-    void setMustLoadGui(const bool value) { itMustLoadGui = value; }
-
 private:
 
     Urho3D::String
         windowTitle,
         guiFilename;
     bool
-        fullscreen,
-        itMustLoadGui;
+        fullscreen;
     Urho3D::IntVector2
         windowSize;
     Urho3D::SharedPtr<Urho3D::Scene>

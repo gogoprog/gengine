@@ -38,7 +38,6 @@ App::App()
     windowTitle("gengine application"),
     guiFilename("about:blank"),
     fullscreen(false),
-    itMustLoadGui(false),
     windowSize(640, 480)
 {
     instance = this;
@@ -79,8 +78,6 @@ void App::Start()
     #ifdef EMSCRIPTEN
         SubscribeToEvent(Urho3D::E_UPDATE, URHO3D_HANDLER(App, update));
         embindcefv8::executeJavaScript("Main.start();");
-    #else
-        gui::System::getInstance().getHandler().init();
     #endif
 }
 
@@ -111,6 +108,11 @@ void App::start()
     Thread::SetMainThread();
 
     Start();
+
+    #ifdef CEF
+        gui::System::getInstance().getHandler().init();
+        gui::System::getInstance().loadFile(gengine::application::get().getGuiFilename().CString());
+    #endif
 }
 
 void App::runFrame()
@@ -210,12 +212,12 @@ int main(int argc, char *argv[])
         auto engine = mainApp->getEngine();
         while(!engine->IsExiting())
         {
-            if(mainApp->mustLoadGui())
+            /*if(mainApp->mustLoadGui())
             {
                 gengine::gui::System::getInstance().loadFile(gengine::application::get().getGuiFilename().CString());
 
                 mainApp->setMustLoadGui(false);
-            }
+            }*/
 
             gengine::gui::System::getInstance().update();
         }

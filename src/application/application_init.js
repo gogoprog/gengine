@@ -6,9 +6,6 @@ STRING(
     {
         gengineApp = Module.gengineApp;
 
-        gengineApp.setup();
-        gengineApp.start();
-
         Main.start();
 
         function update()
