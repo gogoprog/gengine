@@ -112,7 +112,6 @@ void App::start()
     #ifdef CEF
         gui::System::getInstance().getHandler().init();
         gui::System::getInstance().loadFile(gengine::application::get().getGuiFilename().CString());
-        puts("loadfile");
     #endif
 }
 
