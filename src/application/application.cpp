@@ -212,13 +212,6 @@ int main(int argc, char *argv[])
         auto engine = mainApp->getEngine();
         while(!engine->IsExiting())
         {
-            /*if(mainApp->mustLoadGui())
-            {
-                gengine::gui::System::getInstance().loadFile(gengine::application::get().getGuiFilename().CString());
-
-                mainApp->setMustLoadGui(false);
-            }*/
-
             gengine::gui::System::getInstance().update();
         }
     #endif
