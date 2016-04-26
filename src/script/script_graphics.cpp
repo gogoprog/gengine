@@ -3,6 +3,7 @@
 #include <Urho3D/Graphics/Camera.h>
 #include <Urho3D/Graphics/Viewport.h>
 #include <Urho3D/Graphics/Renderer.h>
+#include <Urho3D/Graphics/StaticModel.h>
 
 using namespace Urho3D;
 
@@ -10,6 +11,12 @@ EMBINDCEFV8_DECLARE_CLASS(Context);
 
 EMBINDCEFV8_BINDINGS(graphics)
 {
+    embindcefv8::Class<Material>("Material")
+        ;
+
+    embindcefv8::Class<Model>("Model")
+        ;
+
     embindcefv8::Class<Viewport>("Viewport")
         .constructor<Context*>()
         .method("setScene", &Viewport::SetScene)
@@ -30,5 +37,11 @@ EMBINDCEFV8_BINDINGS(graphics)
 
     embindcefv8::Class<Renderer>("Renderer")
         .method("setViewport", &Renderer::SetViewport)
+        ;
+
+    embindcefv8::Class<StaticModel>("StaticModel")
+        .constructor<Context*>()
+        .method("setModel", &StaticModel::SetModel)
+        .method("setMaterial", &StaticModel::SetMaterial)
         ;
 }
