@@ -21,6 +21,11 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("setOrthoSize", static_cast<void (Camera::*)(const Vector2 &)>(&Camera::SetOrthoSize))
         .method("setOrthographic", &Camera::SetOrthographic)
         .method("setEnabled", static_cast<void (Camera::*)(bool)>(&Camera::SetEnabled))
+        .method("setNearClip", &Camera::SetNearClip)
+        .method("setFarClip", &Camera::SetFarClip)
+        .method("setFov", &Camera::SetFov)
+        .method("setAspectRatio", &Camera::SetAspectRatio)
+        .method("setAutoAspectRatio", &Camera::SetAutoAspectRatio)
         ;
 
     embindcefv8::Class<Renderer>("Renderer")
