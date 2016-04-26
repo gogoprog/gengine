@@ -97,6 +97,8 @@ void System::update()
     #ifndef EMSCRIPTEN
     {
         {
+            static bool mouseWasDown = false;
+
             CefMouseEvent mouse_event;
             const auto & input = gengine::application::get().getInput();
             int wheelY;
@@ -104,14 +106,16 @@ void System::update()
             mouse_event.x = input.GetMousePosition().x_;
             mouse_event.y = input.GetMousePosition().y_;
 
-            if(input.GetMouseButtonDown(1))
+            if(input.GetMouseButtonDown(1) && !mouseWasDown)
             {
                 browser->GetHost()->SendMouseClickEvent(mouse_event, MBT_LEFT, false, 1);
+                mouseWasDown = true;
             }
 
-            if(input.GetMouseButtonPress(1))
+            if(!input.GetMouseButtonDown(1) && mouseWasDown)
             {
                 browser->GetHost()->SendMouseClickEvent(mouse_event, MBT_LEFT, true, 1);
+                mouseWasDown = false;
             }
 
             wheelY = input.GetMouseMoveWheel();
