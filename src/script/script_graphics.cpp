@@ -4,10 +4,12 @@
 #include <Urho3D/Graphics/Viewport.h>
 #include <Urho3D/Graphics/Renderer.h>
 #include <Urho3D/Graphics/StaticModel.h>
+#include <Urho3D/Graphics/Light.h>
 
 using namespace Urho3D;
 
 EMBINDCEFV8_DECLARE_CLASS(Context);
+EMBINDCEFV8_DECLARE_ENUM(LightType);
 
 EMBINDCEFV8_BINDINGS(graphics)
 {
@@ -43,5 +45,10 @@ EMBINDCEFV8_BINDINGS(graphics)
         .constructor<Context*>()
         .method("setModel", &StaticModel::SetModel)
         .method("setMaterial", &StaticModel::SetMaterial)
+        ;
+
+    embindcefv8::Class<Light>("Light")
+        .constructor<Context*>()
+        .method("setLightType", &Light::SetLightType)
         ;
 }
