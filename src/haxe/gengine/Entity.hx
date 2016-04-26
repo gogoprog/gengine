@@ -160,4 +160,24 @@ class Entity extends ash.core.Entity
     {
         return internalParent;
     }
+
+    public function roll(angle:Float, ?transformSpace:Int = 0)
+    {
+        untyped __js__("this.node.roll(angle, transformSpace)");
+    }
+
+    public function yaw(angle:Float, ?transformSpace:Int = 0)
+    {
+        untyped __js__("this.node.yaw(angle, transformSpace)");
+    }
+
+    public function pitch(angle:Float, ?transformSpace:Int = 0)
+    {
+        untyped __js__("this.node.pitch(angle, transformSpace)");
+    }
+
+    public function lookAt(position:Vector3, ?upVector = null, ?transformSpace:Int = 2)
+    {
+        untyped __js__("this.node.lookAt(position, upVector || Module.Vector3(0, 1, 0), transformSpace)");
+    }
 }
