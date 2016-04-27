@@ -12,7 +12,7 @@ class StaticModel extends UrhoComponent
         untyped __js__("window.dummyNode.addComponent(this.object, 0, 0);");
     }
 
-    public inline function setModel(model:Dynamic)
+    public function setModel(model:Dynamic)
     {
         untyped __js__("this.object.setModel(model)");
     }
