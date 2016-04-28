@@ -75,7 +75,7 @@ class Application
 
         var viewport:Viewport = new Viewport(Gengine.getContext());
         viewport.setScene(Gengine.getScene());
-        viewport.setCamera(e.get(Camera).getCamera());
+        viewport.setCamera(e.get(Camera));
         Gengine.getRenderer().setViewport(0, viewport);
     }
 }

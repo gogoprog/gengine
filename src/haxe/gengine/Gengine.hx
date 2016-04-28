@@ -4,13 +4,15 @@ import gengine.systems.*;
 import gengine.math.*;
 import gengine.input.*;
 import gengine.resource.*;
+import gengine.core.*;
+import gengine.scene.*;
 import gengine.*;
 
 @:native('gengine')
 extern class Gengine
 {
-    static public function getContext():Dynamic;
-    static public function getScene():Dynamic;
+    static public function getContext():Context;
+    static public function getScene():Scene;
     static public function getInput():Input;
     static public function getResourceCache():ResourceCache;
     static public function getRenderer():Dynamic;

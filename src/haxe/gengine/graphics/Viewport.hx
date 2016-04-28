@@ -1,9 +1,17 @@
 package gengine.graphics;
 
+import gengine.core.Context;
+import gengine.scene.Scene;
+import gengine.components.Camera;
+
 @:native('Module.Viewport')
 extern class Viewport
 {
-    public function new(context:Dynamic);
-    public function setScene(scene:Dynamic):Void;
-    public function setCamera(camera:Dynamic):Void;
+    public function new(context:Context);
+    public function setScene(scene:Scene):Void;
+
+    public inline function setCamera(camera:Camera):Void
+    {
+        this.setCamera(camera.object);
+    }
 }
