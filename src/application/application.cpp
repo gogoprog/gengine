@@ -200,12 +200,12 @@ int main(int argc, char *argv[])
 
     mainApp = new gengine::application::App();
 
-    embindcefv8::addGlobalObject(*mainApp, "gengineApp");
+    embindcefv8::addGlobalObject(*mainApp, "gengine");
 
     gengine::gui::System::getInstance().init(argc, argv);
 
     #ifdef EMSCRIPTEN
-        gengine::application::loadScriptFile("generated/main.js", " gengineApp = Module.gengineApp;");
+        gengine::application::loadScriptFile("generated/main.js", " gengine = Module.gengine;");
         embindcefv8::executeJavaScript("Main.init();");
         mainApp->run();
     #else

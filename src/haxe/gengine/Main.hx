@@ -25,7 +25,7 @@ class Main
         engine.entityAdded.add(onEntityAdded);
         engine.entityRemoved.add(onEntityRemoved);
 
-        untyped __js__("window.dummyNode = gengineApp.getScene().createChild(0, 0);");
+        untyped __js__("window.dummyNode = gengine.getScene().createChild(0, 0);");
         untyped __js__("window.dummyNode.setEnabled(false)");
 
         Application.start(engine);

@@ -16,7 +16,7 @@ class Entity extends ash.core.Entity
     {
         super();
 
-        untyped __js__("this.node = new Module.Node(gengineApp.getContext());");
+        untyped __js__("this.node = new Module.Node(gengine.getContext());");
     }
 
     override public function add<T>(component:T, componentClass:Class<Dynamic> = null):ash.core.Entity

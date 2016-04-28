@@ -8,7 +8,7 @@ class Light extends UrhoComponent
     {
         super();
 
-        untyped __js__("this.object = new Module.Light(gengineApp.getContext())");
+        untyped __js__("this.object = new Module.Light(gengine.getContext())");
         untyped __js__("window.dummyNode.addComponent(this.object, 0, 0);");
     }
 

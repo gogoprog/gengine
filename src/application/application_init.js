@@ -1,20 +1,20 @@
 STRING(
 
-    var gengineApp;
+    var gengine;
 
     function __init()
     {
-        gengineApp = Module.gengineApp;
+        gengine = Module.gengine;
 
         Main.start();
 
         function update()
         {
-            gengineApp.runFrame();
+            gengine.runFrame();
 
-            Main.update(gengineApp.getTimeStep());
+            Main.update(gengine.getTimeStep());
 
-            if(gengineApp.isRunning())
+            if(gengine.isRunning())
             {
                 setTimeout(update, 1);
             }

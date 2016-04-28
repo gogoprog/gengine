@@ -5,7 +5,7 @@ import gengine.math.*;
 import gengine.input.*;
 import gengine.*;
 
-@:native('gengineApp')
+@:native('gengine')
 extern class Gengine
 {
     static public function getContext():Dynamic;

@@ -1,14 +1,14 @@
 STRING(
-    var gengineApp;
+    var gengine;
 
     function __preinit()
     {
-        gengineApp = Module.gengineApp;
+        gengine = Module.gengine;
 
         Main.init();
 
-        gengineApp.setup();
-        gengineApp.start();
+        gengine.setup();
+        gengine.start();
     }
 
     __preinit();

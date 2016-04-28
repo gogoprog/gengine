@@ -8,7 +8,7 @@ class StaticModel extends UrhoComponent
     {
         super();
 
-        untyped __js__("this.object = new Module.StaticModel(gengineApp.getContext())");
+        untyped __js__("this.object = new Module.StaticModel(gengine.getContext())");
         untyped __js__("window.dummyNode.addComponent(this.object, 0, 0);");
     }
 

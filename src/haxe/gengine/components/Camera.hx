@@ -7,7 +7,7 @@ class Camera extends UrhoComponent
     public inline function new()
     {
         super();
-        untyped __js__("this.object = new Module.Camera(gengineApp.getContext())");
+        untyped __js__("this.object = new Module.Camera(gengine.getContext())");
         untyped __js__("window.dummyNode.addComponent(this.object, 0, 0);");
     }
 
