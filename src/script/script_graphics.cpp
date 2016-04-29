@@ -8,6 +8,7 @@
 #include <Urho3D/Graphics/AnimatedModel.h>
 #include <Urho3D/Graphics/Animation.h>
 #include <Urho3D/Graphics/AnimationState.h>
+#include <Urho3D/Graphics/Zone.h>
 
 using namespace Urho3D;
 
@@ -50,7 +51,12 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("setAutoAspectRatio", &Camera::SetAutoAspectRatio)
         ;
 
+    embindcefv8::Class<Zone>("Zone")
+        .method("setFogColor", &Zone::SetFogColor)
+        ;
+
     embindcefv8::Class<Renderer>("Renderer")
+        .method("getDefaultZone", &Renderer::GetDefaultZone)
         .method("setViewport", &Renderer::SetViewport)
         ;
 
