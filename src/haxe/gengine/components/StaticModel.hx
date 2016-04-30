@@ -21,4 +21,9 @@ class StaticModel extends UrhoComponent
     {
         untyped __js__("this.object.setMaterial(material)");
     }
+
+    public inline function setCastShadows(castShadows:Bool)
+    {
+        untyped __js__("this.object.setCastShadows(castShadows)");
+    }
 }

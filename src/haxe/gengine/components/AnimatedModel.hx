@@ -32,4 +32,9 @@ class AnimatedModel extends UrhoComponent
     {
         return untyped __js__("this.object.getAnimationStateByIndex(index)");
     }
+
+    public inline function setCastShadows(castShadows:Bool)
+    {
+        untyped __js__("this.object.setCastShadows(castShadows)");
+    }
 }

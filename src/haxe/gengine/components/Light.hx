@@ -16,4 +16,14 @@ class Light extends UrhoComponent
     {
         untyped __js__("this.object.setLightType(type)");
     }
+
+    public inline function setColor(color:Color)
+    {
+        untyped __js__("this.object.setColor(color)");
+    }
+
+    public inline function setCastShadows(castShadows:Bool)
+    {
+        untyped __js__("this.object.setCastShadows(castShadows)");
+    }
 }
