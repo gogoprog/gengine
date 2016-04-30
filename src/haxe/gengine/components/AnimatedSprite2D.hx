@@ -41,4 +41,19 @@ class AnimatedSprite2D extends UrhoComponent
     {
         return untyped __js__("this.object.getLayer()");
     }
+
+    public function setEntity(entityName:String)
+    {
+        untyped __js__("this.object.setEntity(entityName)");
+    }
+
+    public function setLoopMode(loopMode:Int)
+    {
+        untyped __js__("this.object.setLoopMode(loopMode)");
+    }
+
+    public function setSpeed(speed:Float)
+    {
+        untyped __js__("this.object.setSpeed(speed)");
+    }
 }

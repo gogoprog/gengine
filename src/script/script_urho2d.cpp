@@ -46,5 +46,8 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("remove", static_cast<void (AnimatedSprite2D::*)()>(&AnimatedSprite2D::Remove))
         .method("setLayer", static_cast<void (AnimatedSprite2D::*)(int)>(&AnimatedSprite2D::SetLayer))
         .method("getLayer", static_cast<int (AnimatedSprite2D::*)() const>(&AnimatedSprite2D::GetLayer))
+        .method("setEntity", &AnimatedSprite2D::SetEntity)
+        .method("setLoopMode", &AnimatedSprite2D::SetLoopMode)
+        .method("setSpeed", &AnimatedSprite2D::SetSpeed)
         ;
 }
