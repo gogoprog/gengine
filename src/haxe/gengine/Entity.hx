@@ -48,14 +48,14 @@ class Entity extends ash.core.Entity
         return component;
     }
 
-    private inline function set_position(position:Vector3):Vector3
+    private function set_position(position:Vector3):Vector3
     {
         untyped __js__("this.node.setPosition(position)");
 
         return position;
     }
 
-    private inline function get_position():Vector3
+    private function get_position():Vector3
     {
         return untyped __js__("this.node.getPosition()");
     }
@@ -72,7 +72,7 @@ class Entity extends ash.core.Entity
         return untyped __js__("this.node.getScale()");
     }
 
-    public inline function setPosition(position:Vector3):Vector3
+    public function setPosition(position:Vector3):Vector3
     {
         untyped __js__("this.node.setPosition(position)");
 
