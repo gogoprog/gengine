@@ -56,6 +56,7 @@ EMBINDCEFV8_BINDINGS(scene)
         .method("createChild", static_cast<Node* (Scene::*)(unsigned, CreateMode)>(&Scene::CreateChild))
         .method("addChild", static_cast<void (Scene::*)(Node*, unsigned)>(&Scene::AddChild))
         .method("removeChild", static_cast<void (Scene::*)(Node*)>(&Scene::RemoveChild))
+        .method("addComponent", static_cast<void (Scene::*)(Component*, unsigned, CreateMode)>(&Scene::AddComponent))
         ;
 
     embindcefv8::Class<Component>("Component")

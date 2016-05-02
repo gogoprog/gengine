@@ -12,11 +12,18 @@ class Entity extends ash.core.Entity
     public var scale(get, set):Vector3;
     public var parent(get, set):Entity;
 
-    public function new()
+    public function new(?node:Dynamic)
     {
         super();
 
-        untyped __js__("this.node = new Module.Node(gengine.getContext());");
+        if(node == null)
+        {
+            untyped __js__("this.node = new Module.Node(gengine.getContext());");
+        }
+        else
+        {
+            untyped __js__("this.node = node;");
+        }
     }
 
     override public function add<T>(component:T, componentClass:Class<Dynamic> = null):ash.core.Entity
