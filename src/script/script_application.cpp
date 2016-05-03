@@ -5,6 +5,7 @@
 #include <Urho3D/Input/Input.h>
 #include <Urho3D/Core/Context.h>
 #include <Urho3D/Resource/ResourceCache.h>
+#include <Urho3D/Graphics/Renderer.h>
 
 using namespace gengine::application;
 using namespace Urho3D;
@@ -15,6 +16,7 @@ EMBINDCEFV8_DECLARE_CLASS(Scene);
 EMBINDCEFV8_DECLARE_CLASS(ResourceCache);
 EMBINDCEFV8_DECLARE_CLASS(Input);
 EMBINDCEFV8_DECLARE_CLASS(Context);
+EMBINDCEFV8_DECLARE_CLASS(Renderer);
 
 EMBINDCEFV8_BINDINGS(application)
 {

@@ -156,18 +156,18 @@ void App::update(StringHash eventType, VariantMap& eventData)
 SharedPtr<App>
     App::instance;
 
+void loadScriptFile(const char *filename, const char *additional_code)
+{
+    std::ifstream in(filename);
+    std::string contents((std::istreambuf_iterator<char>(in)),
+    std::istreambuf_iterator<char>());
+
+    contents += additional_code;
+
+    embindcefv8::executeJavaScript(contents.c_str());
+}
+
 #if CEF
-    void loadScriptFile(const char *filename, const char *additional_code)
-    {
-        std::ifstream in(filename);
-        std::string contents((std::istreambuf_iterator<char>(in)),
-        std::istreambuf_iterator<char>());
-
-        contents += additional_code;
-
-        embindcefv8::executeJavaScript(contents.c_str());
-    }
-
     void preInit()
     {
         const char js_code[] =

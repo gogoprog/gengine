@@ -57,17 +57,17 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("getBonePosition", &AnimatedSprite2D::GetBonePosition)
         ;
 
-    embindcefv8::Class<PhysicsWorld2D>("PhysicsWorld2D")
+    embindcefv8::Class<PhysicsWorld2D, Component>("PhysicsWorld2D")
         .constructor<Context*>()
         .method("setGravity", &PhysicsWorld2D::SetGravity)
         ;
 
-    embindcefv8::Class<RigidBody2D>("RigidBody2D")
+    embindcefv8::Class<RigidBody2D, Component>("RigidBody2D")
         .constructor<Context*>()
         .method("setBodyType", &RigidBody2D::SetBodyType)
         ;
 
-    embindcefv8::Class<CollisionBox2D>("CollisionBox2D")
+    embindcefv8::Class<CollisionBox2D, Component>("CollisionBox2D")
         .constructor<Context*>()
         .method("setSize", static_cast<void (CollisionBox2D::*)(const Vector2&)>(&CollisionBox2D::SetSize))
         .method("setCenter", static_cast<void (CollisionBox2D::*)(const Vector2&)>(&CollisionBox2D::SetCenter))
@@ -77,7 +77,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("setRestitution", static_cast<void (CollisionBox2D::*)(float)>(&CollisionBox2D::SetRestitution))
         ;
 
-    embindcefv8::Class<CollisionCircle2D>("CollisionCircle2D")
+    embindcefv8::Class<CollisionCircle2D, Component>("CollisionCircle2D")
         .constructor<Context*>()
         .method("setRadius", &CollisionCircle2D::SetRadius)
         .method("setCenter", static_cast<void (CollisionCircle2D::*)(const Vector2&)>(&CollisionCircle2D::SetCenter))

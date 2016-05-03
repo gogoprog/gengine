@@ -1,5 +1,7 @@
 #include "embindcefv8.h"
 
+#include <Urho3D/Core/Context.h>
+#include <Urho3D/Scene/Scene.h>
 #include <Urho3D/Graphics/Camera.h>
 #include <Urho3D/Graphics/Viewport.h>
 #include <Urho3D/Graphics/Renderer.h>
@@ -13,6 +15,8 @@
 using namespace Urho3D;
 
 EMBINDCEFV8_DECLARE_CLASS(Context);
+EMBINDCEFV8_DECLARE_CLASS(Renderer);
+EMBINDCEFV8_DECLARE_CLASS(Scene);
 EMBINDCEFV8_DECLARE_ENUM(LightType);
 
 EMBINDCEFV8_BINDINGS(graphics)
@@ -39,7 +43,7 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("setCamera", &Viewport::SetCamera)
         ;
 
-    embindcefv8::Class<Camera>("Camera")
+    embindcefv8::Class<Camera, Component>("Camera")
         .constructor<Context*>()
         .method("setOrthoSize", static_cast<void (Camera::*)(const Vector2 &)>(&Camera::SetOrthoSize))
         .method("setOrthographic", &Camera::SetOrthographic)
@@ -60,14 +64,14 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("setViewport", &Renderer::SetViewport)
         ;
 
-    embindcefv8::Class<StaticModel>("StaticModel")
+    embindcefv8::Class<StaticModel, Component>("StaticModel")
         .constructor<Context*>()
         .method("setModel", &StaticModel::SetModel)
         .method("setMaterial", &StaticModel::SetMaterial)
         .method("setCastShadows", static_cast<void (StaticModel::*)(bool)>(&StaticModel::SetCastShadows))
         ;
 
-    embindcefv8::Class<AnimatedModel>("AnimatedModel")
+    embindcefv8::Class<AnimatedModel, Component>("AnimatedModel")
         .constructor<Context*>()
         .method("setModel", static_cast<void (AnimatedModel::*)(Model *, bool)>(&AnimatedModel::SetModel))
         .method("setMaterial", static_cast<void (AnimatedModel::*)(Material *)>(&AnimatedModel::SetMaterial))
@@ -77,7 +81,7 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("addAnimationState", &AnimatedModel::AddAnimationState)
         ;
 
-    embindcefv8::Class<Light>("Light")
+    embindcefv8::Class<Light, Component>("Light")
         .constructor<Context*>()
         .method("setLightType", &Light::SetLightType)
         .method("setColor", &Light::SetColor)
