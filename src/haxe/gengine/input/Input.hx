@@ -11,4 +11,6 @@ extern class Input
     public function getMouseButtonPress(button:Int):Bool;
     public function getMouseButtonDown(button:Int):Bool;
     public function getMousePosition():IntVector2;
+    public function getMouseMove():IntVector2;
+    public function getMouseMoveWheel():Int;
 }

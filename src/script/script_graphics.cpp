@@ -55,6 +55,7 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("setAutoAspectRatio", &Camera::SetAutoAspectRatio)
         .method("worldToScreenPoint", &Camera::WorldToScreenPoint)
         .method("screenToWorldPoint", &Camera::ScreenToWorldPoint)
+        .method("setZoom", &Camera::SetZoom)
         ;
 
     embindcefv8::Class<Zone>("Zone")

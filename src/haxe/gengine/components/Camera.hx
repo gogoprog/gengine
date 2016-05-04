@@ -51,6 +51,11 @@ class Camera extends UrhoComponent
         untyped __js__("this.object.setAutoAspectRatio(autoAspectRatio)");
     }
 
+    public function setZoom(zoom:Float)
+    {
+        untyped __js__("this.object.setZoom(zoom)");
+    }
+
     public function worldToScreenPoint(worldPoint:Vector3):Vector2
     {
         return untyped __js__("this.object.worldToScreenPoint(worldPoint)");

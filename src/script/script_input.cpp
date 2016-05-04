@@ -16,5 +16,7 @@ EMBINDCEFV8_BINDINGS(input)
         .method("getMouseButtonPress", &Input::GetMouseButtonPress)
         .method("getMouseButtonDown", &Input::GetMouseButtonDown)
         .method("getMousePosition", &Input::GetMousePosition)
+        .method("getMouseMove", &Input::GetMouseMove)
+        .method("getMouseMoveWheel", &Input::GetMouseMoveWheel)
         ;
 }
