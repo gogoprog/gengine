@@ -6,6 +6,7 @@
 using namespace Urho3D;
 
 EMBINDCEFV8_DECLARE_CLASS(Context);
+EMBINDCEFV8_DECLARE_STRING(String, CString);
 
 EMBINDCEFV8_BINDINGS(audio)
 {
