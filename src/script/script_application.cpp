@@ -6,6 +6,7 @@
 #include <Urho3D/Core/Context.h>
 #include <Urho3D/Resource/ResourceCache.h>
 #include <Urho3D/Graphics/Renderer.h>
+#include <Urho3D/Audio/Audio.h>
 
 using namespace gengine::application;
 using namespace Urho3D;
@@ -17,6 +18,7 @@ EMBINDCEFV8_DECLARE_CLASS(ResourceCache);
 EMBINDCEFV8_DECLARE_CLASS(Input);
 EMBINDCEFV8_DECLARE_CLASS(Context);
 EMBINDCEFV8_DECLARE_CLASS(Renderer);
+EMBINDCEFV8_DECLARE_CLASS(Audio);
 
 EMBINDCEFV8_BINDINGS(application)
 {
@@ -32,6 +34,7 @@ EMBINDCEFV8_BINDINGS(application)
         .method("getTimeStep", &App::getTimeStep)
         .method("getScene", &App::getScene)
         .method("getContext", &App::getContext)
+        .method("getAudio", &App::getAudio)
         .method("isRunning", &App::isRunning)
         .method("setWindowTitle", &App::setWindowTitle)
         .method("setGuiFilename", &App::setGuiFilename)

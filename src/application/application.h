@@ -9,6 +9,7 @@
 #include <Urho3D/Graphics/Graphics.h>
 #include <Urho3D/Graphics/Renderer.h>
 #include <Urho3D/Engine/Engine.h>
+#include <Urho3D/Audio/Audio.h>
 
 namespace gengine
 {
@@ -42,6 +43,7 @@ public:
     inline Urho3D::Input & getInput() { return *GetSubsystem<Urho3D::Input>(); }
     inline Urho3D::Graphics & getGraphics() { return *GetSubsystem<Urho3D::Graphics>(); }
     inline Urho3D::Renderer & getRenderer() { return *GetSubsystem<Urho3D::Renderer>(); }
+    inline Urho3D::Audio & getAudio() { return *GetSubsystem<Urho3D::Audio>(); }
 
     inline float getTimeStep() { return engine_->GetNextTimeStep(); };
     inline bool isRunning() { return engine_ && !engine_->IsExiting(); }

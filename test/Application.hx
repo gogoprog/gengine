@@ -3,13 +3,15 @@ import gengine.components.*;
 import gengine.math.*;
 import gengine.graphics.*;
 
-class ANode extends Node<ANode>
+class SoundNode extends Node<SoundNode>
 {
-    public var sprite:StaticSprite2D;
+    public var source:SoundSource;
 }
 
 class GameSystem extends System
 {
+    private var soundNode:SoundNode;
+
     public function new()
     {
         super();
@@ -17,7 +19,7 @@ class GameSystem extends System
 
     override public function addToEngine(engine:Engine)
     {
-        engine.getNodeList(ANode).nodeAdded.add(onNodeAdded);
+        engine.getNodeList(SoundNode).nodeAdded.add(onSoundNodeAdded);
     }
 
     override public function update(dt:Float):Void
@@ -33,11 +35,17 @@ class GameSystem extends System
             var p = Gengine.getInput().getMousePosition();
             trace('Mouse position : ' + p.x + ', ' + p.y);
         }
+
+        if(Gengine.getInput().getMouseButtonPress(1))
+        {
+            soundNode.source.play(Gengine.getResourceCache().getSound("sound.ogg", true));
+        }
     }
 
-    public function onNodeAdded(node:ANode)
+    public function onSoundNodeAdded(node:SoundNode)
     {
-        node.entity.setPosition(new Vector3(0, 0, 0));
+        soundNode = node;
+        soundNode.source.setGain(0.3);
     }
 }
 
@@ -77,5 +85,9 @@ class Application
         viewport.setScene(Gengine.getScene());
         viewport.setCamera(e.get(Camera));
         Gengine.getRenderer().setViewport(0, viewport);
+
+        e = new Entity();
+        e.add(new SoundSource());
+        engine.addEntity(e);
     }
 }

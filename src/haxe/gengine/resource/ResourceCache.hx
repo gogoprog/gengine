@@ -7,4 +7,5 @@ extern class ResourceCache
     public function getModel(filename:String, ?sendEventOnFailure:Bool):Dynamic;
     public function getMaterial(filename:String, ?sendEventOnFailure:Bool):Dynamic;
     public function getAnimation(filename:String, ?sendEventOnFailure:Bool):Dynamic;
+    public function getSound(filename:String, ?sendEventOnFailure:Bool):Dynamic;
 }

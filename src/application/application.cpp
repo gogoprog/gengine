@@ -49,7 +49,7 @@ void App::Setup()
     engineParameters_["LogLevel"] = "Debug";
     engineParameters_["FullScreen"] = fullscreen;
     engineParameters_["Headless"] = false;
-    engineParameters_["Sound"] = false;
+    engineParameters_["Sound"] = true;
     engineParameters_["WindowWidth"] = windowSize.x_;
     engineParameters_["WindowHeight"] = windowSize.y_;
     engineParameters_["WindowTitle"] = windowTitle;
