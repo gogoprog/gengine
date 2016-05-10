@@ -17,44 +17,44 @@ class StaticSprite2D extends UrhoComponent
         }
     }
 
-    public function setSprite(sprite:Dynamic)
+    public inline function setSprite(sprite:Dynamic)
     {
-        untyped __js__("this.object.setSprite(sprite)");
+        this.object.setSprite(sprite);
     }
 
-    public function setDrawRect(rect:Rect)
+    public inline function setDrawRect(rect:Rect)
     {
-        untyped __js__("this.object.setDrawRect(rect)");
+        this.object.setDrawRect(rect);
     }
 
-    public function setTextureRect(rect:Rect)
+    public inline function setTextureRect(rect:Rect)
     {
-        untyped __js__("this.object.setTextureRect(rect)");
+        this.object.setTextureRect(rect);
     }
 
-    public function setLayer(layer:Int)
+    public inline function setLayer(layer:Int)
     {
-        untyped __js__("this.object.setLayer(layer)");
+        this.object.setLayer(layer);
     }
 
     public inline function getLayer():Int
     {
-        return untyped __js__("this.object.getLayer()");
+        return this.object.getLayer();
     }
 
-    public function setHotSpot(hotSpot:Vector2)
+    public inline function setHotSpot(hotSpot:Vector2)
     {
-        untyped __js__("this.object.setHotSpot(hotSpot)");
+        this.object.setHotSpot(hotSpot);
     }
 
-    public function setUseHotSpot(useHotSpot:Bool)
+    public inline function setUseHotSpot(useHotSpot:Bool)
     {
-        untyped __js__("this.object.setUseHotSpot(useHotSpot)");
+        this.object.setUseHotSpot(useHotSpot);
     }
 
-    public function setColor(color:Color)
+    public inline function setColor(color:Color)
     {
-        untyped __js__("this.object.setColor(color)");
+        this.object.setColor(color);
     }
 
 }
