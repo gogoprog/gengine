@@ -42,6 +42,16 @@ class StaticSprite2D extends UrhoComponent
         return this.object.getLayer();
     }
 
+    public inline function setOrderInLayer(order:Int)
+    {
+        this.object.setOrderInLayer(order);
+    }
+
+    public inline function getOrderInLayer():Int
+    {
+        return this.object.getOrderInLayer();
+    }
+
     public inline function setHotSpot(hotSpot:Vector2)
     {
         this.object.setHotSpot(hotSpot);
