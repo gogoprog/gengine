@@ -67,4 +67,8 @@ class StaticSprite2D extends UrhoComponent
         this.object.setColor(color);
     }
 
+    public inline function setAlpha(alpha:Float)
+    {
+        this.object.setAlpha(alpha);
+    }
 }
