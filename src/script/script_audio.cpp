@@ -16,7 +16,7 @@ EMBINDCEFV8_BINDINGS(audio)
         .method("setMasterGain", &Audio::SetMasterGain)
         ;
 
-    embindcefv8::Class<SoundSource>("Sound")
+    embindcefv8::Class<Sound>("Sound")
         ;
 
     embindcefv8::Class<SoundSource>("SoundSource")

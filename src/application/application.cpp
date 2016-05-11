@@ -111,8 +111,9 @@ void App::start()
 
     #ifdef CEF
         gui::System::getInstance().getHandler().init();
-        gui::System::getInstance().loadFile(gengine::application::get().getGuiFilename().CString());
     #endif
+
+    gui::System::getInstance().loadFile(gengine::application::get().getGuiFilename().CString());
 }
 
 void App::runFrame()
@@ -207,6 +208,7 @@ int main(int argc, char *argv[])
     #ifdef EMSCRIPTEN
         gengine::application::loadScriptFile("generated/main.js", " gengine = Module.gengine;");
         embindcefv8::executeJavaScript("Main.init();");
+        gengine::gui::System::getInstance().loadFile(gengine::application::get().getGuiFilename().CString());
         mainApp->run();
     #else
         auto engine = mainApp->getEngine();

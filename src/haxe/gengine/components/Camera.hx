@@ -61,7 +61,7 @@ class Camera extends UrhoComponent
         return untyped __js__("this.object.worldToScreenPoint(worldPoint)");
     }
 
-    public function screenToWorldPoint(screenPoint:Vector2):Vector3
+    public function screenToWorldPoint(screenPoint:Vector3):Vector3
     {
         return untyped __js__("this.object.screenToWorldPoint(screenPoint)");
     }

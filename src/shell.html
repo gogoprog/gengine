@@ -117,16 +117,21 @@
     <script type='text/javascript'>
 
       function setupListeners() {
-        document.getElementById("gui").addEventListener("mousedown", SDL.receiveEvent, true);
-        document.getElementById("gui").addEventListener("mousemove", SDL.receiveEvent, true);
-        document.getElementById("gui").addEventListener("mouseup", SDL.receiveEvent, true);
-        document.getElementById("gui").addEventListener("mousewheel", SDL.receiveEvent, true);
-        document.getElementById("gui").addEventListener("touchstart", SDL.receiveEvent, true);
-        document.getElementById("gui").addEventListener("touchmove", SDL.receiveEvent, true);
-        document.getElementById("gui").addEventListener("touchend", SDL.receiveEvent, true);
-        document.getElementById("gui").addEventListener("touchenter", SDL.receiveEvent, true);
-        document.getElementById("gui").addEventListener("touchleave", SDL.receiveEvent, true);
-        document.getElementById("gui").addEventListener("touchcancel", SDL.receiveEvent, true);
+        var gui = document.getElementById("gui");
+
+        gui.addEventListener("mousedown", SDL.receiveEvent, true);
+        gui.addEventListener("mousemove", SDL.receiveEvent, true);
+        gui.addEventListener("mousemove", SDL.receiveEvent, true);
+        gui.addEventListener("mouseup", SDL.receiveEvent, true);
+        gui.addEventListener("mousewheel", SDL.receiveEvent, true);
+        gui.addEventListener("touchstart", SDL.receiveEvent, true);
+        gui.addEventListener("touchmove", SDL.receiveEvent, true);
+        gui.addEventListener("touchend", SDL.receiveEvent, true);
+        gui.addEventListener("touchenter", SDL.receiveEvent, true);
+        gui.addEventListener("touchleave", SDL.receiveEvent, true);
+        gui.addEventListener("touchcancel", SDL.receiveEvent, true);
+
+        console.log("Listeners set.");
       }
 
       var spinnerElement = document.getElementById('spinner');
@@ -183,9 +188,8 @@
       };
 
       function loadFile(filePath) {
-          $("#gui").load(filePath, function() {
-            gengine.execute("if gengine.gui.onPageLoaded then gengine.gui.onPageLoaded() end");
-            });
+        $("#gui").load(filePath, function() {
+        });
       }
 
       function gengineInitialize(width, height, fullscreen)
@@ -204,6 +208,8 @@
           {
               document.getElementById('canvas_holder').style.width = "'" + width + "px'";
               document.getElementById('canvas_holder').style.height = "'" + height + "px'";
+              document.getElementById('gui').style.width = "'" + width + "px'";
+              document.getElementById('gui').style.height = "'" + height + "px'";
           }
       }
 
