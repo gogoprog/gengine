@@ -118,18 +118,16 @@
 
       function setupListeners() {
         var gui = document.getElementById("gui");
-
-        gui.addEventListener("mousedown", SDL.receiveEvent, true);
-        gui.addEventListener("mousemove", SDL.receiveEvent, true);
-        gui.addEventListener("mousemove", SDL.receiveEvent, true);
-        gui.addEventListener("mouseup", SDL.receiveEvent, true);
-        gui.addEventListener("mousewheel", SDL.receiveEvent, true);
-        gui.addEventListener("touchstart", SDL.receiveEvent, true);
-        gui.addEventListener("touchmove", SDL.receiveEvent, true);
-        gui.addEventListener("touchend", SDL.receiveEvent, true);
-        gui.addEventListener("touchenter", SDL.receiveEvent, true);
-        gui.addEventListener("touchleave", SDL.receiveEvent, true);
-        gui.addEventListener("touchcancel", SDL.receiveEvent, true);
+        ['touchstart', 'touchend', 'touchmove', 'mousedown', 'mouseup', 'mousemove', 'DOMMouseScroll', 'mousewheel', 'wheel', 'mouseout'].forEach(function(eventName) {
+          for(var e in JSEvents.eventHandlers)
+          {
+            var eh = JSEvents.eventHandlers[e];
+            if(eh.eventTypeString == eventName)
+            {
+              gui.addEventListener(eventName, eh.eventListenerFunc, true);
+            }
+          }
+        });
 
         console.log("Listeners set.");
       }
@@ -139,7 +137,6 @@
       var Module = {
         preRun: [
           function() {
-            setupListeners();
           }
           ],
         postRun: [],
@@ -189,6 +186,7 @@
 
       function loadFile(filePath) {
         $("#gui").load(filePath, function() {
+          setupListeners();
         });
       }
 
