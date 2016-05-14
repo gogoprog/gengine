@@ -29,5 +29,6 @@ EMBINDCEFV8_BINDINGS(audio)
         .method("setGain", &SoundSource::SetGain)
         .method("setAttenuation", &SoundSource::SetAttenuation)
         .method("setPanning", &SoundSource::SetPanning)
+        .method("isPlaying", &SoundSource::IsPlaying)
         ;
 }

@@ -51,4 +51,9 @@ class SoundSource extends UrhoComponent
     {
         this.object.setPanning(pannning);
     }
+
+    public inline function isPlaying()
+    {
+        return this.object.isPlaying();
+    }
 }
