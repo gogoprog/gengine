@@ -24,36 +24,36 @@ class AnimatedSprite2D extends UrhoComponent
 
     public function setAnimationSet(animationSet:Dynamic)
     {
-        untyped __js__("this.object.setAnimationSet(animationSet)");
+        this.object.setAnimationSet(animationSet);
     }
 
     public function setAnimation(name:String, ?loopMode=0)
     {
-        untyped __js__("this.object.setAnimation(name, loopMode)");
+        this.object.setAnimation(name, loopMode);
     }
 
     public function setLayer(layer:Int)
     {
-        untyped __js__("this.object.setLayer(layer)");
+        this.object.setLayer(layer);
     }
 
     public function getLayer():Int
     {
-        return untyped __js__("this.object.getLayer()");
+        return this.object.getLayer();
     }
 
     public function setEntity(entityName:String)
     {
-        untyped __js__("this.object.setEntity(entityName)");
+        this.object.setEntity(entityName);
     }
 
     public function setLoopMode(loopMode:Int)
     {
-        untyped __js__("this.object.setLoopMode(loopMode)");
+        this.object.setLoopMode(loopMode);
     }
 
     public function setSpeed(speed:Float)
     {
-        untyped __js__("this.object.setSpeed(speed)");
+        this.object.setSpeed(speed);
     }
 }
