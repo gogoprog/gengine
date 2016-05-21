@@ -14,6 +14,6 @@ class PhysicsWorld2D extends UrhoComponent
 
     public inline function setGravity(gravity:Vector2)
     {
-        untyped __js__("this.object.setGravity(gravity)");
+        this.object.setGravity(gravity);
     }
 }
