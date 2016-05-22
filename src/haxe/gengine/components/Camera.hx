@@ -11,11 +11,6 @@ class Camera extends UrhoComponent
         untyped __js__("window.dummyNode.addComponent(this.object, 0, 0);");
     }
 
-    public inline function getCamera():Dynamic
-    {
-        return object;
-    }
-
     public function setOrthoSize(size:Vector2)
     {
         this.object.setOrthoSize(size);
