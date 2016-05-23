@@ -11,12 +11,12 @@ class Camera extends UrhoComponent
         untyped __js__("window.dummyNode.addComponent(this.object, 0, 0);");
     }
 
-    public function setOrthoSize(size:Vector2)
+    public inline function setOrthoSize(size:Vector2)
     {
         this.object.setOrthoSize(size);
     }
 
-    public function setOrthographic(orthographic:Bool)
+    public inline function setOrthographic(orthographic:Bool)
     {
         this.object.setOrthographic(orthographic);
     }
