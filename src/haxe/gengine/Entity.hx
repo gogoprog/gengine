@@ -30,7 +30,7 @@ class Entity extends ash.core.Entity
     {
         if(Std.is(component, UrhoComponent))
         {
-            untyped __js__("this.node.addComponent(component.object, 0, 0)");
+            this.node.addComponent(cast(component, UrhoComponent).object, 0, 0);
         }
 
         return super.add(component, componentClass);
@@ -42,7 +42,7 @@ class Entity extends ash.core.Entity
 
         if(component != null && Std.is(component, UrhoComponent))
         {
-            untyped __js__("this.node.removeComponent(component.object)");
+            this.node.removeComponent(cast(component, UrhoComponent).object);
         }
 
         return component;
