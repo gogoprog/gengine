@@ -62,14 +62,22 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("getBonePosition", &AnimatedSprite2D::GetBonePosition)
         ;
 
-    embindcefv8::Class<PhysicsWorld2D, Component>("PhysicsWorld2D")
-        .constructor<Context*>()
-        .method("setGravity", &PhysicsWorld2D::SetGravity)
-        ;
-
     embindcefv8::Class<RigidBody2D, Component>("RigidBody2D")
         .constructor<Context*>()
         .method("setBodyType", &RigidBody2D::SetBodyType)
+        ;
+
+    embindcefv8::ValueObject<PhysicsRaycastResult2D>("PhysicsRaycastResult2D")
+        .constructor<>()
+        .property("position", &PhysicsRaycastResult2D::position_)
+        .property("normal", &PhysicsRaycastResult2D::normal_)
+        .property("distance", &PhysicsRaycastResult2D::distance_)
+        .property("body", &PhysicsRaycastResult2D::body_)
+        ;
+
+    embindcefv8::Class<PhysicsWorld2D, Component>("PhysicsWorld2D")
+        .constructor<Context*>()
+        .method("setGravity", &PhysicsWorld2D::SetGravity)
         ;
 
     embindcefv8::Class<CollisionBox2D, Component>("CollisionBox2D")
