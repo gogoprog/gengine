@@ -57,3 +57,7 @@ generated
 /test/packed-*
 
 /doc/pages
+
+callgrind*
+valgrind*
+vgcore*
