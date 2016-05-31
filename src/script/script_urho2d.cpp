@@ -65,6 +65,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
     embindcefv8::Class<RigidBody2D, Component>("RigidBody2D")
         .constructor<Context*>()
         .method("setBodyType", &RigidBody2D::SetBodyType)
+        .method("setMass", &RigidBody2D::SetMass)
         ;
 
     embindcefv8::ValueObject<PhysicsRaycastResult2D>("PhysicsRaycastResult2D")
