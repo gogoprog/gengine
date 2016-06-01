@@ -16,4 +16,9 @@ class RigidBody2D extends UrhoComponent
     {
         this.object.setBodyType(bodyType);
     }
+
+    public inline function setMass(mass:Float)
+    {
+        this.object.setMass(mass);
+    }
 }
