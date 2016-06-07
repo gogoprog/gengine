@@ -94,6 +94,9 @@ EMBINDCEFV8_BINDINGS(urho2d)
     embindcefv8::Class<PhysicsWorld2D, Component>("PhysicsWorld2D")
         .constructor<Context*>()
         .method("setGravity", &PhysicsWorld2D::SetGravity)
+        .method("setContinuousPhysics", &PhysicsWorld2D::SetContinuousPhysics)
+        .method("setSubStepping", &PhysicsWorld2D::SetSubStepping)
+        .method("drawDebugGeometry", &PhysicsWorld2D::DrawDebugGeometry)
         ;
 
     embindcefv8::Class<CollisionBox2D, Component>("CollisionBox2D")
