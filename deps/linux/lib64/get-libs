@@ -2,7 +2,6 @@
 
 wget http://dl.bintray.com/gogoprog/gengine/linux-64.tar.gz
 tar xvfz linux-64.tar.gz
-wget https://bintray.com/artifact/download/gogoprog/gengine/linux64/libUrho3D.a
 wget https://bintray.com/artifact/download/gogoprog/gengine/linux64/libasound.so.2
 wget https://bintray.com/artifact/download/gogoprog/gengine/linux64/libdbus-glib-1.so.2
 wget https://bintray.com/artifact/download/gogoprog/gengine/linux64/libgconf-2.so.4

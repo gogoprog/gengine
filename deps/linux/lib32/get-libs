@@ -1,4 +1,0 @@
-#!/bin/bash
-
-wget http://dl.bintray.com/gogoprog/gengine/linux-32.tar.gz
-tar xvfz linux-32.tar.gz

@@ -16,5 +16,5 @@ if common.buildUrho3D:
     os.system("./cmake_generic.sh " + buildDir + " " + options + " -DURHO3D_LUA=0")
     os.chdir(buildDir)
     os.system("make Urho3D -j" + str(multiprocessing.cpu_count()))
-else:
-    common.build()
+
+common.build()

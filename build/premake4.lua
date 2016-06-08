@@ -82,10 +82,9 @@ solution "gengine"
             defines { "CEF" }
 
             if os.is("linux") then
-                includedirs { "../deps/linux/include" }
-                includedirs { "../deps/linux/include/cef" }
                 includedirs {
-                    "../deps/linux/include/Urho3D/ThirdParty"
+                    "../deps/linux/include",
+                    "../deps/linux/include/cef"
                     }
                 links {
                     "GL",
@@ -108,6 +107,30 @@ solution "gengine"
                     "glew32"
                     }
             end
+
+        configuration { "Debug*", "not *Emscripten" }
+            if os.is("linux") then
+                includedirs {
+                    "../deps/common/Urho3D/build/linux/debug/include",
+                    "../deps/common/Urho3D/build/linux/debug/include/Urho3D/ThirdParty"
+                }
+
+                libdirs {
+                    "../deps/common/Urho3D/build/linux/debug/lib"
+                }
+            end
+        configuration { "Release*", "not *Emscripten" }
+            if os.is("linux") then
+                includedirs {
+                    "../deps/common/Urho3D/build/linux/release/include",
+                    "../deps/common/Urho3D/build/linux/release/include/Urho3D/ThirdParty"
+                }
+
+                libdirs {
+                    "../deps/common/Urho3D/build/linux/release/lib"
+                }
+            end
+        configuration { "Debug*", "*Emscripten" }
 
         configuration { "not *Emscripten", "x32" }
             libdirs { "../deps/linux/lib32" }
