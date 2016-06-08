@@ -66,16 +66,16 @@ def init():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', help='Debug mode', default=False, action='store_true')
-    parser.add_argument('-r', help='It must run', default=False, action='store_true')
-    parser.add_argument('--html5', help='HTML5 mode', default=False, action='store_true')
-    parser.add_argument('--urho', help='Build Urho3D lib', default=False, action='store_true')
+    parser.add_argument('-r', help='Run', default=False, action='store_true')
+    parser.add_argument('--html5', help='HTML5 mode (emscripten)', default=False, action='store_true')
+    parser.add_argument('--urho3d', help='Build Urho3D lib', default=False, action='store_true')
     parser.add_argument('dir', help='Target directory', default='.', nargs='?')
     args = parser.parse_args()
 
     debugMode = args.d
     itMustRun = args.r
     html5Mode = args.html5
-    buildUrho3D = args.urho
+    buildUrho3D = args.urho3d
     targetDir = os.getcwd() + "/" + args.dir + "/"
     rootPath = os.environ['GENGINE']
     buildPath = rootPath + "/build/"

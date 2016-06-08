@@ -108,29 +108,29 @@ solution "gengine"
                     }
             end
 
+        local function useUrho3D(targetPlatform, targetMode)
+            includedirs {
+                "../deps/common/Urho3D/build/" .. targetPlatform .. "/" .. targetMode .. "/include",
+                "../deps/common/Urho3D/build/" .. targetPlatform .. "/" .. targetMode .. "/include/Urho3D/ThirdParty"
+            }
+
+            libdirs {
+                "../deps/common/Urho3D/build/" .. targetPlatform .. "/" .. targetMode .. "/lib"
+            }
+        end
+
         configuration { "Debug*", "not *Emscripten" }
             if os.is("linux") then
-                includedirs {
-                    "../deps/common/Urho3D/build/linux/debug/include",
-                    "../deps/common/Urho3D/build/linux/debug/include/Urho3D/ThirdParty"
-                }
-
-                libdirs {
-                    "../deps/common/Urho3D/build/linux/debug/lib"
-                }
+                useUrho3D("linux", "debug")
             end
         configuration { "Release*", "not *Emscripten" }
             if os.is("linux") then
-                includedirs {
-                    "../deps/common/Urho3D/build/linux/release/include",
-                    "../deps/common/Urho3D/build/linux/release/include/Urho3D/ThirdParty"
-                }
-
-                libdirs {
-                    "../deps/common/Urho3D/build/linux/release/lib"
-                }
+                useUrho3D("linux", "release")
             end
         configuration { "Debug*", "*Emscripten" }
+            useUrho3D("emscripten", "debug")
+        configuration { "Release*", "*Emscripten" }
+            useUrho3D("emscripten", "release")
 
         configuration { "not *Emscripten", "x32" }
             libdirs { "../deps/linux/lib32" }
