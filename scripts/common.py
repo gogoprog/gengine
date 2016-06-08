@@ -14,6 +14,9 @@ buildPath = None
 binaryPath = None
 itMustRun = False
 html5Mode = False
+buildUrho3D = False
+targetPlatform = "undefined"
+targetMode = "undefined"
 
 def printn(*args):
     sys.stdout.write(*args)
@@ -57,17 +60,22 @@ def init():
     global buildPath
     global itMustRun
     global html5Mode
+    global buildUrho3D
+    global targetPlatform
+    global targetMode
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', help='Debug mode', default=False, action='store_true')
     parser.add_argument('-r', help='It must run', default=False, action='store_true')
     parser.add_argument('--html5', help='HTML5 mode', default=False, action='store_true')
+    parser.add_argument('--urho', help='Build Urho3D lib', default=False, action='store_true')
     parser.add_argument('dir', help='Target directory', default='.', nargs='?')
     args = parser.parse_args()
 
     debugMode = args.d
     itMustRun = args.r
     html5Mode = args.html5
+    buildUrho3D = args.urho
     targetDir = os.getcwd() + "/" + args.dir + "/"
     rootPath = os.environ['GENGINE']
     buildPath = rootPath + "/build/"
@@ -76,6 +84,18 @@ def init():
     if not os.path.isdir(targetDir):
         logError("Target directroy does not exist.")
         sys.exit(1)
+
+    if html5Mode:
+        targetPlatform = "emscripten"
+    elif isLinux():
+        targetPlatform = "linux"
+    else:
+        targetPlatform = "windows"
+
+    if debugMode:
+        targetMode = "debug"
+    else:
+        targetMode = "release"
 
 def getDeps():
     log("Downloading dependencies...")

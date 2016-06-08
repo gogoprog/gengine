@@ -4,3 +4,7 @@
 [submodule "deps/common/Ash-Haxe"]
 	path = deps/common/Ash-Haxe
 	url = https://github.com/gogoprog/Ash-Haxe.git
+[submodule "deps/common/Urho3D"]
+	path = deps/common/Urho3D
+	url = https://github.com/gogoprog/Urho3D.git
+	branch = gengine
