@@ -110,7 +110,20 @@ def getDeps():
             os.system("cp *.dll " + rootPath + "/build/")
 
 def build(emscripten=False):
+    if buildUrho3D:
+        log("Building Urho3D lib...")
+        os.chdir(os.environ['GENGINE']+"/deps/common/Urho3D")
+        buildDir = 'build/' + targetPlatform + '/' + targetMode
+        options = ('-DCMAKE_BUILD_TYPE=Debug' if debugMode else '')
+        command = ('./cmake_generic.sh' if not html5Mode else './cmake_emscripten.sh')
+
+        os.system(command + ' ' + buildDir + " " + options + " -DURHO3D_LUA=0")
+
+        os.chdir(buildDir)
+        os.system("make Urho3D -j" + str(multiprocessing.cpu_count()))
+
     current_dir = os.getcwd()
+
     if not emscripten:
         getDeps()
 

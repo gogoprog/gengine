@@ -6,17 +6,4 @@ import multiprocessing
 
 common.sanityCheck()
 common.init()
-
-if common.buildUrho3D:
-    common.log("Building Urho3D lib...")
-    os.chdir(os.environ['GENGINE']+"/deps/common/Urho3D")
-    buildDir = 'build/' + common.targetPlatform + '/' + common.targetMode
-    options = ('-DCMAKE_BUILD_TYPE=Debug' if common.debugMode else '')
-    command = ('./cmake_generic.sh' if not common.html5Mode else './cmake_emscripten.sh')
-
-    os.system(command + ' ' + buildDir + " " + options + " -DURHO3D_LUA=0")
-
-    os.chdir(buildDir)
-    os.system("make Urho3D -j" + str(multiprocessing.cpu_count()))
-
 common.build()
