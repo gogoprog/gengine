@@ -2,6 +2,10 @@ package gengine.components;
 
 import gengine.math.*;
 
+extern class PhysicsRaycastResult2D
+{
+}
+
 class PhysicsWorld2D extends UrhoComponent
 {
     public inline function new()
@@ -29,5 +33,10 @@ class PhysicsWorld2D extends UrhoComponent
     public inline function drawDebugGeometry()
     {
         this.object.drawDebugGeometry();
+    }
+
+    public inline function raycastSingle(result:PhysicsRaycastResult2D, startPoint:Vector2, endPoint:Vector2, ?collisionMask = 0xffffffff)
+    {
+        this.object.raycastSingle(result, startPoint, endPoint, collisionMask);
     }
 }
