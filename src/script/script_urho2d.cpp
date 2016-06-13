@@ -97,7 +97,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("setContinuousPhysics", &PhysicsWorld2D::SetContinuousPhysics)
         .method("setSubStepping", &PhysicsWorld2D::SetSubStepping)
         .method("drawDebugGeometry", &PhysicsWorld2D::DrawDebugGeometry)
-        .method("raycastSingle", &PhysicsWorld2D::RaycastSingle)
+        //.method("raycastSingle", &PhysicsWorld2D::RaycastSingle)
         ;
 
     embindcefv8::Class<CollisionBox2D, Component>("CollisionBox2D")
