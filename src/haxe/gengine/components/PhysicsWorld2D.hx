@@ -1,10 +1,7 @@
 package gengine.components;
 
 import gengine.math.*;
-
-extern class PhysicsRaycastResult2D
-{
-}
+import gengine.physics.*;
 
 class PhysicsWorld2D extends UrhoComponent
 {
