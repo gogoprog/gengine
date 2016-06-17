@@ -1,4 +1,4 @@
-#include "embindcefv8.h"
+#include "script.h"
 
 #include <Urho3D/Scene/Component.h>
 #include <Urho3D/Urho2D/StaticSprite2D.h>

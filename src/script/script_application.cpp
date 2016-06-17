@@ -1,4 +1,4 @@
-#include "embindcefv8.h"
+#include "script.h"
 
 #include "application.h"
 #include <Urho3D/Scene/Scene.h>
