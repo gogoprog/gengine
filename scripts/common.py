@@ -149,6 +149,6 @@ def build(emscripten=False):
         os.system(msbuild + " /p:Configuration=Release")
 
     log("Running haxe...")
-    os.system("haxe -cp $GENGINE/deps/common/Ash-Haxe/src/ -cp $GENGINE/src/haxe/ -cp " + targetDir + " -main gengine.Main -js " + targetDir + "generated/main.js")
+    os.system("haxe -cp $GENGINE/deps/common/Ash-Haxe/src/ -cp $GENGINE/src/haxe/ -cp " + targetDir +  " -cp " + targetDir + "/src -main gengine.Main -js " + targetDir + "generated/main.js")
 
     os.chdir(current_dir)
