@@ -153,6 +153,6 @@ def build(emscripten=False):
         os.system("haxe -cp $GENGINE/deps/common/Ash-Haxe/src/ -cp $GENGINE/src/haxe/ -cp " + targetDir +  " -cp " + targetDir + "/src -main gengine.Main -js " + targetDir + "generated/main.js")
     else:
         log("Running haxe with build.hxml...")
-        os.system("haxe " + targetDir + "/build.hxml")
+        os.system("cd " + targetDir + ";haxe build.hxml")
 
     os.chdir(current_dir)
