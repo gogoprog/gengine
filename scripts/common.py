@@ -148,7 +148,11 @@ def build(emscripten=False):
         os.system("sed -i 's/v110/v120/g' *.vcxproj")
         os.system(msbuild + " /p:Configuration=Release")
 
-    log("Running haxe...")
-    os.system("haxe -cp $GENGINE/deps/common/Ash-Haxe/src/ -cp $GENGINE/src/haxe/ -cp " + targetDir +  " -cp " + targetDir + "/src -main gengine.Main -js " + targetDir + "generated/main.js")
+    if not os.path.exists(targetDir + "/build.hxml"):
+        log("Running haxe default command line...")
+        os.system("haxe -cp $GENGINE/deps/common/Ash-Haxe/src/ -cp $GENGINE/src/haxe/ -cp " + targetDir +  " -cp " + targetDir + "/src -main gengine.Main -js " + targetDir + "generated/main.js")
+    else:
+        log("Running haxe with build.hxml...")
+        os.system("haxe " + targetDir + "/build.hxml")
 
     os.chdir(current_dir)
