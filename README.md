@@ -18,13 +18,13 @@ Activate the gengine environment :
   
 First time build including Urho3D :
 
-    gengine-build --urho3d [--html5] [path-to-your-application-code]
+    gengine-build --urho3d [-d] [--html5] [path-to-your-application-code]
 
 Next times build :
 
-    gengine-build [--html5] [path-to-your-application-code]
+    gengine-build [-d] [--html5] [path-to-your-application-code]
     
 Build and run on native platforms :
   
-    gengine-run [path-to-your-application-code]
+    gengine-run [-d] [path-to-your-application-code]
 
