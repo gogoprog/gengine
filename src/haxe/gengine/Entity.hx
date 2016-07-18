@@ -18,7 +18,7 @@ class Entity extends ash.core.Entity
 
         if(node == null)
         {
-            untyped __js__("this.node = new Module.Node(gengine.getContext());");
+            untyped __js__("this.node = new Module.Node(gengine.getContext()); this.node.addRef();");
         }
         else
         {

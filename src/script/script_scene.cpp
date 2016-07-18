@@ -50,6 +50,7 @@ EMBINDCEFV8_BINDINGS(scene)
         .method("yaw", &Node::Yaw)
         .method("pitch", &Node::Pitch)
         .method("lookAt", &Node::LookAt)
+        .method("addRef", static_cast<void(Node::*)()>(&Node::AddRef))
         ;
 
     embindcefv8::Class<Scene>("Scene")
