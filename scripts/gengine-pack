@@ -37,7 +37,7 @@ def packNative():
 
 common.sanityCheck()
 common.init()
-common.build(common.html5Mode)
+common.build()
 
 if common.html5Mode:
     packHtml()

@@ -68,11 +68,6 @@ solution "gengine"
 
         configuration "*Emscripten"
             defines { "EMSCRIPTEN" }
-            libdirs { "../deps/emscripten/lib" }
-            includedirs { "../deps/emscripten/include" }
-            includedirs {
-                "../deps/emscripten/include/Urho3D/ThirdParty"
-                }
             targetsuffix ".bc"
             if not os.is("windows") then
                 linkoptions { "-Wno-warn-absolute-paths" }

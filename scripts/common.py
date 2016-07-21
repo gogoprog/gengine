@@ -109,7 +109,7 @@ def getDeps():
             os.system("./get-libs")
             os.system("cp *.dll " + rootPath + "/build/")
 
-def build(emscripten=False):
+def build():
     if buildUrho3D:
         log("Building Urho3D lib...")
         os.chdir(os.environ['GENGINE']+"/deps/common/Urho3D")
@@ -124,16 +124,16 @@ def build(emscripten=False):
 
     current_dir = os.getcwd()
 
-    if not emscripten:
+    if not html5Mode:
         getDeps()
 
     log("Building gengine...")
     os.chdir(os.environ['GENGINE']+"/build")
 
     if isLinux():
-        config = ('debug' if debugMode else 'release') + ('emscripten' if emscripten else '') + ('64' if isPlatform64() else '32')
+        config = ('debug' if debugMode else 'release') + ('emscripten' if html5Mode else '') + ('64' if isPlatform64() else '32')
         os.system("premake4 gmake")
-        os.system(('emmake ' if emscripten else '') + "make config=" + config + " -j" + str(multiprocessing.cpu_count()))
+        os.system(('emmake ' if html5Mode else '') + "make config=" + config + " -j" + str(multiprocessing.cpu_count()))
     else:
         msbuild = "/cygdrive/c/Program Files (x86)/MSBuild/12.0/Bin/MSBuild.exe"
 
