@@ -4,11 +4,11 @@
 
 namespace Urho3D
 {
-    struct Vector2;
-    struct Vector3;
-    struct IntVector2;
-    struct Rect;
-    struct Color;
+    class Vector2;
+    class Vector3;
+    class IntVector2;
+    class Rect;
+    class Color;
 }
 
 EMBINDCEFV8_DECLARE_VALUE_OBJECT(Urho3D::Vector2);

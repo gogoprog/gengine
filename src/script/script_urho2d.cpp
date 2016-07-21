@@ -18,6 +18,7 @@ using namespace Urho3D;
 EMBINDCEFV8_DECLARE_STRING(String, CString);
 EMBINDCEFV8_DECLARE_CLASS(Context);
 EMBINDCEFV8_DECLARE_CLASS(Component);
+EMBINDCEFV8_DECLARE_CLASS(RigidBody2D);
 EMBINDCEFV8_DECLARE_ENUM(LoopMode2D);
 EMBINDCEFV8_DECLARE_ENUM(BlendMode);
 EMBINDCEFV8_DECLARE_ENUM(BodyType2D);
@@ -96,7 +97,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .property("position", &PhysicsRaycastResult2D::position_)
         .property("normal", &PhysicsRaycastResult2D::normal_)
         .property("distance", &PhysicsRaycastResult2D::distance_)
-        .property("body", &PhysicsRaycastResult2D::body_)
+        // .property("body", &PhysicsRaycastResult2D::body_) // :todo: support for emscripten
         ;
 
     embindcefv8::Class<PhysicsWorld2D, Component>("PhysicsWorld2D")
