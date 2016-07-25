@@ -7,6 +7,7 @@ STRING(
         gengine = Module.gengine;
 
         Main.start();
+        Main.onGuiLoaded();
 
         function update()
         {

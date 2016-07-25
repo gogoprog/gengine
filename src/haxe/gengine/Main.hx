@@ -49,4 +49,11 @@ class Main
 
         untyped __js__("scene.removeChild(entity.node)");
     }
+
+    static public function onGuiLoaded():Void
+    {
+        var app = Application;
+
+        untyped __js__('if(typeof app.onGuiLoaded === "function") { app.onGuiLoaded(); }');
+    }
 }
