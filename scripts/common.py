@@ -25,9 +25,8 @@ def log(*args):
     sys.stdout.write("[gengine] ")
     print(*args)
 
-def logError(*args):
-    sys.stdout.write("[gengine] Error: ")
-    print(*args)
+def exitWithError(err):
+    sys.exit("[gengine] " + '\033[91m' + "Error: " + err + '\033[0m')
 
 def isPlatform64():
     if getPlatformName() == "Windows":
@@ -82,8 +81,7 @@ def init():
     binaryPath = rootPath + "/build/gengine" + ('d' if debugMode else '')
 
     if not os.path.isdir(targetDir):
-        logError("Target directroy does not exist.")
-        sys.exit(1)
+        exitWithError("Target directroy does not exist.")
 
     if html5Mode:
         targetPlatform = "emscripten"
@@ -148,11 +146,15 @@ def build():
         os.system("sed -i 's/v110/v120/g' *.vcxproj")
         os.system(msbuild + " /p:Configuration=Release")
 
+    os.system("rm -rf " + targetDir + "generated/main.js")
+
     if not os.path.exists(targetDir + "/build.hxml"):
         log("Running haxe default command line...")
         os.system("haxe -cp $GENGINE/deps/common/Ash-Haxe/src/ -cp $GENGINE/src/haxe/ -cp " + targetDir +  " -cp " + targetDir + "/src -main gengine.Main -js " + targetDir + "generated/main.js")
     else:
         log("Running haxe with build.hxml...")
-        os.system("cd " + targetDir + ";haxe build.hxml")
+
+    if not os.path.exists(targetDir + "generated/main.js"):
+        exitWithError("Haxe compilation failed.")
 
     os.chdir(current_dir)
