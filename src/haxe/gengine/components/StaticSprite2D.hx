@@ -4,7 +4,7 @@ import gengine.math.*;
 
 class StaticSprite2D extends UrhoComponent
 {
-    public inline function new(?sprite)
+    public function new(?sprite)
     {
         super();
 

@@ -10,6 +10,8 @@
 #include <Urho3D/Urho2D/RigidBody2D.h>
 #include <Urho3D/Urho2D/CollisionBox2D.h>
 #include <Urho3D/Urho2D/CollisionCircle2D.h>
+#include <Urho3D/Urho2D/ParticleEffect2D.h>
+#include <Urho3D/Urho2D/ParticleEmitter2D.h>
 #include <Urho3D/Graphics/Texture2D.h>
 #include <Urho3D/Core/Context.h>
 
@@ -126,5 +128,20 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("setDensity", static_cast<void (CollisionCircle2D::*)(float)>(&CollisionCircle2D::SetDensity))
         .method("setFriction", static_cast<void (CollisionCircle2D::*)(float)>(&CollisionCircle2D::SetFriction))
         .method("setRestitution", static_cast<void (CollisionCircle2D::*)(float)>(&CollisionCircle2D::SetRestitution))
+        ;
+
+    embindcefv8::Class<ParticleEffect2D>("ParticleEffect2D")
+        ;
+
+    embindcefv8::Class<ParticleEmitter2D, Component>("ParticleEmitter2D")
+        .constructor<Context*>()
+        .method("setEffect", &ParticleEmitter2D::SetEffect)
+        .method("setSprite", &ParticleEmitter2D::SetSprite)
+        .method("setBlendMode", &ParticleEmitter2D::SetBlendMode)
+        .method("setMaxParticles", &ParticleEmitter2D::SetMaxParticles)
+        .method("setLayer", static_cast<void (ParticleEmitter2D::*)(int)>(&ParticleEmitter2D::SetLayer))
+        .method("setOrderInLayer", static_cast<void (ParticleEmitter2D::*)(int)>(&ParticleEmitter2D::SetOrderInLayer))
+        .method("getLayer", static_cast<int (ParticleEmitter2D::*)() const>(&ParticleEmitter2D::GetLayer))
+        .method("getOrderInLayer", static_cast<int (ParticleEmitter2D::*)() const>(&ParticleEmitter2D::GetOrderInLayer))
         ;
 }
