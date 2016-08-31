@@ -4,7 +4,7 @@ import gengine.math.*;
 
 class SoundSource extends UrhoComponent
 {
-    public inline function new()
+    public function new()
     {
         super();
 
