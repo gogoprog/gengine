@@ -36,4 +36,9 @@ class PhysicsWorld2D extends UrhoComponent
     {
         this.object.raycastSingle(result, startPoint, endPoint, collisionMask);
     }
+    
+    public inline function getRigidBody(point:Vector2, ?collisionMask = 0xffffffff):Dynamic
+    {
+        return this.object.getRigidBody(point, collisionMask);
+    }
 }

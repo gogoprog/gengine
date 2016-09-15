@@ -109,6 +109,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("setSubStepping", &PhysicsWorld2D::SetSubStepping)
         .method("drawDebugGeometry", &PhysicsWorld2D::DrawDebugGeometry)
         .method("raycastSingle", &PhysicsWorld2D::RaycastSingle)
+        .method("getRigidBody", static_cast<RigidBody2D* (PhysicsWorld2D::*)(const Vector2&, unsigned)>(&PhysicsWorld2D::GetRigidBody))
         ;
 
     embindcefv8::Class<CollisionBox2D, Component>("CollisionBox2D")

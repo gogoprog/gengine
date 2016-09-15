@@ -61,7 +61,7 @@ class RigidBody2D extends UrhoComponent
         this.object.setLinearVelocity(linearVelocity);
     }
 
-    public inline function setAngularVelocity(angularVelocity:Vector2)
+    public inline function setAngularVelocity(angularVelocity:Float)
     {
         this.object.setAngularVelocity(angularVelocity);
     }
