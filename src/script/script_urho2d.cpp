@@ -92,6 +92,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("applyTorque", &RigidBody2D::ApplyTorque)
         .method("applyLinearImpulse", &RigidBody2D::ApplyLinearImpulse)
         .method("applyAngularImpulse", &RigidBody2D::ApplyAngularImpulse)
+        .method("getID", static_cast<unsigned (RigidBody2D::*)() const>(&RigidBody2D::GetID))
         ;
 
     embindcefv8::Class<PhysicsRaycastResult2D>("PhysicsRaycastResult2D")
