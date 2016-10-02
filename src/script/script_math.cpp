@@ -7,6 +7,16 @@
 
 using namespace Urho3D;
 
+class Maths
+{
+public:
+    template<typename V>
+    static float getVectorLength(const V & v)
+    {
+        return v.Length();
+    }
+};
+
 EMBINDCEFV8_BINDINGS(math)
 {
     embindcefv8::ValueObject<Vector3>("Vector3")
@@ -41,4 +51,8 @@ EMBINDCEFV8_BINDINGS(math)
         .property("b", &Color::b_)
         .property("a", &Color::a_)
         ;
+
+    embindcefv8::Class<Maths>("Maths")
+        .static_function("getVector2Length", &Maths::getVectorLength<Vector2>)
+        .static_function("getVector3Length", &Maths::getVectorLength<Vector3>);
 }
