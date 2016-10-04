@@ -35,6 +35,18 @@ public:
     {
         return v1.Angle(v2);
     }
+
+    template<typename V>
+    static float getVectorDistance(const V & v1, const V & v2)
+    {
+        return (v1 - v2).Length();
+    }
+
+    template<typename V>
+    static float getVectorDistanceSquared(const V & v1, const V & v2)
+    {
+        return (v1 - v2).LengthSquared();
+    }
 };
 
 EMBINDCEFV8_BINDINGS(math)
@@ -81,5 +93,9 @@ EMBINDCEFV8_BINDINGS(math)
         .static_function("getNormalizedVector3", &Maths::getNormalizedVector<Vector3>)
         .static_function("getVector2Angle", &Maths::getVectorAngle<Vector2>)
         .static_function("getVector3Angle", &Maths::getVectorAngle<Vector3>)
+        .static_function("getVector2Distance", &Maths::getVectorDistance<Vector2>)
+        .static_function("getVector3Distance", &Maths::getVectorDistance<Vector3>)
+        .static_function("getVector2DistanceSquared", &Maths::getVectorDistanceSquared<Vector2>)
+        .static_function("getVector3DistanceSquared", &Maths::getVectorDistanceSquared<Vector3>)
         ;
 }
