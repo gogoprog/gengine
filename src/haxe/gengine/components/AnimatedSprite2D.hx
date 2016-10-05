@@ -56,4 +56,14 @@ class AnimatedSprite2D extends UrhoComponent
     {
         this.object.setSpeed(speed);
     }
+
+    public inline function setColor(color:Color)
+    {
+        this.object.setColor(color);
+    }
+
+    public inline function setAlpha(alpha:Float)
+    {
+        this.object.setAlpha(alpha);
+    }
 }

@@ -12,6 +12,7 @@
 #include <Urho3D/Urho2D/CollisionCircle2D.h>
 #include <Urho3D/Urho2D/ParticleEffect2D.h>
 #include <Urho3D/Urho2D/ParticleEmitter2D.h>
+#include <Urho3D/Math/Color.h>
 #include <Urho3D/Graphics/Texture2D.h>
 #include <Urho3D/Core/Context.h>
 
@@ -71,6 +72,8 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("setLoopMode", &AnimatedSprite2D::SetLoopMode)
         .method("setSpeed", &AnimatedSprite2D::SetSpeed)
         .method("getBonePosition", &AnimatedSprite2D::GetBonePosition)
+        .method("setColor", static_cast<void (AnimatedSprite2D::*)(const Color &)>(&AnimatedSprite2D::SetColor))
+        .method("setAlpha", static_cast<void (AnimatedSprite2D::*)(float)>(&AnimatedSprite2D::SetAlpha))
         ;
 
     embindcefv8::Class<RigidBody2D, Component>("RigidBody2D")
