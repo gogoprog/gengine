@@ -1,4 +1,4 @@
 #!/bin/bash
 
 haxe generate.hxml
-haxelib run dox -i generated/output.xml
+haxelib run dox -i generated/output.xml --title "gengine API documentation" -D themeColor 0xF1EED9 -D website "//gengine.net"
