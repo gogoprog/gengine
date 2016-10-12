@@ -6,7 +6,8 @@ import gengine.math.*;
 class Entity extends ash.core.Entity
 {
     private var node:Dynamic;
-    private var internalParent:Entity;
+    private var _parent:Entity;
+    private var _children = new Array<Entity>();
 
     public var position(get, set):Vector3;
     public var scale(get, set):Vector3;
@@ -136,6 +137,16 @@ class Entity extends ash.core.Entity
         return this.node.getWorldPosition();
     }
 
+    public inline function setWorldRotation2D(angle:Float)
+    {
+        this.node.setWorldRotation2D(angle);
+    }
+
+    public inline function getWorldRotation2D():Float
+    {
+        return this.node.getWorldRotation2D();
+    }
+
     public inline function setWorldScale(scale:Vector3)
     {
         this.node.setWorldScale(scale);
@@ -148,13 +159,27 @@ class Entity extends ash.core.Entity
 
     public inline function setParent(parent:Entity)
     {
-        this.node.setParent(parent.node);
-        internalParent = parent;
+        if(_parent != null)
+        {
+            _parent._children.remove(this);
+        }
+
+        if(parent != null)
+        {
+            parent._children.push(this);
+            this.node.setParent(parent.node);
+            _parent = parent;
+        }
+        else
+        {
+            this.node.setParent(null);
+            _parent = null;
+        }
     }
 
     public inline function getParent():Entity
     {
-        return internalParent;
+        return _parent;
     }
 
     public inline function set_parent(parent:Entity):Entity
@@ -165,7 +190,7 @@ class Entity extends ash.core.Entity
 
     public inline function get_parent():Entity
     {
-        return internalParent;
+        return _parent;
     }
 
     public inline function roll(angle:Float, ?transformSpace:Int = 0)

@@ -41,21 +41,39 @@ class Main
     static public function onEntityAdded(entity:ash.core.Entity):Void
     {
         var scene = Gengine.getScene();
+        var gentity:Entity = cast (entity, Entity);
 
-        untyped __js__("scene.addChild(entity.node, 1000)");
+        if(gentity.parent == null)
+        {
+            untyped __js__("scene.addChild(entity.node, 1000)");
+        }
 
         var r = entity.get(RigidBody2D);
         if(r != null)
         {
             Physics2DSystem.addEntity(r.object, cast entity);
         }
+
+        for(c in @:privateAccess gentity._children)
+        {
+            engine.addEntity(c);
+        }
     }
 
     static public function onEntityRemoved(entity:ash.core.Entity):Void
     {
         var scene = Gengine.getScene();
+        var gentity:Entity = cast (entity, Entity);
 
-        untyped __js__("scene.removeChild(entity.node)");
+        if(gentity.parent == null)
+        {
+            untyped __js__("scene.removeChild(entity.node)");
+        }
+
+        for(c in @:privateAccess gentity._children)
+        {
+            engine.removeEntity(c);
+        }
     }
 
     static public function onGuiLoaded():Void
