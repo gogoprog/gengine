@@ -35,4 +35,9 @@ class CollisionCircle2D extends UrhoComponent
     {
         this.object.setRestitution(restitution);
     }
+
+    public inline function setTrigger(trigger:Bool)
+    {
+        this.object.setTrigger(trigger);
+    }
 }

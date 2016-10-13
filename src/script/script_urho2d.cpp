@@ -124,6 +124,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("setDensity", static_cast<void (CollisionBox2D::*)(float)>(&CollisionBox2D::SetDensity))
         .method("setFriction", static_cast<void (CollisionBox2D::*)(float)>(&CollisionBox2D::SetFriction))
         .method("setRestitution", static_cast<void (CollisionBox2D::*)(float)>(&CollisionBox2D::SetRestitution))
+        .method("setTrigger", static_cast<void (CollisionBox2D::*)(bool)>(&CollisionBox2D::SetTrigger))
         ;
 
     embindcefv8::Class<CollisionCircle2D, Component>("CollisionCircle2D")
@@ -133,6 +134,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("setDensity", static_cast<void (CollisionCircle2D::*)(float)>(&CollisionCircle2D::SetDensity))
         .method("setFriction", static_cast<void (CollisionCircle2D::*)(float)>(&CollisionCircle2D::SetFriction))
         .method("setRestitution", static_cast<void (CollisionCircle2D::*)(float)>(&CollisionCircle2D::SetRestitution))
+        .method("setTrigger", static_cast<void (CollisionCircle2D::*)(bool)>(&CollisionCircle2D::SetTrigger))
         ;
 
     embindcefv8::Class<ParticleEffect2D>("ParticleEffect2D")
