@@ -82,4 +82,11 @@ class Main
 
         untyped __js__('if(typeof app.onGuiLoaded === "function") { app.onGuiLoaded(); }');
     }
+
+    static public function onPhysicsBeginContact2D(name:String)
+    {
+        var app = Application;
+
+        untyped __js__('if(typeof app.onPhysicsBeginContact2D === "function") { app.onPhysicsBeginContact2D(name); }');
+    }
 }
