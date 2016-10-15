@@ -83,10 +83,13 @@ class Main
         untyped __js__('if(typeof app.onGuiLoaded === "function") { app.onGuiLoaded(); }');
     }
 
-    static public function onPhysicsBeginContact2D(name:String)
+    static public function onPhysicsBeginContact2D(bodyA:Dynamic, bodyB:Dynamic)
     {
         var app = Application;
 
-        untyped __js__('if(typeof app.onPhysicsBeginContact2D === "function") { app.onPhysicsBeginContact2D(name); }');
+        trace(bodyA.getID());
+        trace(bodyB.getID());
+
+        //untyped __js__('if(typeof app.onPhysicsBeginContact2D === "function") { app.onPhysicsBeginContact2D(name); }');
     }
 }

@@ -22,6 +22,7 @@
 #include <Urho3D/Scene/Scene.h>
 #include <Urho3D/Scene/SceneEvents.h>
 #include <Urho3D/Urho2D/PhysicsEvents2D.h>
+#include <Urho3D/Urho2D/RigidBody2D.h>
 
 #define STRING(src) \
     #src
@@ -164,9 +165,9 @@ void App::update(StringHash eventType, VariantMap& eventData)
 
 void App::onPhysicsBeginContact2D(StringHash eventType, VariantMap& eventData)
 {
-    ss.str("");
-    ss << "Main.onPhysicsBeginContact2D('" << eventType.ToString().CString() << "');";
-    embindcefv8::executeJavaScript(ss.str().c_str());
+    embindcefv8::addGlobalObject(*dynamic_cast<RigidBody2D*>(eventData[PhysicsBeginContact2D::P_BODYA].GetPtr()), "arg0");
+    embindcefv8::addGlobalObject(*dynamic_cast<RigidBody2D*>(eventData[PhysicsBeginContact2D::P_BODYB].GetPtr()), "arg1");
+    embindcefv8::executeJavaScript("Main.onPhysicsBeginContact2D(Module.arg0, Module.arg1);");
 }
 
 SharedPtr<App>
