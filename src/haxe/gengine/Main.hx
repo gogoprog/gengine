@@ -87,9 +87,12 @@ class Main
     {
         var app = Application;
 
-        trace(bodyA.getID());
-        trace(bodyB.getID());
+        if(untyped __js__('typeof app.onPhysicsBeginContact2D === "function"'))
+        {
+            var entityA = Physics2DSystem.urhoBodyToEntity.get(bodyA.getID());
+            var entityB = Physics2DSystem.urhoBodyToEntity.get(bodyB.getID());
 
-        //untyped __js__('if(typeof app.onPhysicsBeginContact2D === "function") { app.onPhysicsBeginContact2D(name); }');
+            untyped __js__('app.onPhysicsBeginContact2D(entityA, entityB)');
+        }
     }
 }

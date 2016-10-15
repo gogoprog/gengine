@@ -23,7 +23,7 @@ class Physics2DSystem extends ListIteratingSystem<Physics2DNode>
         urhoBodyToEntity.set(urhoBody.getID(), entity);
     }
 
-    static public function getEntity(urhoBody:Dynamic):Entity
+    static public inline function getEntity(urhoBody:Dynamic):Entity
     {
         return urhoBody == null ? null : urhoBodyToEntity.get(urhoBody.getID());
     }
