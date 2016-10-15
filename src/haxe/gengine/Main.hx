@@ -82,4 +82,17 @@ class Main
 
         untyped __js__('if(typeof app.onGuiLoaded === "function") { app.onGuiLoaded(); }');
     }
+
+    static public function onPhysicsBeginContact2D(bodyA:Dynamic, bodyB:Dynamic)
+    {
+        var app = Application;
+
+        if(untyped __js__('typeof app.onPhysicsBeginContact2D === "function"'))
+        {
+            var entityA = Physics2DSystem.urhoBodyToEntity.get(bodyA.getID());
+            var entityB = Physics2DSystem.urhoBodyToEntity.get(bodyB.getID());
+
+            untyped __js__('app.onPhysicsBeginContact2D(entityA, entityB)');
+        }
+    }
 }

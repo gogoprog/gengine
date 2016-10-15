@@ -14,4 +14,14 @@ class Application
     public static function start(engine:Engine)
     {
     }
+
+    /** Called after gui is loaded. **/
+    public static function onGuiLoaded()
+    {
+    }
+
+    /** Callback for Urho3D::E_PHYSICSBEGINCONTACT2D **/
+    public static function onPhysicsBeginContact2D(entityA:Entity, entityB:Entity)
+    {
+    }
 }

@@ -21,6 +21,8 @@
 #include <Urho3D/Resource/ResourceCache.h>
 #include <Urho3D/Scene/Scene.h>
 #include <Urho3D/Scene/SceneEvents.h>
+#include <Urho3D/Urho2D/PhysicsEvents2D.h>
+#include <Urho3D/Urho2D/RigidBody2D.h>
 
 #define STRING(src) \
     #src
@@ -31,6 +33,9 @@ namespace gengine
 {
 namespace application
 {
+
+static std::stringstream
+    ss;
 
 App::App()
     :
@@ -79,6 +84,9 @@ void App::Start()
         SubscribeToEvent(Urho3D::E_UPDATE, URHO3D_HANDLER(App, update));
         embindcefv8::executeJavaScript("Main.start();");
     #endif
+
+    SubscribeToEvent(Urho3D::E_PHYSICSBEGINCONTACT2D, URHO3D_HANDLER(App, onPhysicsBeginContact2D));
+
 }
 
 void App::Stop()
@@ -148,10 +156,18 @@ Node & App::createNode()
 
 void App::update(StringHash eventType, VariantMap& eventData)
 {
-    static std::stringstream ss;
     ss.str("");
     ss << "Main.update(" << getTimeStep() << ");";
     embindcefv8::executeJavaScript(ss.str().c_str());
+}
+
+// Events :
+
+void App::onPhysicsBeginContact2D(StringHash eventType, VariantMap& eventData)
+{
+    embindcefv8::addGlobalObject(*dynamic_cast<RigidBody2D*>(eventData[PhysicsBeginContact2D::P_BODYA].GetPtr()), "arg0");
+    embindcefv8::addGlobalObject(*dynamic_cast<RigidBody2D*>(eventData[PhysicsBeginContact2D::P_BODYB].GetPtr()), "arg1");
+    embindcefv8::executeJavaScript("Main.onPhysicsBeginContact2D(Module.arg0, Module.arg1);");
 }
 
 SharedPtr<App>
