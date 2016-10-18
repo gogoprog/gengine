@@ -2,7 +2,7 @@ package gengine.components;
 
 import gengine.math.*;
 
-class CollisionBox2D extends UrhoComponent
+class CollisionBox2D extends CollisionShape2D
 {
     public inline function new()
     {
@@ -24,25 +24,5 @@ class CollisionBox2D extends UrhoComponent
     public inline function setAngle(angle:Float)
     {
         this.object.setAngle(angle);
-    }
-
-    public inline function setDensity(density:Float)
-    {
-        this.object.setDensity(density);
-    }
-
-    public inline function setFriction(friction:Float)
-    {
-        this.object.setFriction(friction);
-    }
-
-    public inline function setRestitution(restitution:Float)
-    {
-        this.object.setRestitution(restitution);
-    }
-
-    public inline function setTrigger(trigger:Bool)
-    {
-        this.object.setTrigger(trigger);
     }
 }

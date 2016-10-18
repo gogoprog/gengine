@@ -125,6 +125,9 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("setFriction", static_cast<void (CollisionBox2D::*)(float)>(&CollisionBox2D::SetFriction))
         .method("setRestitution", static_cast<void (CollisionBox2D::*)(float)>(&CollisionBox2D::SetRestitution))
         .method("setTrigger", static_cast<void (CollisionBox2D::*)(bool)>(&CollisionBox2D::SetTrigger))
+        .method("setCategoryBits", static_cast<void (CollisionBox2D::*)(int)>(&CollisionBox2D::SetCategoryBits))
+        .method("setMaskBits", static_cast<void (CollisionBox2D::*)(int)>(&CollisionBox2D::SetMaskBits))
+        .method("setGroupIndex", static_cast<void (CollisionBox2D::*)(int)>(&CollisionBox2D::SetGroupIndex))
         ;
 
     embindcefv8::Class<CollisionCircle2D, Component>("CollisionCircle2D")
@@ -135,6 +138,9 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("setFriction", static_cast<void (CollisionCircle2D::*)(float)>(&CollisionCircle2D::SetFriction))
         .method("setRestitution", static_cast<void (CollisionCircle2D::*)(float)>(&CollisionCircle2D::SetRestitution))
         .method("setTrigger", static_cast<void (CollisionCircle2D::*)(bool)>(&CollisionCircle2D::SetTrigger))
+        .method("setCategoryBits", static_cast<void (CollisionCircle2D::*)(int)>(&CollisionCircle2D::SetCategoryBits))
+        .method("setMaskBits", static_cast<void (CollisionCircle2D::*)(int)>(&CollisionCircle2D::SetMaskBits))
+        .method("setGroupIndex", static_cast<void (CollisionCircle2D::*)(int)>(&CollisionCircle2D::SetGroupIndex))
         ;
 
     embindcefv8::Class<ParticleEffect2D>("ParticleEffect2D")

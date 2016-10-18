@@ -2,7 +2,7 @@ package gengine.components;
 
 import gengine.math.*;
 
-class CollisionCircle2D extends UrhoComponent
+class CollisionCircle2D extends CollisionShape2D
 {
     public inline function new()
     {
@@ -19,25 +19,5 @@ class CollisionCircle2D extends UrhoComponent
     public inline function setCenter(center:Vector2)
     {
         this.object.setCenter(center);
-    }
-
-    public inline function setDensity(density:Float)
-    {
-        this.object.setDensity(density);
-    }
-
-    public inline function setFriction(friction:Float)
-    {
-        this.object.setFriction(friction);
-    }
-
-    public inline function setRestitution(restitution:Float)
-    {
-        this.object.setRestitution(restitution);
-    }
-
-    public inline function setTrigger(trigger:Bool)
-    {
-        this.object.setTrigger(trigger);
     }
 }
