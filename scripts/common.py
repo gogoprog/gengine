@@ -119,6 +119,8 @@ def build():
 
         os.chdir(buildDir)
         os.system("make Urho3D -j" + str(multiprocessing.cpu_count()))
+        os.system("rm -rf " + binaryPath)
+
 
     current_dir = os.getcwd()
 
