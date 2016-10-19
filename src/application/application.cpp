@@ -23,6 +23,7 @@
 #include <Urho3D/Scene/SceneEvents.h>
 #include <Urho3D/Urho2D/PhysicsEvents2D.h>
 #include <Urho3D/Urho2D/RigidBody2D.h>
+#include <Urho3D/Urho2D/StaticSprite2D.h>
 
 #define STRING(src) \
     #src
@@ -35,7 +36,8 @@ namespace application
 {
 
 static std::stringstream
-    ss;
+    ss,
+    sss[10];
 
 App::App()
     :
@@ -126,6 +128,7 @@ void App::start()
 
 void App::runFrame()
 {
+    lastArgIndex = 0;
     Thread::SetMainThread();
     engine_->RunFrame();
 
@@ -165,9 +168,17 @@ void App::update(StringHash eventType, VariantMap& eventData)
 
 void App::onPhysicsBeginContact2D(StringHash eventType, VariantMap& eventData)
 {
-    embindcefv8::addGlobalObject(*dynamic_cast<RigidBody2D*>(eventData[PhysicsBeginContact2D::P_BODYA].GetPtr()), "arg0");
-    embindcefv8::addGlobalObject(*dynamic_cast<RigidBody2D*>(eventData[PhysicsBeginContact2D::P_BODYB].GetPtr()), "arg1");
-    embindcefv8::executeJavaScript("Main.onPhysicsBeginContact2D(Module.arg0, Module.arg1);");
+    sss[0].str("");
+    sss[0] << "arg" << lastArgIndex++;
+    embindcefv8::addGlobalObject(*dynamic_cast<RigidBody2D*>(eventData[PhysicsBeginContact2D::P_BODYA].GetPtr()), sss[0].str().c_str());
+    sss[1].str("");
+    sss[1] << "arg" << lastArgIndex++;
+    embindcefv8::addGlobalObject(*dynamic_cast<RigidBody2D*>(eventData[PhysicsBeginContact2D::P_BODYB].GetPtr()), sss[1].str().c_str());
+
+    ss.str("");
+    ss << "Main.onPhysicsBeginContact2D(Module." << sss[0].str() << ", Module." << sss[1].str() << ");";
+
+    embindcefv8::executeJavaScript(ss.str().c_str());
 }
 
 SharedPtr<App>
