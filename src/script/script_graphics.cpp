@@ -56,6 +56,7 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("worldToScreenPoint", &Camera::WorldToScreenPoint)
         .method("screenToWorldPoint", &Camera::ScreenToWorldPoint)
         .method("setZoom", &Camera::SetZoom)
+        .method("getZoom", &Camera::GetZoom)
         ;
 
     embindcefv8::Class<Zone>("Zone")

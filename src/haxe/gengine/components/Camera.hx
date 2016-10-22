@@ -51,6 +51,11 @@ class Camera extends UrhoComponent
         this.object.setZoom(zoom);
     }
 
+    public function getZoom():Float
+    {
+        return this.object.getZoom();
+    }
+
     public function worldToScreenPoint(worldPoint:Vector3):Vector2
     {
         return this.object.worldToScreenPoint(worldPoint);
