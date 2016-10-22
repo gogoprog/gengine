@@ -20,6 +20,7 @@ EMBINDCEFV8_BINDINGS(audio)
         ;
 
     embindcefv8::Class<Sound>("Sound")
+        .method("setLooped", &Sound::SetLooped)
         ;
 
     embindcefv8::Class<SoundSource, Component>("SoundSource")
