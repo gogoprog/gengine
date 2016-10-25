@@ -75,8 +75,6 @@ private:
         windowSize;
     Urho3D::SharedPtr<Urho3D::Scene>
         scene;
-    uint
-        lastArgIndex;
     static Urho3D::SharedPtr<App>
         instance;
 };
