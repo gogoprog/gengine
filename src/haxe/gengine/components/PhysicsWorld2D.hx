@@ -33,12 +33,12 @@ class PhysicsWorld2D extends UrhoComponent
         this.object.drawDebugGeometry();
     }
 
-    public inline function raycastSingle(result:PhysicsRaycastResult2D, startPoint:Vector2, endPoint:Vector2, ?collisionMask = 0xffffffff)
+    public inline function raycastSingle(result:PhysicsRaycastResult2D, startPoint:Vector2, endPoint:Vector2, ?collisionMask = 4294967295)
     {
         this.object.raycastSingle(result, startPoint, endPoint, collisionMask);
     }
 
-    public inline function getEntity(point:Vector2, ?collisionMask = 0xffffffff):Entity
+    public inline function getEntity(point:Vector2, ?collisionMask = 4294967295):Entity
     {
         var urhoBody = this.object.getRigidBody(point, collisionMask);
         return Physics2DSystem.getEntity(urhoBody);
