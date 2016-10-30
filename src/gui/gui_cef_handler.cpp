@@ -85,50 +85,16 @@ void Handler::OnPaint(CefRefPtr<CefBrowser> browser, PaintElementType type, cons
 
 bool Handler::OnBeforeResourceLoad(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request)
 {
-    std::string initial_url = request->GetURL().ToString().c_str();
+    std::string str = request->GetURL().ToString().c_str();
+    std::string::size_type pos = 0u;
+    std::string stringToReplace = "/gui/gui/";
 
-    if(initial_url.substr(0,12) == "file:///gui/")
+    if((pos = str.find(stringToReplace, pos)) != std::string::npos)
     {
-        char cwd[1024];
-        std::string file_path, final_url;
+         str.replace(pos, stringToReplace.length(), "/gui/");
 
-        final_url = "file://";
-
-        #ifdef _WINDOWS
-            final_url += _getcwd(cwd, 1024);
-        #else
-            final_url += getcwd(cwd, 1024);
-        #endif
-
-        file_path = initial_url.substr(7);
-
-        final_url += file_path;
-
-        request->SetURL(final_url);
-
-        return false;
+         request->SetURL(str);
     }
-
-    #ifdef _WINDOWS
-        if(initial_url.substr(0,8) == "file:///"
-            && initial_url.substr(9,6) == ":/gui/"
-            )
-        {
-            char cwd[1024];
-            std::string file_path, final_url;
-
-            final_url = "file://";
-            final_url += _getcwd(cwd, 1024);
-            file_path = initial_url.substr(10);
-
-            final_url += file_path;
-
-            request->SetURL(final_url);
-
-            return false;
-        }
-    #endif
-
 
     return false;
 }
@@ -136,7 +102,6 @@ bool Handler::OnBeforeResourceLoad(CefRefPtr<CefBrowser> browser, CefRefPtr<CefF
 void Handler::OnLoadEnd(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, int httpStatusCode)
 {
     static bool firstTime = true;
-
     if(firstTime)
     {
         gengine::application::preInit();
