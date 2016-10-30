@@ -6,7 +6,9 @@ extern class Input
 {
     public function getKeyPress(button:Int):Bool;
     public function getKeyDown(button:Int):Bool;
+    /** See https://wiki.libsdl.org/SDLScancodeLookup **/
     public function getScancodePress(button:Int):Bool;
+    /** See https://wiki.libsdl.org/SDLScancodeLookup **/
     public function getScancodeDown(button:Int):Bool;
     public function getMouseButtonPress(button:Int):Bool;
     public function getMouseButtonDown(button:Int):Bool;
