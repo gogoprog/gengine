@@ -32,6 +32,36 @@ class StaticSprite2D extends UrhoComponent
         this.object.setTextureRect(rect);
     }
 
+    public inline function getDrawRect():Rect
+    {
+        return this.object.getDrawRect();
+    }
+
+    public inline function getTextureRect():Rect
+    {
+        return this.object.getTextureRect();
+    }
+
+    public inline function setUseDrawRect(useDrawRect:Bool)
+    {
+        this.object.setUseDrawRect(useDrawRect);
+    }
+
+    public inline function setUseTextureRect(useTextureRect:Bool)
+    {
+        this.object.setUseTextureRect(useTextureRect);
+    }
+
+    public inline function getUseDrawRect():Bool
+    {
+        return this.object.getUseDrawRect();
+    }
+
+    public inline function getUseTextureRect():Bool
+    {
+        return this.object.getUseTextureRect();
+    }
+
     public inline function setLayer(layer:Int)
     {
         this.object.setLayer(layer);
