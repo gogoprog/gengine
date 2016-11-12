@@ -1,0 +1,9 @@
+#!/usr/bin/python3
+
+import common
+import os
+import multiprocessing
+
+common.sanityCheck()
+common.init()
+common.compile()

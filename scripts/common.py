@@ -50,7 +50,7 @@ def sanityCheck():
     print("Ok!")
 
 def init():
-    log("Init script...")
+    log("Initialization...")
 
     global binaryPath
     global debugMode
@@ -148,16 +148,19 @@ def build():
         os.system("sed -i 's/v110/v120/g' *.vcxproj")
         os.system(msbuild + " /p:Configuration=Release")
 
+    compile()
+
+    os.chdir(current_dir)
+
+def compile():
     os.system("rm -rf " + targetDir + "generated/main.js")
 
     if not os.path.exists(targetDir + "/build.hxml"):
-        log("Running haxe default command line...")
+        log("Compiling : Running haxe default command line...")
         os.system("haxe -cp $GENGINE/deps/common/Ash-Haxe/src/ -cp $GENGINE/src/haxe/ -cp " + targetDir +  " -cp " + targetDir + "/src -main gengine.Main -js " + targetDir + "generated/main.js")
     else:
-        log("Running haxe with build.hxml...")
+        log("Compiling : Running haxe with build.hxml...")
         os.system("cd " + targetDir + "; haxe build.hxml")
 
     if not os.path.exists(targetDir + "generated/main.js"):
         exitWithError("Haxe compilation failed.")
-
-    os.chdir(current_dir)
