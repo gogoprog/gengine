@@ -145,6 +145,14 @@ void App::exit()
     engine_->Exit();
 }
 
+void App::setGuiFilename(const Urho3D::String & filename)
+{
+    guiFilename = filename;
+#ifdef EMSCRIPTEN
+    gui::System::getInstance().loadFile(guiFilename.CString());
+#endif
+}
+
 gui::System & App::getGui()
 {
     return gui::System::getInstance();

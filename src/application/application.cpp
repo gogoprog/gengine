@@ -23,10 +23,14 @@ void loadScriptFile(const char *filename, const char *additional_code)
 
     contents += additional_code;
 
+#ifdef CEF
     embindcefv8::executeJavaScript(contents.c_str());
+#else
+    embindcefv8::executeJavaScript("var result = null; $.ajax({type: 'GET', dataType:'script', url:'generated/main.js', cache: false, async: false });");
+#endif
 }
 
-#if CEF
+#ifdef CEF
 void preInit()
 {
     const char js_code[] =
