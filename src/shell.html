@@ -124,6 +124,8 @@
       }
 
       function setupListeners() {
+        console.log("[gengine] Setting GUI listeners...");
+
         var gui = document.getElementById("gui");
         ['touchstart', 'touchend', 'touchmove', 'mousedown', 'mouseup', 'mousemove', 'DOMMouseScroll', 'mousewheel', 'wheel', 'mouseout'].forEach(function(eventName) {
           for(var e in JSEvents.eventHandlers)
@@ -137,8 +139,6 @@
         });
 
         document.getElementById('gui').addEventListener('mousedown', handleMouseDown, false);
-
-        console.log("Listeners set.");
       }
 
       var spinnerElement = document.getElementById('spinner');

@@ -16,11 +16,14 @@ class Main
 
     static public function init()
     {
+        trace("[gengine] Initializing...");
         Application.init();
     }
 
     static public function start()
     {
+        trace("[gengine] Starting...");
+
         engine = new Engine();
 
         engine.entityAdded.add(onEntityAdded);
