@@ -110,7 +110,8 @@ def getDeps():
 def build():
     if buildUrho3D:
         log("Building Urho3D lib...")
-        os.chdir(os.environ['GENGINE']+"/deps/common/Urho3D")
+        urhoDir = os.environ['GENGINE']+"/deps/common/Urho3D/"
+        os.chdir(urhoDir)
         buildDir = 'build/' + targetPlatform + '/' + targetMode
         options = ('-DCMAKE_BUILD_TYPE=Debug' if debugMode else '')
         command = ('./cmake_generic.sh' if not html5Mode else './cmake_emscripten.sh')
@@ -118,7 +119,12 @@ def build():
         os.system(command + ' ' + buildDir + " " + options + " -DURHO3D_LUA=0")
 
         os.chdir(buildDir)
+
         os.system("make Urho3D -j" + str(multiprocessing.cpu_count()))
+
+        if not os.path.exists(urhoDir + buildDir + "/lib/libUrho3D.a"):
+            exitWithError("Urho3D build failed.")
+
         os.system("rm -rf " + binaryPath)
 
 
