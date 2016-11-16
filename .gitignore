@@ -55,6 +55,7 @@ debug.log
 *.log
 generated
 /test/packed-*
+/test/index.*
 
 /doc/pages
 
