@@ -13,9 +13,8 @@ inline App & get()
     return App::getInstance();
 }
 
-void loadScriptFile(const char *filename, const char *additional_code = "");
-
 #if CEF
+void loadScriptFile(const char *filename, const char *additional_code = "");
 void preInit();
 void init();
 #endif
