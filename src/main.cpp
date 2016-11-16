@@ -40,8 +40,6 @@ int main(int argc, char *argv[])
           }
         });
     )");
-
-    //mainApp->run();
 #else
     auto engine = mainApp->getEngine();
     while(!engine->IsExiting())
