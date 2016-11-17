@@ -78,7 +78,7 @@ def init():
     targetDir = os.getcwd() + "/" + args.dir + "/"
     rootPath = os.environ['GENGINE']
     buildPath = rootPath + "/build/"
-    binaryPath = rootPath + "/build/gengine" + ('d' if debugMode else '')
+    binaryPath = rootPath + "/build/gengine" + ('d' if debugMode else '') + ('.bc' if html5Mode else '')
 
     if not os.path.isdir(targetDir):
         exitWithError("Target directroy does not exist.")
@@ -129,7 +129,6 @@ def build():
             exitWithError("Urho3D build failed.")
 
         os.system("rm -rf " + binaryPath)
-
 
     current_dir = os.getcwd()
 
