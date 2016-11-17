@@ -113,6 +113,9 @@ def build():
         urhoDir = os.environ['GENGINE']+"/deps/common/Urho3D/"
         os.chdir(urhoDir)
         buildDir = 'build/' + targetPlatform + '/' + targetMode
+
+        os.system("rm -rf " + buildDir + "/lib/libUrho3D.a")
+
         options = ('-DCMAKE_BUILD_TYPE=Debug' if debugMode else '')
         command = ('./cmake_generic.sh' if not html5Mode else './cmake_emscripten.sh')
 
