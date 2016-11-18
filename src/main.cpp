@@ -24,22 +24,24 @@ int main(int argc, char *argv[])
     gengine::gui::System::getInstance().init(argc, argv);
 
 #ifdef EMSCRIPTEN
-    embindcefv8::executeJavaScript(R"(
+    EM_ASM(
         $.ajax({
           url: "generated/main.js",
           dataType: "script",
           cache: false,
+          async: false,
           complete: function() {
               console.log("[gengine] main.js loaded!");
               gengine = Module.gengine;
               Main.init();
-              gengine.run();
           },
           error: function() {
               console.log("[gengine] Failed to load main.js");
           }
         });
-    )");
+    );
+
+    mainApp->run();
 #else
     auto engine = mainApp->getEngine();
     while(!engine->IsExiting())
