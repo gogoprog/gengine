@@ -156,6 +156,9 @@ def build():
         os.system("sed -i 's/v110/v120/g' *.vcxproj")
         os.system(msbuild + " /p:Configuration=Release")
 
+    if not os.path.exists(binaryPath):
+        exitWithError("gengine compilation failed.")
+
     compile()
 
     os.chdir(current_dir)

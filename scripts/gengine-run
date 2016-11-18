@@ -7,6 +7,7 @@ def run():
     if not common.html5Mode:
         common.log("Running...")
         os.chdir(common.targetDir)
+        os.system("rm -rf index.data index.html index.js index.js.mem")
         command = common.binaryPath
         if common.isLinux():
             command = "LD_LIBRARY_PATH=" + common.rootPath + "/deps/linux/lib" + ('64' if common.isPlatform64() else '32') + " " + command
