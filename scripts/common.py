@@ -43,11 +43,9 @@ def getPlatformName():
     return system
 
 def sanityCheck():
-    printn("Sanity check... ")
+    log("Sanity check... ")
     if not "GENGINE" in os.environ:
-        print("GENGINE environment variable is not set.")
-        exit(1)
-    print("Ok!")
+        exitWithError("GENGINE environment variable is not set.")
 
 def init():
     log("Initialization...")

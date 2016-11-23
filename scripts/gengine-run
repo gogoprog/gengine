@@ -15,7 +15,7 @@ def run():
     else:
         common.log("Running emcc...")
         os.chdir(os.environ['GENGINE']+"/build")
-        os.system("emcc -s NO_EXIT_RUNTIME=1 " + ('' if common.debugMode else '-O3') + " --bind gengine" + ('d' if common.debugMode else '') + ".bc -o " + common.targetDir + "/index.html --preload-file " + common.rootPath + "/res/coreData@coreData " + "--preload-file " + common.targetDir + "data@data " + "--use-preload-plugins -s TOTAL_MEMORY=67108864 -s TOTAL_STACK=1048576 --shell-file " + common.rootPath + "/src/shell.html")
+        os.system("emcc " + ('' if common.debugMode else '-O3') + " --bind gengine" + ('d' if common.debugMode else '') + ".bc -o " + common.targetDir + "/index.html --preload-file " + common.rootPath + "/res/coreData@coreData " + "--preload-file " + common.targetDir + "data@data " + "--use-preload-plugins -s TOTAL_MEMORY=67108864 -s TOTAL_STACK=1048576 --shell-file " + common.rootPath + "/src/shell.html")
         os.chdir(common.targetDir)
         common.log("Running HTTP server...")
         os.system("python2 -m SimpleHTTPServer");
