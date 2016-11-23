@@ -117,7 +117,7 @@ def build():
         options = ('-DCMAKE_BUILD_TYPE=Debug' if debugMode else '')
         command = ('./cmake_generic.sh' if not html5Mode else './cmake_emscripten.sh')
 
-        os.system(command + ' ' + buildDir + " " + options + " -DURHO3D_LUA=0")
+        os.system(command + ' ' + buildDir + " " + options + " -DURHO3D_LUA=0 -DURHO3D_ANGELSCRIPT=0 -DURHO3D_PROFILING=0 -DURHO3D_C++11=1")
 
         os.chdir(buildDir)
 
