@@ -15,6 +15,7 @@ binaryPath = None
 itMustRun = False
 html5Mode = False
 buildUrho3D = False
+distributed = False
 targetPlatform = "undefined"
 targetMode = "undefined"
 
@@ -43,12 +44,12 @@ def getPlatformName():
     return system
 
 def sanityCheck():
-    log("Sanity check... ")
     if not "GENGINE" in os.environ:
         exitWithError("GENGINE environment variable is not set.")
 
 def init():
-    log("Initialization...")
+    log("Initializing...")
+    sanityCheck()
 
     global binaryPath
     global debugMode
@@ -60,6 +61,7 @@ def init():
     global buildUrho3D
     global targetPlatform
     global targetMode
+    global distributed
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', help='Debug mode', default=False, action='store_true')
@@ -69,6 +71,7 @@ def init():
     parser.add_argument('dir', help='Target directory', default='.', nargs='?')
     args = parser.parse_args()
 
+    distributed = "GENGINE_DISTRIBUTED" in os.environ
     debugMode = args.d
     itMustRun = args.r
     html5Mode = args.html5
@@ -106,6 +109,8 @@ def getDeps():
             os.system("cp *.dll " + rootPath + "/build/")
 
 def build():
+    if distributed:
+        return
     if buildUrho3D:
         log("Building Urho3D lib...")
         urhoDir = os.environ['GENGINE']+"/deps/common/Urho3D/"

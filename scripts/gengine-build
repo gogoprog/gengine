@@ -4,6 +4,5 @@ import common
 import os
 import multiprocessing
 
-common.sanityCheck()
 common.init()
 common.build()

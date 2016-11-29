@@ -12,17 +12,17 @@ def run():
             command = "LD_LIBRARY_PATH=" + common.rootPath + "/deps/linux/lib" + ('64' if common.isPlatform64() else '32') + " " + command
         os.system(command)
     else:
-        common.log("Running emcc...")
-        os.chdir(common.targetDir)
-        os.system("rm -rf index.data index.html index.js index.html.mem")
-        os.chdir(os.environ['GENGINE']+"/build")
-        os.system("emcc " + ('' if common.debugMode else '-O3') + " --bind gengine" + ('d' if common.debugMode else '') + ".bc -o " + common.targetDir + "/index.html --preload-file " + common.rootPath + "/res/coreData@coreData " + "--preload-file " + common.targetDir + "data@data " + "--use-preload-plugins -s TOTAL_MEMORY=67108864 -s TOTAL_STACK=1048576 --shell-file " + common.rootPath + "/src/shell.html")
+        if not common.distributed:
+            common.log("Running emcc...")
+            os.chdir(common.targetDir)
+            os.system("rm -rf index.data index.html index.js index.html.mem")
+            os.chdir(os.environ['GENGINE']+"/build")
+            os.system("emcc " + ('' if common.debugMode else '-O3') + " --bind gengine" + ('d' if common.debugMode else '') + ".bc -o " + common.targetDir + "/index.html --preload-file " + common.rootPath + "/res/coreData@coreData " + "--preload-file " + common.rootPath + "/res/data@data " + "--use-preload-plugins -s TOTAL_MEMORY=67108864 -s TOTAL_STACK=1048576 --shell-file " + common.rootPath + "/src/shell.html")
+
         os.chdir(common.targetDir)
         common.log("Running HTTP server...")
         os.system("python3 -m http.server");
 
-
-common.sanityCheck()
 common.init()
 common.build()
 

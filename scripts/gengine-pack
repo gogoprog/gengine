@@ -35,7 +35,6 @@ def packNative():
     fo.close()
     os.system("chmod +x " + startName)
 
-common.sanityCheck()
 common.init()
 common.build()
 
