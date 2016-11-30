@@ -1,0 +1,4 @@
+#!/bin/zsh
+source scripts/activate
+export GENGINE_DISTRIBUTED=1
+zsh -i

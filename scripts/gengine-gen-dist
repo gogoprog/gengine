@@ -20,16 +20,5 @@ os.makedirs(targetDir)
 emscripten.build(targetDir)
 shutil.copytree(common.rootPath + "/scripts", distDir + "/scripts")
 
-startFile = distDir + "/start-zsh"
-startContent = """#!/bin/zsh
-source scripts/activate
-export GENGINE_DISTRIBUTED=1
-zsh -i
-"""
-
-with open(startFile, 'a') as out:
-    out.write(startContent)
-    out.close
-
-st = os.stat(startFile)
-os.chmod(startFile, st.st_mode | stat.S_IEXEC)
+shutil.copy2(common.rootPath + "/scripts/dist/start-zsh", distDir)
+shutil.copy2(common.rootPath + "/scripts/dist/start-server-zsh", distDir)

@@ -1,0 +1,5 @@
+#!/bin/zsh
+source scripts/activate
+export GENGINE_DISTRIBUTED=1
+pushd $1
+zsh -c 'gengine-run --html5'
