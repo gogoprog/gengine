@@ -96,6 +96,8 @@ def init():
     else:
         targetMode = "release"
 
+    log("(distributed:" + str(distributed) + ", debugMode:" + str(debugMode) + ", html5Mode:" + str(html5Mode) + ")")
+
 def getDeps():
     log("Downloading dependencies...")
     directory = rootPath+"/deps/"+getPlatformName().lower()+"/lib"+('64' if isPlatform64() else ('32' if isLinux() else ''))
