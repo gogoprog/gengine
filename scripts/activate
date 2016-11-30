@@ -14,13 +14,7 @@ fi
 BIN_DIR=$(dirname $(readlink -e ${SRC}))
 BASEDIR=${BIN_DIR%/*}
 
-export PATH=${PATH}:${BASEDIR}/scripts
+export PATH=${BASEDIR}/scripts:${PATH}
 export GENGINE=${BASEDIR}
-
-if [[ ${SHELL} == *"/bash"* ]]; then
-    export PS1="[gengine]${PS1}"
-else
-    export PROMPT="[gengine]${PROMPT}"
-fi
 
 echo "[gengine] Enabled with ${GENGINE}"
