@@ -22,6 +22,8 @@ def run():
         emscripten.runServer(common.targetDir)
 
 common.init()
-common.build()
+
+if not common.distributed:
+    common.build()
 
 run()
