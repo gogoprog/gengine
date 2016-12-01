@@ -22,8 +22,8 @@ os.makedirs(targetDir)
 emscripten.build(targetDir)
 shutil.copytree(common.rootPath + "/scripts", distDir + "/scripts")
 
-shutil.copy2(common.rootPath + "/scripts/dist/start-zsh", distDir)
-shutil.copy2(common.rootPath + "/scripts/dist/start-server-zsh", distDir)
+shutil.copy2(common.rootPath + "/scripts/dist/start.sh", distDir)
+shutil.copy2(common.rootPath + "/scripts/dist/start-server.sh", distDir)
 
 os.chdir(distDir)
 version = input("Enter version: ")
