@@ -10,6 +10,10 @@ A game framework that combines Haxe, Ash, HTML5 and Urho3D.
   * Most Urho3D features
   * HTML5 WebGL target support
 
+## Documentation
+
+[Generated doc pages](http://gogoprog.github.io/gengine/doc/pages/)
+
 ## Usage
 
 ### Distribution release
