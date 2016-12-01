@@ -30,4 +30,3 @@ version = input("Enter version: ")
 fileName = "gengine-" + version + ".zip"
 os.system("zip -r " + fileName + " *")
 os.system("git tag " + version)
-os.system("git push origin " + version)
