@@ -166,8 +166,6 @@ def build():
     if not os.path.exists(binaryPath):
         exitWithError("gengine compilation failed.")
 
-    compile()
-
     os.chdir(current_dir)
 
 def compile():

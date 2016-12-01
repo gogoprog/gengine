@@ -26,4 +26,6 @@ common.init()
 if not common.distributed:
     common.build()
 
+common.compile()
+
 run()

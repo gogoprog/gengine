@@ -13,6 +13,8 @@ if common.distributed:
 
 common.log("Generating distributed gengine...")
 
+common.build()
+
 distDir = common.rootPath + "/dist"
 targetDir = distDir + "/build"
 shutil.rmtree(distDir, True)
@@ -22,3 +24,10 @@ shutil.copytree(common.rootPath + "/scripts", distDir + "/scripts")
 
 shutil.copy2(common.rootPath + "/scripts/dist/start-zsh", distDir)
 shutil.copy2(common.rootPath + "/scripts/dist/start-server-zsh", distDir)
+
+os.chdir(distDir)
+version = input("Enter version: ")
+fileName = "gengine-" + version + ".zip"
+os.system("zip -r " + fileName + " *")
+os.system("git tag " + version)
+os.system("git push origin " + version)
