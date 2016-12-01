@@ -10,7 +10,29 @@ A game framework that combines Haxe, Ash, HTML5 and Urho3D.
   * Most Urho3D features
   * HTML5 WebGL target support
 
-## Commands
+## Usage
+
+### Distribution release
+
+#### Requirements
+
+ * python3
+ * haxe
+
+#### Commands
+
+Go to the directory containing the extracted files and start the environment :
+    
+    cd path/to/extracted/files/
+    ./start.sh
+    
+This will activate the environment and enable the gengine-run command :
+
+    gengine-run [path-to-your-application-code]
+    
+This will start a local server running your application.
+
+### Development
 
 Activate the gengine environment :
 
