@@ -34,6 +34,7 @@ build/gengine*
 build/*.dll
 build/*.exe
 build/error.txt
+build/index.*
 libcef.so
 deps/*/lib*/*.so*
 deps/*/lib*/*.dll
@@ -62,3 +63,5 @@ generated
 callgrind*
 valgrind*
 vgcore*
+
+/dist

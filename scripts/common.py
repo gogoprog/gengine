@@ -18,6 +18,7 @@ buildUrho3D = False
 distributed = False
 targetPlatform = "undefined"
 targetMode = "undefined"
+skipHaxe = False
 
 def printn(*args):
     sys.stdout.write(*args)
@@ -62,24 +63,27 @@ def init():
     global targetPlatform
     global targetMode
     global distributed
+    global skipHaxe
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', help='Debug mode', default=False, action='store_true')
     parser.add_argument('-r', help='Run', default=False, action='store_true')
     parser.add_argument('--html5', help='HTML5 mode (emscripten)', default=False, action='store_true')
     parser.add_argument('--urho3d', help='Build Urho3D lib', default=False, action='store_true')
+    parser.add_argument('--skip-haxe', help='Skip Haxe compilation', default=False, action='store_true')
     parser.add_argument('dir', help='Target directory', default='.', nargs='?')
     args = parser.parse_args()
 
     distributed = "GENGINE_DISTRIBUTED" in os.environ
     debugMode = args.d
     itMustRun = args.r
-    html5Mode = args.html5
+    html5Mode = args.html5 or distributed
     buildUrho3D = args.urho3d
     targetDir = os.getcwd() + "/" + args.dir + "/"
     rootPath = os.environ['GENGINE']
     buildPath = rootPath + "/build/"
     binaryPath = rootPath + "/build/gengine" + ('d' if debugMode else '') + ('.bc' if html5Mode else '')
+    skipHaxe = args.skip_haxe
 
     if not os.path.isdir(targetDir):
         exitWithError("Target directroy does not exist.")
@@ -111,8 +115,6 @@ def getDeps():
             os.system("cp *.dll " + rootPath + "/build/")
 
 def build():
-    if distributed:
-        return
     if buildUrho3D:
         log("Building Urho3D lib...")
         urhoDir = os.environ['GENGINE']+"/deps/common/Urho3D/"
@@ -164,11 +166,12 @@ def build():
     if not os.path.exists(binaryPath):
         exitWithError("gengine compilation failed.")
 
-    compile()
-
     os.chdir(current_dir)
 
 def compile():
+    if skipHaxe:
+        return
+
     os.system("rm -rf " + targetDir + "generated/main.js")
 
     if not os.path.exists(targetDir + "/build.hxml"):

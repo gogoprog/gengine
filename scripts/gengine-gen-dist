@@ -1,0 +1,32 @@
+#!/usr/bin/python3
+
+import os
+import common
+import emscripten
+import shutil
+import stat
+
+common.init()
+
+if common.distributed:
+    common.exitWithError("Required non-distributed gengine.")
+
+common.log("Generating distributed gengine...")
+
+common.build()
+
+distDir = common.rootPath + "/dist"
+targetDir = distDir + "/build"
+shutil.rmtree(distDir, True)
+os.makedirs(targetDir)
+emscripten.build(targetDir)
+shutil.copytree(common.rootPath + "/scripts", distDir + "/scripts")
+
+shutil.copy2(common.rootPath + "/scripts/dist/start.sh", distDir)
+shutil.copy2(common.rootPath + "/scripts/dist/start-server.sh", distDir)
+
+os.chdir(distDir)
+version = input("Enter version: ")
+fileName = "gengine-" + version + ".zip"
+os.system("zip -r " + fileName + " *")
+os.system("git tag " + version)
