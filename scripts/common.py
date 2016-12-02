@@ -86,7 +86,7 @@ def init():
     skipHaxe = args.skip_haxe
 
     if not os.path.isdir(targetDir):
-        exitWithError("Target directroy does not exist.")
+        exitWithError("Target directory does not exist.")
 
     if html5Mode:
         targetPlatform = "emscripten"
