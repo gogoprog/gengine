@@ -79,14 +79,17 @@ def init():
     itMustRun = args.r
     html5Mode = args.html5 or distributed
     buildUrho3D = args.urho3d
-    targetDir = os.getcwd() + "/" + args.dir + "/"
+    targetDir = args.dir + "/"
+
     rootPath = os.environ['GENGINE']
     buildPath = rootPath + "/build/"
     binaryPath = rootPath + "/build/gengine" + ('d' if debugMode else '') + ('.bc' if html5Mode else '')
     skipHaxe = args.skip_haxe
 
     if not os.path.isdir(targetDir):
-        exitWithError("Target directory does not exist.")
+        targetDir = os.getcwd() + "/" + args.dir + "/"
+        if not os.path.isdir(targetDir):
+            exitWithError("Target directory does not exist.")
 
     if html5Mode:
         targetPlatform = "emscripten"
@@ -176,10 +179,10 @@ def compile():
 
     if not os.path.exists(targetDir + "/build.hxml"):
         log("Compiling : Running haxe default command line...")
-        os.system("haxe -cp $GENGINE/deps/common/Ash-Haxe/src/ -cp $GENGINE/src/haxe/ -cp " + targetDir +  " -cp " + targetDir + "/src -main gengine.Main -js " + targetDir + "generated/main.js")
+        os.system("haxe -cp " +  os.environ['GENGINE'] + "/deps/common/Ash-Haxe/src/ -cp " +  os.environ['GENGINE'] + "/src/haxe/ -cp " + targetDir +  " -cp " + targetDir + "/src -main gengine.Main -js " + targetDir + "generated/main.js")
     else:
         log("Compiling : Running haxe with build.hxml...")
-        os.system("cd " + targetDir + "; haxe build.hxml")
+        os.system("cd " + targetDir + " && haxe build.hxml")
 
     if not os.path.exists(targetDir + "generated/main.js"):
         exitWithError("Haxe compilation failed.")

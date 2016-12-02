@@ -22,8 +22,15 @@ os.makedirs(targetDir)
 emscripten.build(targetDir)
 shutil.copytree(common.rootPath + "/scripts", distDir + "/scripts")
 
+os.makedirs(distDir + "/deps/common/Ash-Haxe")
+shutil.copytree(common.rootPath + "/deps/common/Ash-Haxe/src", distDir + "/deps/common/Ash-Haxe/src")
+
+os.makedirs(distDir + "/src")
+shutil.copytree(common.rootPath + "/src/haxe", distDir + "/src/haxe")
+
 shutil.copy2(common.rootPath + "/scripts/dist/start.sh", distDir)
 shutil.copy2(common.rootPath + "/scripts/dist/start-server.sh", distDir)
+shutil.copy2(common.rootPath + "/scripts/dist/start-server.bat", distDir)
 
 os.chdir(distDir)
 version = input("Enter version: ")

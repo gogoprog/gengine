@@ -18,4 +18,4 @@ def build(targetDir):
 def runServer(targetDir):
     os.chdir(targetDir)
     common.log("Running HTTP server in '" + targetDir + "'...")
-    os.system("python3 -m http.server");
+    os.system("python -m http.server");
