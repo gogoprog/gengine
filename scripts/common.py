@@ -179,10 +179,10 @@ def compile():
 
     if not os.path.exists(targetDir + "/build.hxml"):
         log("Compiling : Running haxe default command line...")
-        os.system("haxe -cp $GENGINE/deps/common/Ash-Haxe/src/ -cp $GENGINE/src/haxe/ -cp " + targetDir +  " -cp " + targetDir + "/src -main gengine.Main -js " + targetDir + "generated/main.js")
+        os.system("haxe -cp " +  os.environ['GENGINE'] + "/deps/common/Ash-Haxe/src/ -cp " +  os.environ['GENGINE'] + "/src/haxe/ -cp " + targetDir +  " -cp " + targetDir + "/src -main gengine.Main -js " + targetDir + "generated/main.js")
     else:
         log("Compiling : Running haxe with build.hxml...")
-        os.system("cd " + targetDir + "; haxe build.hxml")
+        os.system("cd " + targetDir + " && haxe build.hxml")
 
     if not os.path.exists(targetDir + "generated/main.js"):
         exitWithError("Haxe compilation failed.")

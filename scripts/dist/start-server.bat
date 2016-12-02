@@ -3,3 +3,4 @@ set GENGINE=%~dp0
 
 cd %GENGINE%
 python scripts/gengine-run %1
+pause
