@@ -79,14 +79,17 @@ def init():
     itMustRun = args.r
     html5Mode = args.html5 or distributed
     buildUrho3D = args.urho3d
-    targetDir = os.getcwd() + "/" + args.dir + "/"
+    targetDir = args.dir + "/"
+
     rootPath = os.environ['GENGINE']
     buildPath = rootPath + "/build/"
     binaryPath = rootPath + "/build/gengine" + ('d' if debugMode else '') + ('.bc' if html5Mode else '')
     skipHaxe = args.skip_haxe
 
     if not os.path.isdir(targetDir):
-        exitWithError("Target directory does not exist.")
+        targetDir = os.getcwd() + "/" + args.dir + "/"
+        if not os.path.isdir(targetDir):
+            exitWithError("Target directory does not exist.")
 
     if html5Mode:
         targetPlatform = "emscripten"
