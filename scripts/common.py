@@ -91,6 +91,8 @@ def init():
         if not os.path.isdir(targetDir):
             exitWithError("Target directory does not exist.")
 
+    targetDir = os.path.abspath(targetDir) + "/"
+
     if html5Mode:
         targetPlatform = "emscripten"
     elif isLinux():
@@ -182,7 +184,10 @@ def compile():
         os.system("haxe -cp " +  os.environ['GENGINE'] + "/deps/common/Ash-Haxe/src/ -cp " +  os.environ['GENGINE'] + "/src/haxe/ -cp " + targetDir +  " -cp " + targetDir + "/src -main gengine.Main -js " + targetDir + "generated/main.js")
     else:
         log("Compiling : Running haxe with build.hxml...")
-        os.system("cd " + targetDir + " && haxe build.hxml")
+        currentDir = os.getcwd()
+        os.chdir(targetDir)
+        os.system("haxe build.hxml")
+        os.chdir(currentDir)
 
     if not os.path.exists(targetDir + "generated/main.js"):
         exitWithError("Haxe compilation failed.")
