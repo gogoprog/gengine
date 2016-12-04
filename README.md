@@ -20,8 +20,8 @@ A game framework that combines Haxe, Ash, HTML5 and Urho3D.
 
 #### Requirements
 
- * python3
- * haxe
+ * [python3](https://www.python.org/downloads/)
+ * [haxe](https://haxe.org/download/)
 
 #### Commands
 
