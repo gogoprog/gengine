@@ -28,15 +28,26 @@ A local http server is used to run the applications.
 
 #### Commands
 
-Go to the directory containing the extracted files and activate the gengine environment :
+##### Helpers
 
-    cd path/to/extracted/files/
-    ./gengine.sh
+Those are the scripts located at the root of the gengine distributed release.
 
-This enables the gengine-run and gengine-compile commands :
+    ./gengine.sh               
+    # Activates the gengine commands
+    
+    ./gengine-compile.(bat/sh) [path-to-your-application] 
+    # Compiles the application haxe code.
+   
+    ./gengine-run.(bat/sh) [path-to-your-application] 
+    # Compiles and runs the local server
 
-    gengine-compile [path-to-your-application-code] # To compile your Haxe code
-    gengine-run [path-to-your-application-code] # To compile and run the local server
+##### gengine commands
+
+    gengine-compile [path-to-your-application] 
+    # To compile your Haxe code
+    
+    gengine-run [path-to-your-application] 
+    # To compile and run the local server
 
 ### Development
 
