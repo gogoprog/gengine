@@ -28,9 +28,11 @@ shutil.copytree(common.rootPath + "/deps/common/Ash-Haxe/src", distDir + "/deps/
 os.makedirs(distDir + "/src")
 shutil.copytree(common.rootPath + "/src/haxe", distDir + "/src/haxe")
 
-shutil.copy2(common.rootPath + "/scripts/dist/start.sh", distDir)
-shutil.copy2(common.rootPath + "/scripts/dist/start-server.sh", distDir)
-shutil.copy2(common.rootPath + "/scripts/dist/start-server.bat", distDir)
+shutil.copy2(common.rootPath + "/scripts/dist/gengine.sh", distDir)
+shutil.copy2(common.rootPath + "/scripts/dist/gengine-run.sh", distDir)
+shutil.copy2(common.rootPath + "/scripts/dist/gengine-run.bat", distDir)
+shutil.copy2(common.rootPath + "/scripts/dist/gengine-compile.sh", distDir)
+shutil.copy2(common.rootPath + "/scripts/dist/gengine-compile.bat", distDir)
 
 os.chdir(distDir)
 version = input("Enter version: ")
