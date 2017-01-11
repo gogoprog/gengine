@@ -1,0 +1,94 @@
+#!/usr/bin/python3
+
+import os
+import common
+import emscripten
+import shutil
+import stat
+
+common.init()
+
+
+className = input("Enter component name (CamelCase): ")
+
+if className == "":
+    common.log("Cancelled.")
+    exit()
+
+smallName = className[:1].lower() + className[1:]
+
+srcDir = common.targetDir + "src/";
+
+fileName = srcDir + "components/" + className + ".hx"
+common.log("Generating " + fileName)
+f = open(fileName, 'w')
+f.write("""package components;
+
+class {className}
+{{
+    public function new()
+    {{
+    }}
+}}
+""".format(**locals()))
+f.close()
+
+fileName = srcDir + "nodes/" + className + "Node.hx"
+common.log("Generating " + fileName)
+f = open(fileName, 'w')
+f.write(
+"""package nodes;
+
+import gengine.*;
+import components.*;
+
+class {className}Node extends Node<{className}Node>
+{{
+    public var {smallName}:{className};
+}}
+""".format(**locals())
+)
+f.close()
+
+fileName = srcDir + "systems/" + className + "System.hx"
+common.log("Generating " + fileName)
+f = open(fileName, 'w')
+f.write(
+"""package systems;
+
+import ash.tools.ListIteratingSystem;
+
+import components.*;
+import nodes.*;
+import gengine.*;
+
+class {className}System extends ListIteratingSystem<{className}Node>
+{{
+    private var engine:Engine;
+
+    public function new()
+    {{
+        super({className}Node, updateNode, onNodeAdded, onNodeRemoved);
+    }}
+
+    public override function addToEngine(engine:Engine)
+    {{
+        this.engine = engine;
+        super.addToEngine(engine);
+    }}
+
+    private function updateNode(node:{className}Node, dt:Float):Void
+    {{
+    }}
+
+    private function onNodeAdded(node:{className}Node)
+    {{
+    }}
+
+    private function onNodeRemoved(node:{className}Node)
+    {{
+    }}
+}}
+""".format(**locals())
+)
+f.close()
