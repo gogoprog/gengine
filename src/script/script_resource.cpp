@@ -4,6 +4,7 @@
 #include <Urho3D/Urho2D/Sprite2D.h>
 #include <Urho3D/Urho2D/AnimationSet2D.h>
 #include <Urho3D/Urho2D/ParticleEffect2D.h>
+#include <Urho3D/Urho2D/TmxFile2D.h>
 #include <Urho3D/Graphics/Model.h>
 #include <Urho3D/Graphics/Material.h>
 #include <Urho3D/Graphics/Animation.h>
@@ -24,5 +25,6 @@ EMBINDCEFV8_BINDINGS(resource)
         .method("getAnimation", &ResourceCache::GetResource<Animation>)
         .method("getSound", &ResourceCache::GetResource<Sound>)
         .method("getParticleEffect2D", &ResourceCache::GetResource<ParticleEffect2D>)
+        .method("getTmxFile2D", &ResourceCache::GetResource<TmxFile2D>)
         ;
 }

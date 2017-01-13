@@ -12,6 +12,8 @@
 #include <Urho3D/Urho2D/CollisionCircle2D.h>
 #include <Urho3D/Urho2D/ParticleEffect2D.h>
 #include <Urho3D/Urho2D/ParticleEmitter2D.h>
+#include <Urho3D/Urho2D/TmxFile2D.h>
+#include <Urho3D/Urho2D/TileMap2D.h>
 #include <Urho3D/Math/Color.h>
 #include <Urho3D/Graphics/Texture2D.h>
 #include <Urho3D/Core/Context.h>
@@ -162,5 +164,13 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("setOrderInLayer", static_cast<void (ParticleEmitter2D::*)(int)>(&ParticleEmitter2D::SetOrderInLayer))
         .method("getLayer", static_cast<int (ParticleEmitter2D::*)() const>(&ParticleEmitter2D::GetLayer))
         .method("getOrderInLayer", static_cast<int (ParticleEmitter2D::*)() const>(&ParticleEmitter2D::GetOrderInLayer))
+        ;
+
+    embindcefv8::Class<TmxFile2D>("TmxFile2D")
+        ;
+
+    embindcefv8::Class<TileMap2D, Component>("TileMap2D")
+        .constructor<Context*>()
+        .method("setTmxFile", &TileMap2D::SetTmxFile)
         ;
 }
