@@ -29,7 +29,8 @@ class Main
         engine.entityAdded.add(onEntityAdded);
         engine.entityRemoved.add(onEntityRemoved);
 
-        untyped __js__("window.dummyNode = gengine.getScene().createChild(0, 0, false);");
+        untyped __js__("window.dummyNode = gengine.getScene().createChild(0, 0, false)");
+        untyped __js__("window.dummyNode.setName('dummyNode')");
         untyped __js__("window.dummyNode.setEnabled(false)");
 
         engine.addSystem(new Physics2DSystem(), 1);

@@ -9,6 +9,7 @@
 
 using namespace Urho3D;
 
+EMBINDCEFV8_DECLARE_STRING(String, CString);
 EMBINDCEFV8_DECLARE_ENUM(CreateMode);
 EMBINDCEFV8_DECLARE_ENUM(TransformSpace);
 EMBINDCEFV8_DECLARE_CLASS(Scene);
@@ -22,6 +23,7 @@ EMBINDCEFV8_BINDINGS(scene)
 
     embindcefv8::Class<Node>("Node")
         .constructor<Context*>()
+        .method("setName", &Node::SetName)
         .method("setPosition", &Node::SetPosition)
         .method("setWorldPosition", &Node::SetWorldPosition)
         .method("setRotation", &Node::SetRotation)
