@@ -133,11 +133,13 @@
             var eh = JSEvents.eventHandlers[e];
             if(eh.eventTypeString == eventName)
             {
+              gui.removeEventListener(eventName, eh.eventListenerFunc);
               gui.addEventListener(eventName, eh.eventListenerFunc, true);
             }
           }
         });
 
+        document.getElementById('gui').removeEventListener('mousedown', handleMouseDown);
         document.getElementById('gui').addEventListener('mousedown', handleMouseDown, false);
       }
 
@@ -175,7 +177,10 @@
             text = m[1];
             spinnerElement.hidden = false;
           } else {
-            if (!text) spinnerElement.hidden = true;
+            if (!text) {
+              spinnerElement.hidden = true;
+              setupListeners();
+            }
           }
         },
         totalDependencies: 0,
