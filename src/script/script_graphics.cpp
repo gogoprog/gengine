@@ -61,6 +61,7 @@ EMBINDCEFV8_BINDINGS(graphics)
         ;
 
     embindcefv8::Class<Zone>("Zone")
+        .method("setAmbientColor", &Zone::SetAmbientColor)
         .method("setFogColor", &Zone::SetFogColor)
         ;
 
