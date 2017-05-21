@@ -47,4 +47,9 @@ class Terrain extends UrhoComponent
     {
         this.object.setCastShadows(castShadows);
     }
+
+    public inline function getHeight(worldPosition:Vector3):Float
+    {
+        return this.object.getHeight(worldPosition);
+    }
 }

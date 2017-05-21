@@ -103,5 +103,6 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("setMaterial", &Terrain::SetMaterial)
         .method("setOccluder", &Terrain::SetOccluder)
         .method("setCastShadows", &Terrain::SetCastShadows)
+        .method("getHeight", &Terrain::GetHeight)
         ;
 }
