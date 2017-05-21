@@ -11,6 +11,7 @@
 #include <Urho3D/Graphics/Animation.h>
 #include <Urho3D/Graphics/AnimationState.h>
 #include <Urho3D/Graphics/Zone.h>
+#include <Urho3D/Graphics/Terrain.h>
 
 using namespace Urho3D;
 
@@ -90,5 +91,16 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("setLightType", &Light::SetLightType)
         .method("setColor", &Light::SetColor)
         .method("setCastShadows", static_cast<void (Light::*)(bool)>(&Light::SetCastShadows))
+        ;
+
+    embindcefv8::Class<Terrain, Component>("Terrain")
+        .constructor<Context*>()
+        .method("setPatchSize", &Terrain::SetPatchSize)
+        .method("setSpacing", &Terrain::SetSpacing)
+        .method("setSmoothing", &Terrain::SetSmoothing)
+        .method("setHeightMap", &Terrain::SetHeightMap)
+        .method("setMaterial", &Terrain::SetMaterial)
+        .method("setOccluder", &Terrain::SetOccluder)
+        .method("setCastShadows", &Terrain::SetCastShadows)
         ;
 }
