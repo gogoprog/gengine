@@ -4,7 +4,7 @@ import gengine.math.*;
 
 class Light extends UrhoComponent
 {
-    public inline function new()
+    public function new()
     {
         super();
 
