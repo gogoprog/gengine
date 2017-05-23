@@ -18,6 +18,9 @@ EMBINDCEFV8_DECLARE_CLASS(ResourceCache);
 
 EMBINDCEFV8_BINDINGS(resource)
 {
+    embindcefv8::Class<Image>("Image")
+        ;
+
     embindcefv8::Class<ResourceCache>("ResourceCache")
         .method("getSprite2D", &ResourceCache::GetResource<Sprite2D>)
         .method("getAnimationSet2D", &ResourceCache::GetResource<AnimationSet2D>)

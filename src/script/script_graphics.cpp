@@ -1,6 +1,7 @@
 #include "script.h"
 
 #include <Urho3D/Core/Context.h>
+#include <Urho3D/Resource/Image.h>
 #include <Urho3D/Scene/Scene.h>
 #include <Urho3D/Graphics/Camera.h>
 #include <Urho3D/Graphics/Viewport.h>
@@ -18,6 +19,7 @@ using namespace Urho3D;
 EMBINDCEFV8_DECLARE_CLASS(Context);
 EMBINDCEFV8_DECLARE_CLASS(Renderer);
 EMBINDCEFV8_DECLARE_CLASS(Scene);
+EMBINDCEFV8_DECLARE_CLASS(Image);
 EMBINDCEFV8_DECLARE_ENUM(LightType);
 
 EMBINDCEFV8_BINDINGS(graphics)
