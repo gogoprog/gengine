@@ -13,6 +13,7 @@
 #include <Urho3D/Graphics/AnimationState.h>
 #include <Urho3D/Graphics/Zone.h>
 #include <Urho3D/Graphics/Terrain.h>
+#include <Urho3D/Graphics/Skybox.h>
 
 using namespace Urho3D;
 
@@ -106,5 +107,11 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("setOccluder", &Terrain::SetOccluder)
         .method("setCastShadows", &Terrain::SetCastShadows)
         .method("getHeight", &Terrain::GetHeight)
+        ;
+
+    embindcefv8::Class<Skybox, Component>("Skybox")
+        .constructor<Context*>()
+        .method("setModel", static_cast<void (Skybox::*)(Model *)>(&Skybox::SetModel))
+        .method("setMaterial", static_cast<void (Skybox::*)(Material *)>(&Skybox::SetMaterial))
         ;
 }
