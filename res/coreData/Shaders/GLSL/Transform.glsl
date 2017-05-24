@@ -10,17 +10,18 @@ attribute vec4 iPos;
 attribute vec3 iNormal;
 attribute vec4 iColor;
 attribute vec2 iTexCoord;
-attribute vec2 iTexCoord2;
+attribute vec2 iTexCoord1;
 attribute vec4 iTangent;
 attribute vec4 iBlendWeights;
 attribute vec4 iBlendIndices;
 attribute vec3 iCubeTexCoord;
-attribute vec4 iCubeTexCoord2;
+attribute vec4 iCubeTexCoord1;
 #ifdef INSTANCED
-    attribute vec4 iInstanceMatrix1;
-    attribute vec4 iInstanceMatrix2;
-    attribute vec4 iInstanceMatrix3;
+    attribute vec4 iTexCoord4;
+    attribute vec4 iTexCoord5;
+    attribute vec4 iTexCoord6;
 #endif
+attribute float iObjectIndex;
 
 #ifdef SKINNED
 mat4 GetSkinMatrix(vec4 blendWeights, vec4 blendIndices)
@@ -38,7 +39,7 @@ mat4 GetSkinMatrix(vec4 blendWeights, vec4 blendIndices)
 mat4 GetInstanceMatrix()
 {
     const vec4 lastColumn = vec4(0.0, 0.0, 0.0, 1.0);
-    return mat4(iInstanceMatrix1, iInstanceMatrix2, iInstanceMatrix3, lastColumn);
+    return mat4(iTexCoord4, iTexCoord5, iTexCoord6, lastColumn);
 }
 #endif
 
@@ -86,10 +87,67 @@ vec3 GetBillboardNormal()
 }
 #endif
 
+#ifdef DIRBILLBOARD
+mat3 GetFaceCameraRotation(vec3 position, vec3 direction)
+{
+    vec3 cameraDir = normalize(position - cCameraPos);
+    vec3 front = normalize(direction);
+    vec3 right = normalize(cross(front, cameraDir));
+    vec3 up = normalize(cross(front, right));
+
+    return mat3(
+        right.x, up.x, front.x,
+        right.y, up.y, front.y,
+        right.z, up.z, front.z
+    );
+}
+
+vec3 GetBillboardPos(vec4 iPos, vec3 iDirection, mat4 modelMatrix)
+{
+    vec3 worldPos = (iPos * modelMatrix).xyz;
+    return worldPos + vec3(iTexCoord1.x, 0.0, iTexCoord1.y) * GetFaceCameraRotation(worldPos, iDirection);
+}
+
+vec3 GetBillboardNormal(vec4 iPos, vec3 iDirection, mat4 modelMatrix)
+{
+    vec3 worldPos = (iPos * modelMatrix).xyz;
+    return vec3(0.0, 1.0, 0.0) * GetFaceCameraRotation(worldPos, iDirection);
+}
+#endif
+
+#ifdef TRAILFACECAM
+vec3 GetTrailPos(vec4 iPos, vec3 iFront, float iScale, mat4 modelMatrix)
+{
+    vec3 up = normalize(cCameraPos - iPos.xyz);
+    vec3 right = normalize(cross(iFront, up));
+    return (vec4((iPos.xyz + right * iScale), 1.0) * modelMatrix).xyz;
+}
+
+vec3 GetTrailNormal(vec4 iPos)
+{
+    return normalize(cCameraPos - iPos.xyz);
+}
+#endif
+
+#ifdef TRAILBONE
+vec3 GetTrailPos(vec4 iPos, vec3 iParentPos, float iScale, mat4 modelMatrix)
+{
+    vec3 right = iParentPos - iPos.xyz;
+    return (vec4((iPos.xyz + right * iScale), 1.0) * modelMatrix).xyz;
+}
+
+vec3 GetTrailNormal(vec4 iPos, vec3 iParentPos, vec3 iForward)
+{
+    vec3 left = normalize(iPos.xyz - iParentPos);
+    vec3 up = normalize(cross(normalize(iForward), left));
+    return up;
+}
+#endif
+
 #if defined(SKINNED)
     #define iModelMatrix GetSkinMatrix(iBlendWeights, iBlendIndices)
 #elif defined(INSTANCED)
-    #define iModelMatrix GetInstanceMatrix();
+    #define iModelMatrix GetInstanceMatrix()
 #else
     #define iModelMatrix cModel
 #endif
@@ -97,7 +155,13 @@ vec3 GetBillboardNormal()
 vec3 GetWorldPos(mat4 modelMatrix)
 {
     #if defined(BILLBOARD)
-        return GetBillboardPos(iPos, iTexCoord2, modelMatrix);
+        return GetBillboardPos(iPos, iTexCoord1, modelMatrix);
+    #elif defined(DIRBILLBOARD)
+        return GetBillboardPos(iPos, iNormal, modelMatrix);
+    #elif defined(TRAILFACECAM)
+        return GetTrailPos(iPos, iTangent.xyz, iTangent.w, modelMatrix);
+    #elif defined(TRAILBONE)
+        return GetTrailPos(iPos, iTangent.xyz, iTangent.w, modelMatrix);
     #else
         return (iPos * modelMatrix).xyz;
     #endif
@@ -107,14 +171,26 @@ vec3 GetWorldNormal(mat4 modelMatrix)
 {
     #if defined(BILLBOARD)
         return GetBillboardNormal();
+    #elif defined(DIRBILLBOARD)
+        return GetBillboardNormal(iPos, iNormal, modelMatrix);
+    #elif defined(TRAILFACECAM)
+        return GetTrailNormal(iPos);
+    #elif defined(TRAILBONE)
+        return GetTrailNormal(iPos, iTangent.xyz, iNormal);
     #else
         return normalize(iNormal * GetNormalMatrix(modelMatrix));
     #endif
 }
 
-vec3 GetWorldTangent(mat4 modelMatrix)
+vec4 GetWorldTangent(mat4 modelMatrix)
 {
-    return normalize(iTangent.xyz * GetNormalMatrix(modelMatrix));
+    #if defined(BILLBOARD)
+        return vec4(normalize(vec3(1.0, 0.0, 0.0) * cBillboardRot), 1.0);
+    #elif defined(DIRBILLBOARD)
+        return vec4(normalize(vec3(1.0, 0.0, 0.0) * GetNormalMatrix(modelMatrix)), 1.0);
+    #else
+        return vec4(normalize(iTangent.xyz * GetNormalMatrix(modelMatrix)), iTangent.w);
+    #endif
 }
 
 #else
@@ -123,14 +199,20 @@ vec3 GetWorldTangent(mat4 modelMatrix)
 #ifdef GL3
 #define varying in
 
-// \todo: should not hardcode the number of MRT outputs according to defines
+#ifndef MRT_COUNT
+
 #if defined(DEFERRED)
-out vec4 fragData[4];
+#define MRT_COUNT 4
 #elif defined(PREPASS)
-out vec4 fragData[2];
+#define MRT_COUNT 2
 #else
-out vec4 fragData[1];
+#define MRT_COUNT 1
 #endif
+
+#endif
+
+out vec4 fragData[MRT_COUNT];
+
 
 #define gl_FragColor fragData[0]
 #define gl_FragData fragData

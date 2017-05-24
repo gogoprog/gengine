@@ -21,6 +21,7 @@ void VS()
     #ifdef VERTEXCOLOR
         vColor = iColor;
     #endif
+
 }
 
 void PS()
