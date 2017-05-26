@@ -2,6 +2,17 @@ package gengine.components;
 
 import gengine.math.*;
 
+@:native('Module.BiasParameters')
+extern class BiasParameters
+{
+    public var constantBias:Float;
+    public var slopeScaledBias:Float;
+    public var normalOffset:Float;
+
+    @:selfCall
+    public function new(constantBias:Float, slopeScaledBias:Float, normalOffset:Float);
+}
+
 class Light extends UrhoComponent
 {
     public function new()
@@ -25,5 +36,10 @@ class Light extends UrhoComponent
     public inline function setCastShadows(castShadows:Bool)
     {
         this.object.setCastShadows(castShadows);
+    }
+
+    public inline function setShadowBias(biasParameters:BiasParameters)
+    {
+        this.object.setShadowBias(biasParameters);
     }
 }

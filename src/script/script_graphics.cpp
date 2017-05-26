@@ -90,11 +90,19 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("addAnimationState", &AnimatedModel::AddAnimationState)
         ;
 
+    embindcefv8::Class<BiasParameters>("BiasParameters")
+        .constructor<float, float, float>()
+        .property("constantBias", &BiasParameters::constantBias_)
+        .property("slopeScaledBias", &BiasParameters::slopeScaledBias_)
+        .property("normalOffset", &BiasParameters::normalOffset_)
+        ;
+
     embindcefv8::Class<Light, Component>("Light")
         .constructor<Context*>()
         .method("setLightType", &Light::SetLightType)
         .method("setColor", &Light::SetColor)
         .method("setCastShadows", static_cast<void (Light::*)(bool)>(&Light::SetCastShadows))
+        .method("setShadowBias", &Light::SetShadowBias)
         ;
 
     embindcefv8::Class<Terrain, Component>("Terrain")
