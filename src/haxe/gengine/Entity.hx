@@ -217,4 +217,14 @@ class Entity extends ash.core.Entity
 
         this.node.lookAt(position, upVector, transformSpace);
     }
+
+    public inline function translate(delta:Vector3, ?transformSpace:Int = 0)
+    {
+        this.node.translate(delta, transformSpace);
+    }
+
+    public inline function translate2D(delta:Vector2, ?transformSpace:Int = 0)
+    {
+        this.node.translate2D(delta, transformSpace);
+    }
 }

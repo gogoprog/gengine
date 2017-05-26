@@ -54,6 +54,8 @@ EMBINDCEFV8_BINDINGS(scene)
         .method("yaw", &Node::Yaw)
         .method("pitch", &Node::Pitch)
         .method("lookAt", &Node::LookAt)
+        .method("translate", &Node::Translate)
+        .method("translate2D", &Node::Translate2D)
         .method("addRef", static_cast<void(Node::*)()>(&Node::AddRef))
         ;
 
