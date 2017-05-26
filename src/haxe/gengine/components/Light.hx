@@ -5,12 +5,15 @@ import gengine.math.*;
 @:native('Module.BiasParameters')
 extern class BiasParameters
 {
-    public var constantBias:Float;
-    public var slopeScaledBias:Float;
-    public var normalOffset:Float;
-
     @:selfCall
     public function new(constantBias:Float, slopeScaledBias:Float, normalOffset:Float);
+}
+
+@:native('Module.CascadeParameters')
+extern class CascadeParameters
+{
+    @:selfCall
+    public function new(split1:Float, split2:Float, split3:Float, split4:Float, fadeStart:Float, biasAutoAdjust:Float);
 }
 
 class Light extends UrhoComponent
@@ -41,5 +44,15 @@ class Light extends UrhoComponent
     public inline function setShadowBias(biasParameters:BiasParameters)
     {
         this.object.setShadowBias(biasParameters);
+    }
+
+    public inline function setShadowCascade(cascadeParameters:CascadeParameters)
+    {
+        this.object.setShadowCascade(cascadeParameters);
+    }
+
+    public inline function setSpecularIntensity(intensity:Float)
+    {
+        this.object.setSpecularIntensity(intensity);
     }
 }

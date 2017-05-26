@@ -97,12 +97,18 @@ EMBINDCEFV8_BINDINGS(graphics)
         .property("normalOffset", &BiasParameters::normalOffset_)
         ;
 
+    embindcefv8::Class<CascadeParameters>("CascadeParameters")
+        .constructor<float, float, float, float, float, float>()
+        ;
+
     embindcefv8::Class<Light, Component>("Light")
         .constructor<Context*>()
         .method("setLightType", &Light::SetLightType)
         .method("setColor", &Light::SetColor)
         .method("setCastShadows", static_cast<void (Light::*)(bool)>(&Light::SetCastShadows))
         .method("setShadowBias", &Light::SetShadowBias)
+        .method("setShadowCascade", &Light::SetShadowCascade)
+        .method("setSpecularIntensity", &Light::SetSpecularIntensity)
         ;
 
     embindcefv8::Class<Terrain, Component>("Terrain")
