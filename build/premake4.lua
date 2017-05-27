@@ -49,7 +49,7 @@ solution "gengine"
         if os.is("linux") then
             defines { "_LINUX" }
             flags { "Cxx11" }
-            buildoptions { "-Wno-error=unused-variable -Wno-error=unused-parameter" }
+            buildoptions { "-Wno-error=unused-variable -Wno-error=unused-parameter -Wno-strict-aliasing -Wno-sign-compare" }
             linkoptions { "-Wl,-rpath=../deps/linux/lib64/"}
         elseif os.is("windows") then
             defines { "_WINDOWS", "NOMINMAX" }
