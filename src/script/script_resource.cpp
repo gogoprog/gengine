@@ -14,7 +14,7 @@
 using namespace Urho3D;
 
 EMBINDCEFV8_DECLARE_STRING(String, CString);
-EMBINDCEFV8_DECLARE_CLASS(ResourceCache);
+EMBINDCEFV8_DECLARE_CLASS(ResourceCache, void);
 
 EMBINDCEFV8_BINDINGS(resource)
 {

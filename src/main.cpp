@@ -11,7 +11,7 @@ gengine::application::App
 using namespace Urho3D;
 
 EMBINDCEFV8_DECLARE_STRING(String, CString)
-EMBINDCEFV8_DECLARE_CLASS(gengine::application::App)
+EMBINDCEFV8_DECLARE_CLASS(gengine::application::App, void)
 
 int main(int argc, char *argv[])
 {

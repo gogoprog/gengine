@@ -17,11 +17,17 @@
 
 using namespace Urho3D;
 
-EMBINDCEFV8_DECLARE_CLASS(Context);
-EMBINDCEFV8_DECLARE_CLASS(Renderer);
-EMBINDCEFV8_DECLARE_CLASS(Scene);
-EMBINDCEFV8_DECLARE_CLASS(Image);
-EMBINDCEFV8_DECLARE_CLASS(Camera);
+EMBINDCEFV8_DECLARE_CLASS(Component, void);
+EMBINDCEFV8_DECLARE_CLASS(Context, void);
+EMBINDCEFV8_DECLARE_CLASS(Renderer, void);
+EMBINDCEFV8_DECLARE_CLASS(Scene, void);
+EMBINDCEFV8_DECLARE_CLASS(Image, void);
+EMBINDCEFV8_DECLARE_CLASS(Camera, Component);
+EMBINDCEFV8_DECLARE_CLASS(Light, Component);
+EMBINDCEFV8_DECLARE_CLASS(Terrain, Component);
+EMBINDCEFV8_DECLARE_CLASS(Skybox, Component);
+EMBINDCEFV8_DECLARE_CLASS(StaticModel, Component);
+EMBINDCEFV8_DECLARE_CLASS(AnimatedModel, StaticModel);
 EMBINDCEFV8_DECLARE_ENUM(LightType);
 
 EMBINDCEFV8_BINDINGS(graphics)
@@ -48,7 +54,7 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("setCamera", &Viewport::SetCamera)
         ;
 
-    embindcefv8::Class<Camera, Component>("Camera")
+    embindcefv8::Class<Camera>("Camera")
         .constructor<Context*>()
         .method("setOrthoSize", static_cast<void (Camera::*)(const Vector2 &)>(&Camera::SetOrthoSize))
         .method("setOrthographic", &Camera::SetOrthographic)
@@ -74,7 +80,7 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("setViewport", &Renderer::SetViewport)
         ;
 
-    embindcefv8::Class<StaticModel, Component>("StaticModel")
+    embindcefv8::Class<StaticModel>("StaticModel")
         .constructor<Context*>()
         .method("setModel", &StaticModel::SetModel)
         .method("getModel", &StaticModel::GetModel)
@@ -82,11 +88,11 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("setCastShadows", static_cast<void (StaticModel::*)(bool)>(&StaticModel::SetCastShadows))
         ;
 
-    embindcefv8::Class<AnimatedModel, Component>("AnimatedModel")
+    embindcefv8::Class<AnimatedModel>("AnimatedModel")
         .constructor<Context*>()
         .method("setModel", static_cast<void (AnimatedModel::*)(Model *, bool)>(&AnimatedModel::SetModel))
-        .method("setMaterial", static_cast<void (AnimatedModel::*)(Material *)>(&AnimatedModel::SetMaterial))
-        .method("setCastShadows", static_cast<void (AnimatedModel::*)(bool)>(&AnimatedModel::SetCastShadows))
+        //.method("setMaterial", static_cast<void (AnimatedModel::*)(Material *)>(&AnimatedModel::SetMaterial))
+        //.method("setCastShadows", static_cast<void (AnimatedModel::*)(bool)>(&AnimatedModel::SetCastShadows))
         .method("getAnimationState", static_cast<AnimationState* (AnimatedModel::*)(Animation *) const>(&AnimatedModel::GetAnimationState))
         .method("getAnimationStateByIndex", static_cast<AnimationState* (AnimatedModel::*)(unsigned) const>(&AnimatedModel::GetAnimationState))
         .method("addAnimationState", &AnimatedModel::AddAnimationState)
@@ -103,7 +109,7 @@ EMBINDCEFV8_BINDINGS(graphics)
         .constructor<float, float, float, float, float, float>()
         ;
 
-    embindcefv8::Class<Light, Component>("Light")
+    embindcefv8::Class<Light>("Light")
         .constructor<Context*>()
         .method("setLightType", &Light::SetLightType)
         .method("setColor", &Light::SetColor)
@@ -113,7 +119,7 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("setSpecularIntensity", &Light::SetSpecularIntensity)
         ;
 
-    embindcefv8::Class<Terrain, Component>("Terrain")
+    embindcefv8::Class<Terrain>("Terrain")
         .constructor<Context*>()
         .method("setPatchSize", &Terrain::SetPatchSize)
         .method("setSpacing", &Terrain::SetSpacing)
@@ -125,7 +131,7 @@ EMBINDCEFV8_BINDINGS(graphics)
         .method("getHeight", &Terrain::GetHeight)
         ;
 
-    embindcefv8::Class<Skybox, Component>("Skybox")
+    embindcefv8::Class<Skybox>("Skybox")
         .constructor<Context*>()
         .method("setModel", static_cast<void (Skybox::*)(Model *)>(&Skybox::SetModel))
         .method("setMaterial", static_cast<void (Skybox::*)(Material *)>(&Skybox::SetMaterial))

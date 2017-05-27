@@ -4,7 +4,7 @@
 
 using namespace Urho3D;
 
-EMBINDCEFV8_DECLARE_CLASS(Input)
+EMBINDCEFV8_DECLARE_CLASS(Input, void);
 
 EMBINDCEFV8_BINDINGS(input)
 {

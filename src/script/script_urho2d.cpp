@@ -21,9 +21,15 @@
 using namespace Urho3D;
 
 EMBINDCEFV8_DECLARE_STRING(String, CString);
-EMBINDCEFV8_DECLARE_CLASS(Context);
-EMBINDCEFV8_DECLARE_CLASS(Component);
-EMBINDCEFV8_DECLARE_CLASS(RigidBody2D);
+EMBINDCEFV8_DECLARE_CLASS(Context, void);
+EMBINDCEFV8_DECLARE_CLASS(Component, void);
+EMBINDCEFV8_DECLARE_CLASS(RigidBody2D, Component);
+EMBINDCEFV8_DECLARE_CLASS(StaticSprite2D, Component);
+EMBINDCEFV8_DECLARE_CLASS(AnimatedSprite2D, Component);
+EMBINDCEFV8_DECLARE_CLASS(CollisionBox2D, Component);
+EMBINDCEFV8_DECLARE_CLASS(CollisionCircle2D, Component);
+EMBINDCEFV8_DECLARE_CLASS(ParticleEmitter2D, Component);
+EMBINDCEFV8_DECLARE_CLASS(TileMap2D, Component);
 EMBINDCEFV8_DECLARE_ENUM(LoopMode2D);
 EMBINDCEFV8_DECLARE_ENUM(BlendMode);
 EMBINDCEFV8_DECLARE_ENUM(BodyType2D);
@@ -43,7 +49,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
     embindcefv8::Class<AnimationSet2D>("AnimationSet2D")
         ;
 
-    embindcefv8::Class<StaticSprite2D, Component>("StaticSprite2D")
+    embindcefv8::Class<StaticSprite2D>("StaticSprite2D")
         .constructor<Context*>()
         .method("setSprite", &StaticSprite2D::SetSprite)
         .method("setEnabled", static_cast<void (StaticSprite2D::*)(bool)>(&StaticSprite2D::SetEnabled))
@@ -67,7 +73,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("getOrderInLayer", static_cast<int (StaticSprite2D::*)() const>(&StaticSprite2D::GetOrderInLayer))
         ;
 
-    embindcefv8::Class<AnimatedSprite2D, Component>("AnimatedSprite2D")
+    embindcefv8::Class<AnimatedSprite2D>("AnimatedSprite2D")
         .constructor<Context*>()
         .method("setAnimation", &AnimatedSprite2D::SetAnimation)
         .method("setAnimationSet", &AnimatedSprite2D::SetAnimationSet)
@@ -84,7 +90,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("setAlpha", static_cast<void (AnimatedSprite2D::*)(float)>(&AnimatedSprite2D::SetAlpha))
         ;
 
-    embindcefv8::Class<RigidBody2D, Component>("RigidBody2D")
+    embindcefv8::Class<RigidBody2D>("RigidBody2D")
         .constructor<Context*>()
         .method("setBodyType", &RigidBody2D::SetBodyType)
         .method("setMass", &RigidBody2D::SetMass)
@@ -114,7 +120,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
         // .property("body", &PhysicsRaycastResult2D::body_) // :todo: support for emscripten
         ;
 
-    embindcefv8::Class<PhysicsWorld2D, Component>("PhysicsWorld2D")
+    embindcefv8::Class<PhysicsWorld2D>("PhysicsWorld2D")
         .constructor<Context*>()
         .method("setGravity", &PhysicsWorld2D::SetGravity)
         .method("setContinuousPhysics", &PhysicsWorld2D::SetContinuousPhysics)
@@ -124,7 +130,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("getRigidBody", static_cast<RigidBody2D* (PhysicsWorld2D::*)(const Vector2&, unsigned)>(&PhysicsWorld2D::GetRigidBody))
         ;
 
-    embindcefv8::Class<CollisionBox2D, Component>("CollisionBox2D")
+    embindcefv8::Class<CollisionBox2D>("CollisionBox2D")
         .constructor<Context*>()
         .method("setSize", static_cast<void (CollisionBox2D::*)(const Vector2&)>(&CollisionBox2D::SetSize))
         .method("setCenter", static_cast<void (CollisionBox2D::*)(const Vector2&)>(&CollisionBox2D::SetCenter))
@@ -138,7 +144,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
         .method("setGroupIndex", static_cast<void (CollisionBox2D::*)(int)>(&CollisionBox2D::SetGroupIndex))
         ;
 
-    embindcefv8::Class<CollisionCircle2D, Component>("CollisionCircle2D")
+    embindcefv8::Class<CollisionCircle2D>("CollisionCircle2D")
         .constructor<Context*>()
         .method("setRadius", &CollisionCircle2D::SetRadius)
         .method("setCenter", static_cast<void (CollisionCircle2D::*)(const Vector2&)>(&CollisionCircle2D::SetCenter))
@@ -154,7 +160,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
     embindcefv8::Class<ParticleEffect2D>("ParticleEffect2D")
         ;
 
-    embindcefv8::Class<ParticleEmitter2D, Component>("ParticleEmitter2D")
+    embindcefv8::Class<ParticleEmitter2D>("ParticleEmitter2D")
         .constructor<Context*>()
         .method("setEffect", &ParticleEmitter2D::SetEffect)
         .method("setSprite", &ParticleEmitter2D::SetSprite)
@@ -169,7 +175,7 @@ EMBINDCEFV8_BINDINGS(urho2d)
     embindcefv8::Class<TmxFile2D>("TmxFile2D")
         ;
 
-    embindcefv8::Class<TileMap2D, Component>("TileMap2D")
+    embindcefv8::Class<TileMap2D>("TileMap2D")
         .constructor<Context*>()
         .method("setTmxFile", &TileMap2D::SetTmxFile)
         ;
