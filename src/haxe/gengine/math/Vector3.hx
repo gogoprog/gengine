@@ -44,4 +44,13 @@ abstract Vector3(Vector3Base) to Vector3Base from Vector3Base
     {
         return new Vector3(a.x - b.x, a.y - b.y, a.z - b.z);
     }
+
+    public static var ZERO = new Vector3(0, 0, 0);
+    public static var LEFT = new Vector3(-1.0, 0.0, 0.0);
+    public static var RIGHT = new Vector3(1.0, 0.0, 0.0);
+    public static var UP = new Vector3(0.0, 1.0, 0.0);
+    public static var DOWN = new Vector3(0.0, -1.0, 0.0);
+    public static var FORWARD = new Vector3(0.0, 0.0, 1.0);
+    public static var BACK = new Vector3(0.0, 0.0, -1.0);
+    public static var ONE = new Vector3(1.0, 1.0, 1.0);
 }

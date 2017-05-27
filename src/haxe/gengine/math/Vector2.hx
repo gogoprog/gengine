@@ -42,4 +42,11 @@ abstract Vector2(Vector2Base) to Vector2Base from Vector2Base
     {
         return new Vector2(a.x - b.x, a.y - b.y);
     }
+
+    public static var ZERO = new Vector2(0, 0);
+    public static var LEFT = new Vector2(-1.0, 0.0);
+    public static var RIGHT = new Vector2(1.0, 0.0);
+    public static var UP = new Vector2(0.0, 1.0);
+    public static var DOWN = new Vector2(0.0, -1.0);
+    public static var ONE = new Vector2(1.0, 1.0);
 }
