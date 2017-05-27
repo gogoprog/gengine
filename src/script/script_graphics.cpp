@@ -76,6 +76,7 @@ EMBINDCEFV8_BINDINGS(graphics)
     embindcefv8::Class<StaticModel, Component>("StaticModel")
         .constructor<Context*>()
         .method("setModel", &StaticModel::SetModel)
+        .method("getModel", &StaticModel::GetModel)
         .method("setMaterial", &StaticModel::SetMaterial)
         .method("setCastShadows", static_cast<void (StaticModel::*)(bool)>(&StaticModel::SetCastShadows))
         ;

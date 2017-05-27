@@ -4,6 +4,7 @@
 #include <Urho3D/Math/Vector2.h>
 #include <Urho3D/Math/Rect.h>
 #include <Urho3D/Math/Color.h>
+#include <Urho3D/Math/Quaternion.h>
 
 using namespace Urho3D;
 
@@ -82,6 +83,14 @@ EMBINDCEFV8_BINDINGS(math)
         .property("g", &Color::g_)
         .property("b", &Color::b_)
         .property("a", &Color::a_)
+        ;
+
+    embindcefv8::ValueObject<Quaternion>("Quaternion")
+        .constructor<float, float, float, float>()
+        .property("w", &Quaternion::w_)
+        .property("x", &Quaternion::x_)
+        .property("y", &Quaternion::y_)
+        .property("z", &Quaternion::z_)
         ;
 
     embindcefv8::Class<Maths>("Maths")
