@@ -1,5 +1,6 @@
 #include "script.h"
 
+#include <Urho3D/Core/Context.h>
 #include <Urho3D/Physics/PhysicsWorld.h>
 #include <Urho3D/Physics/CollisionShape.h>
 #include <Urho3D/Physics/RigidBody.h>

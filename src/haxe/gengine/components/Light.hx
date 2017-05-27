@@ -5,14 +5,12 @@ import gengine.math.*;
 @:native('Module.BiasParameters')
 extern class BiasParameters
 {
-    @:selfCall
     public function new(constantBias:Float, slopeScaledBias:Float, normalOffset:Float);
 }
 
 @:native('Module.CascadeParameters')
 extern class CascadeParameters
 {
-    @:selfCall
     public function new(split1:Float, split2:Float, split3:Float, split4:Float, fadeStart:Float, biasAutoAdjust:Float);
 }
 
