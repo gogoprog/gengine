@@ -7,21 +7,24 @@
 
 using namespace Urho3D;
 
-EMBINDCEFV8_DECLARE_CLASS(Context);
-EMBINDCEFV8_DECLARE_CLASS(Component);
+EMBINDCEFV8_DECLARE_CLASS(Context, void);
+EMBINDCEFV8_DECLARE_CLASS(Component, void);
 EMBINDCEFV8_DECLARE_STRING(String, CString);
 EMBINDCEFV8_DECLARE_ENUM(CollisionEventMode);
+EMBINDCEFV8_DECLARE_CLASS(RigidBody, Component);
+EMBINDCEFV8_DECLARE_CLASS(CollisionShape, Component);
+EMBINDCEFV8_DECLARE_CLASS(PhysicsWorld, Component);
 
 EMBINDCEFV8_BINDINGS(physics)
 {
-    embindcefv8::Class<RigidBody, Component>("RigidBody")
+    embindcefv8::Class<RigidBody>("RigidBody")
         .constructor<Context*>()
         .method("setMass", &RigidBody::SetMass)
         .method("setFriction", &RigidBody::SetFriction)
         .method("setCollisionEventMode", &RigidBody::SetCollisionEventMode)
         ;
 
-    embindcefv8::Class<CollisionShape, Component>("CollisionShape")
+    embindcefv8::Class<CollisionShape>("CollisionShape")
         .constructor<Context*>()
         .method("setBox", &CollisionShape::SetBox)
         .method("setSphere", &CollisionShape::SetSphere)
@@ -34,7 +37,7 @@ EMBINDCEFV8_BINDINGS(physics)
         .method("setTerrain", &CollisionShape::SetTerrain)
         ;
 
-    embindcefv8::Class<PhysicsWorld, Component>("PhysicsWorld")
+    embindcefv8::Class<PhysicsWorld>("PhysicsWorld")
         .constructor<Context*>()
         .method("setGravity", &PhysicsWorld::SetGravity)
         ;
