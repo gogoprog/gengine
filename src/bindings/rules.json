@@ -1,0 +1,20 @@
+[
+    {
+        "files": [
+            "*/Urho3D/*"
+        ],
+        "base": "Component",
+        "output":[
+            {
+                "template": "templates/component.hx.mustache",
+                "rule": "file-per-class",
+                "path": "generated/haxe/gengine/components/{{class_name}}.hx"
+            },
+            {
+                "template": "templates/bindings.cpp.mustache",
+                "rule": "single-file",
+                "path": "generated/cpp/bindings.cpp"
+            }
+        ]
+    }
+]

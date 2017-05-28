@@ -1,0 +1,16 @@
+#include <todo>
+
+{{#classes}}
+EMBINDCEFV8_DECLARE_CLASS({{class_name}}, {{class_base_name}});
+{{/classes}}
+
+EMBINDCEFV8_BINDINGS(components)
+{
+    {{#classes}}
+    embindcefv8::Class<{{class_name}}>("{{class_name}}")
+        {{#methods}}
+        .method("{{method_name_camel_case}}", &{{class_name}}::{{method_name}})
+        {{/methods}}
+        ;
+    {{/classes}}
+}
