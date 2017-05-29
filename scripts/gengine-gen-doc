@@ -1,0 +1,6 @@
+#!/bin/bash
+
+pushd ${GENGINE}/src/doc
+haxe generate.hxml
+haxelib run dox -i /tmp/gengine-doc-output.xml --title "gengine API documentation" -D themeColor 0xF1EED9 -D website "//gengine.net" -o ../../docs
+popd
