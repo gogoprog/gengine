@@ -24,18 +24,22 @@ class ExtractedArgument(object):
     def __init__(self, name, _type):
         self._name = name
         self._type = _type
+        self._last = False
 
     def argument_name(self):
         return self._name
-    
+
     def argument_type(self):
         return self._type
+
+    def comma(self):
+        return ', ' if not self._last else ''
 
 class ExtractedMethod(object):
     def __init__(self, name):
         self._name = name
         self._result_type = None
-        self.arguments = []
+        self._arguments = []
 
     def method_name(self):
         return self._name
@@ -48,6 +52,14 @@ class ExtractedMethod(object):
 
     def result_type_pascal_case(self):
         return self._result_type[:1].upper() + self._result_type[1:]
+
+    def arguments(self):
+        return self._arguments
+
+    def setup(self):
+        l = len(self._arguments)
+        if l > 0:
+            self._arguments[l - 1]._last = True
 
 class ExtractedClass(object):
     def __init__(self, name):
@@ -142,8 +154,9 @@ def process_method_cursor(cursor, extracted_class):
 
     for child_cursor in cursor.get_children():
         if child_cursor.kind == CursorKind.PARM_DECL:
-            extracted_method.arguments.append(ExtractedArgument(child_cursor.spelling, get_type_name(child_cursor.type)))
+            extracted_method._arguments.append(ExtractedArgument(child_cursor.spelling, get_type_name(child_cursor.type)))
 
+    extracted_method.setup()
     extracted_class.methods.append(extracted_method)
 
 def get_rule_from_cursor(cursor):
