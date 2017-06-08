@@ -8,7 +8,11 @@
             {
                 "template": "templates/component.hx.mustache",
                 "rule": "file-per-class",
-                "path": "generated/haxe/gengine/components/{{class_name}}.hx"
+                "path": "generated/haxe/gengine/components/{{class_name}}.hx",
+                "types":
+                {
+                    "unsigned int" : "Int"
+                }
             },
             {
                 "template": "templates/bindings.cpp.mustache",

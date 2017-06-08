@@ -30,6 +30,11 @@ class ExtractedArgument(object):
         return self._name
 
     def argument_type(self):
+        if 'types' in context.current_output:
+            types = context.current_output['types']
+            if self._type in types:
+                return types[self._type]
+
         return self._type
 
     def comma(self):
@@ -51,6 +56,12 @@ class ExtractedMethod(object):
         return self._result_type
 
     def result_type_pascal_case(self):
+        rtype = self._result_type
+        if 'types' in context.current_output:
+            types = context.current_output['types']
+            if rtype in types:
+                return types[rtype]
+
         return self._result_type[:1].upper() + self._result_type[1:]
 
     def arguments(self):
@@ -194,10 +205,12 @@ def begin_generation(rule):
 def end_generation(rule):
     for output in rule['output']:
         if output['rule'] == 'single-file':
+            context.current_output = output
             print(pystache_renderer.render(output['parsed-template'], output['extraction']))
 
 def generate_class(rule, output, extracted_class):
     if output['rule'] == 'file-per-class':
+        context.current_output = output
         print(pystache_renderer.render(output['parsed-template'], extracted_class))
     else:
         output['extraction'].add_class(extracted_class)
