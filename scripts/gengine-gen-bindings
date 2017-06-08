@@ -206,14 +206,28 @@ def end_generation(rule):
     for output in rule['output']:
         if output['rule'] == 'single-file':
             context.current_output = output
-            print(pystache_renderer.render(output['parsed-template'], output['extraction']))
+            path = bindings_path + output['path']
+            ensure_file_path(path)
+            with open(path, "w") as f:
+                f.write(pystache_renderer.render(output['parsed-template'], output['extraction']))
 
 def generate_class(rule, output, extracted_class):
     if output['rule'] == 'file-per-class':
         context.current_output = output
-        print(pystache_renderer.render(output['parsed-template'], extracted_class))
+        path = bindings_path + pystache_renderer.render(output['path'], extracted_class)
+        ensure_file_path(path)
+        with open(path, "w") as f:
+            f.write(pystache_renderer.render(output['parsed-template'], extracted_class))
     else:
         output['extraction'].add_class(extracted_class)
+
+def ensure_file_path(filename):
+    if not os.path.exists(os.path.dirname(filename)):
+        try:
+            os.makedirs(os.path.dirname(filename))
+        except OSError as exc:
+            if exc.errno != errno.EEXIST:
+                raise
 
 def main():
     global context
