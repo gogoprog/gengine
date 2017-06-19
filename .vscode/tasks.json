@@ -87,6 +87,10 @@
                     "message": 5
                 }
             }
+        },
+        {
+            "taskName": "gen-bindings",
+            "command": "gengine-gen-bindings"
         }
     ]
 }
