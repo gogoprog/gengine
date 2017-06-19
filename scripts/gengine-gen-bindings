@@ -56,6 +56,9 @@ class ExtractedMethod(object):
     def result_type(self):
         return self._result_type
 
+    def result_full_type(self):
+        return self._result_full_type
+
     def result_type_pascal_case(self):
         rtype = self._result_type
         if 'types' in context.current_output:
@@ -166,6 +169,8 @@ def get_type_name(input_type):
 def process_method_cursor(cursor, extracted_class):
     extracted_method = ExtractedMethod(cursor.spelling)
     extracted_method._result_type = get_type_name(cursor.result_type)
+    extracted_method._result_full_type = cursor.result_type.spelling
+
     extracted_method.const_qualifier = ' const' if cursor.is_const_method() else ''
 
     for child_cursor in cursor.get_children():
