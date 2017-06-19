@@ -21,9 +21,10 @@ gengine_path = os.environ['GENGINE']
 bindings_path = gengine_path + "/src/bindings/"
 
 class ExtractedArgument(object):
-    def __init__(self, name, _type):
+    def __init__(self, name, _type, _full_type):
         self._name = name
         self._type = _type
+        self._full_type = _full_type
         self._last = False
 
     def argument_name(self):
@@ -36,6 +37,9 @@ class ExtractedArgument(object):
                 return types[self._type]
 
         return self._type
+
+    def argument_full_type(self):
+        return self._full_type
 
     def comma(self):
         return ', ' if not self._last else ''
@@ -175,7 +179,7 @@ def process_method_cursor(cursor, extracted_class):
 
     for child_cursor in cursor.get_children():
         if child_cursor.kind == CursorKind.PARM_DECL:
-            extracted_method._arguments.append(ExtractedArgument(child_cursor.spelling, get_type_name(child_cursor.type)))
+            extracted_method._arguments.append(ExtractedArgument(child_cursor.spelling, get_type_name(child_cursor.type), child_cursor.type.spelling))
 
     extracted_method.setup()
     extracted_class.methods.append(extracted_method)
