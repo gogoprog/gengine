@@ -140,7 +140,7 @@ def process_class_cursor(cursor):
     for child_cursor in cursor.get_children():
         if child_cursor.access_specifier == AccessSpecifier.PUBLIC:
             kind = child_cursor.kind
-            if kind == CursorKind.CXX_METHOD:
+            if kind == CursorKind.CXX_METHOD and not child_cursor.is_static_method():
                 process_method_cursor(child_cursor, extracted_class)
         if child_cursor.kind == CursorKind.CXX_BASE_SPECIFIER:
             definition = child_cursor.get_definition()

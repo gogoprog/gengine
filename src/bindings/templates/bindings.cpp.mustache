@@ -1,5 +1,10 @@
 #include "embindcefv8.h"
 
+#include <Urho3D/Core/Context.h>
+#include <Urho3D/Graphics/StaticModel.h>
+
+using namespace Urho3D;
+
 {{#classes}}
 EMBINDCEFV8_DECLARE_CLASS({{class_name}}, {{class_base_name}});
 {{/classes}}
