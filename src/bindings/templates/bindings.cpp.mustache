@@ -17,7 +17,7 @@ EMBINDCEFV8_BINDINGS(components)
     embindcefv8::Class<{{class_name}}>("{{class_name}}")
         .constructor<Context*>()
         {{#methods}}
-        .method("{{method_name_camel_case}}", static_cast<{{{result_full_type}}} ({{class_name}}::*)({{#arguments}}{{{argument_full_type}}}{{comma}}{{/arguments}}){{method_const_qualifier}}>(&{{class_name}}::{{method_name}}))
+        .method("{{method_other_name_camel_case}}", static_cast<{{{result_full_type}}} ({{class_name}}::*)({{#arguments}}{{{argument_full_type}}}{{comma}}{{/arguments}}){{method_const_qualifier}}>(&{{class_name}}::{{method_name}}))
         {{/methods}}
         ;
     {{/classes}}

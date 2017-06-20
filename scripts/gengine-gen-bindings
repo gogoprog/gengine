@@ -47,6 +47,7 @@ class ExtractedArgument(object):
 class ExtractedMethod(object):
     def __init__(self, name):
         self._name = name
+        self._other_name = name
         self._result_type = None
         self._arguments = []
         self.const_qualifier = ""
@@ -54,8 +55,14 @@ class ExtractedMethod(object):
     def method_name(self):
         return self._name
 
+    def method_other_name(self):
+        return self._other_name
+
     def method_name_camel_case(self):
         return self._name[:1].lower() + self._name[1:]
+
+    def method_other_name_camel_case(self):
+        return self._other_name[:1].lower() + self._other_name[1:]
 
     def result_type(self):
         return self._result_type
@@ -113,6 +120,18 @@ class ExtractedClass(object):
     def methods(self):
         return self._methods
 
+    def setup(self):
+        mlen = len(self.methods)
+        for i in range(0, mlen):
+            dup = 1
+            for j in range(0, mlen):
+                if i != j:
+                    if self.methods[i]._other_name == self.methods[j]._other_name:
+                        print("Duplicate: " + self.methods[i]._name)
+                        self.methods[j]._other_name = self.methods[i]._name + str(dup)
+                        dup += 1
+
+
 class Extraction(object):
     def __init__(self):
         self._classes = []
@@ -169,6 +188,7 @@ def process_class_cursor(cursor):
             definition = child_cursor.get_definition()
             extracted_class.base = definition.spelling
 
+    extracted_class.setup()
     rule = context.current_rule
     for output in rule['output']:
         generate_class(rule, output, extracted_class)
