@@ -26,7 +26,6 @@ EMBINDCEFV8_DECLARE_CLASS(Camera, Component);
 EMBINDCEFV8_DECLARE_CLASS(Light, Component);
 EMBINDCEFV8_DECLARE_CLASS(Terrain, Component);
 EMBINDCEFV8_DECLARE_CLASS(Skybox, Component);
-EMBINDCEFV8_DECLARE_CLASS(StaticModel, Component);
 EMBINDCEFV8_DECLARE_CLASS(AnimatedModel, StaticModel);
 EMBINDCEFV8_DECLARE_ENUM(LightType);
 
@@ -78,14 +77,6 @@ EMBINDCEFV8_BINDINGS(graphics)
     embindcefv8::Class<Renderer>("Renderer")
         .method("getDefaultZone", &Renderer::GetDefaultZone)
         .method("setViewport", &Renderer::SetViewport)
-        ;
-
-    embindcefv8::Class<StaticModel>("StaticModel")
-        .constructor<Context*>()
-        .method("setModel", &StaticModel::SetModel)
-        .method("getModel", &StaticModel::GetModel)
-        .method("setMaterial", &StaticModel::SetMaterial)
-        .method("setCastShadows", static_cast<void (StaticModel::*)(bool)>(&StaticModel::SetCastShadows))
         ;
 
     embindcefv8::Class<AnimatedModel>("AnimatedModel")
