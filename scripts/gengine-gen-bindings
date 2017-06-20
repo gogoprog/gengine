@@ -83,6 +83,18 @@ class ExtractedMethod(object):
     def method_const_qualifier(self):
         return self.const_qualifier
 
+    def is_valid(self):
+        if 'excluded-types' in context.current_rule:
+            excludes = context.current_rule['excluded-types']
+            if self._result_type in excludes:
+                return False
+
+            for arg in self._arguments:
+                if arg._type in excludes:
+                    return False
+
+        return True
+
 class ExtractedClass(object):
     def __init__(self, name):
         self._name = name
@@ -182,7 +194,8 @@ def process_method_cursor(cursor, extracted_class):
             extracted_method._arguments.append(ExtractedArgument(child_cursor.spelling, get_type_name(child_cursor.type), child_cursor.type.spelling))
 
     extracted_method.setup()
-    extracted_class.methods.append(extracted_method)
+    if extracted_method.is_valid():
+        extracted_class.methods.append(extracted_method)
 
 def get_rule_from_cursor(cursor):
     if cursor.location.file:
