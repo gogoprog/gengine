@@ -22,7 +22,9 @@
         ],
         "excluded-types":[
             "RayOctreeQuery",
-            "Geometry"
+            "Geometry",
+            "FrameInfo",
+            "UpdateGeometryType"
         ]
     }
 ]
