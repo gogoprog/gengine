@@ -33,7 +33,8 @@
             "RayOctreeQuery",
             "Geometry",
             "FrameInfo",
-            "UpdateGeometryType"
+            "UpdateGeometryType",
+            "OctreeQuery"
         ]
     }
 ]
