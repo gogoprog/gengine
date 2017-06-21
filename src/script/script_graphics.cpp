@@ -27,8 +27,6 @@ EMBINDCEFV8_DECLARE_CLASS(Light, Component);
 EMBINDCEFV8_DECLARE_CLASS(Terrain, Component);
 EMBINDCEFV8_DECLARE_CLASS(Skybox, Component);
 EMBINDCEFV8_DECLARE_CLASS(Drawable, void);
-EMBINDCEFV8_DECLARE_CLASS(StaticModel, Drawable);
-EMBINDCEFV8_DECLARE_CLASS(AnimatedModel, StaticModel);
 EMBINDCEFV8_DECLARE_ENUM(LightType);
 
 EMBINDCEFV8_BINDINGS(graphics)
@@ -79,16 +77,6 @@ EMBINDCEFV8_BINDINGS(graphics)
     embindcefv8::Class<Renderer>("Renderer")
         .method("getDefaultZone", &Renderer::GetDefaultZone)
         .method("setViewport", &Renderer::SetViewport)
-        ;
-
-    embindcefv8::Class<AnimatedModel>("AnimatedModel")
-        .constructor<Context*>()
-        .method("setModel", static_cast<void (AnimatedModel::*)(Model *, bool)>(&AnimatedModel::SetModel))
-        //.method("setMaterial", static_cast<void (AnimatedModel::*)(Material *)>(&AnimatedModel::SetMaterial))
-        //.method("setCastShadows", static_cast<void (AnimatedModel::*)(bool)>(&AnimatedModel::SetCastShadows))
-        .method("getAnimationState", static_cast<AnimationState* (AnimatedModel::*)(Animation *) const>(&AnimatedModel::GetAnimationState))
-        .method("getAnimationStateByIndex", static_cast<AnimationState* (AnimatedModel::*)(unsigned) const>(&AnimatedModel::GetAnimationState))
-        .method("addAnimationState", &AnimatedModel::AddAnimationState)
         ;
 
     embindcefv8::Class<BiasParameters>("BiasParameters")

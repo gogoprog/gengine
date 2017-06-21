@@ -127,7 +127,6 @@ class ExtractedClass(object):
             for j in range(0, mlen):
                 if i != j:
                     if self.methods[i]._other_name == self.methods[j]._other_name:
-                        print("Duplicate: " + self.methods[i]._name)
                         self.methods[j]._other_name = self.methods[i]._name + str(dup)
                         dup += 1
 
@@ -277,6 +276,7 @@ def ensure_file_path(filename):
                 raise
 
 def main():
+    print("[gengine] Generating bindings...")
     global context
 
     with open(bindings_path + "rules.json") as data_file:
@@ -289,5 +289,7 @@ def main():
 
     for rule in context.rules:
         end_generation(rule)
+
+    print("[gengine] Done!")
 
 main()
