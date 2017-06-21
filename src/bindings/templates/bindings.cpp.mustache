@@ -11,11 +11,15 @@ EMBINDCEFV8_DECLARE_CLASS(Component, void);
 EMBINDCEFV8_DECLARE_CLASS({{class_name}}, {{class_base_name}});
 {{/classes}}
 
+#define NO_CONSTRUCTOR_Drawable
+
 EMBINDCEFV8_BINDINGS(components)
 {
     {{#classes}}
     embindcefv8::Class<{{class_name}}>("{{class_name}}")
+        #ifndef NO_CONSTRUCTOR_{{class_name}}
         .constructor<Context*>()
+        #endif
         {{#methods}}
         .method("{{method_other_name_camel_case}}", static_cast<{{{result_full_type}}} ({{class_name}}::*)({{#arguments}}{{{argument_full_type}}}{{comma}}{{/arguments}}){{method_const_qualifier}}>(&{{class_name}}::{{method_name}}))
         {{/methods}}
