@@ -148,15 +148,17 @@ def clang_default_include():
     reg = re.compile('lib/clang.*/include$')
     return next(line.strip() for line in out.split('\n') if reg.search(line))
 
-def start_process():
+def start_process(rule):
     file_path = bindings_path + "main.cpp"
     index = clang.cindex.Index.create()
 
     compiler_command_line = [
         '-I', clang_default_include(),
-        '-I', gengine_path + "/deps/common/Urho3D/build/linux/release/include",
-        '-I', gengine_path + "/deps/common/Urho3D/build/linux/release/include/Urho3D/ThirdParty"
         ]
+
+    for include_dir in rule['include-dirs']:
+        compiler_command_line.append("-I")
+        compiler_command_line.append(include_dir)
 
     tu = index.parse(file_path,
                      compiler_command_line,
@@ -276,20 +278,19 @@ def ensure_file_path(filename):
                 raise
 
 def main():
-    print("[gengine] Generating bindings...")
+    print("[gengine-gen-bindings] Generating bindings...")
     global context
+    os.chdir(bindings_path)
 
     with open(bindings_path + "rules.json") as data_file:
         context.rules = json.load(data_file)
 
-    for rule in context.rules:
+    for index, rule in enumerate(context.rules):
+        print("[gengine-gen-bindings] Processing rule #" + str(index + 1))
         begin_generation(rule)
-
-    start_process()
-
-    for rule in context.rules:
+        start_process(rule)
         end_generation(rule)
 
-    print("[gengine] Done!")
+    print("[gengine-gen-bindings] Done!")
 
 main()

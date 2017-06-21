@@ -1,5 +1,9 @@
 [
     {
+        "include-dirs": [
+            "../../deps/common/Urho3D/build/linux/release/include",
+            "../../deps/common/Urho3D/build/linux/release/include/Urho3D/ThirdParty"
+        ],
         "files": [
             "*/Urho3D/*"
         ],
