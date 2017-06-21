@@ -4,6 +4,10 @@
 #include <Urho3D/Graphics/StaticModel.h>
 #include <Urho3D/Graphics/AnimatedModel.h>
 
+{{#headers}}
+#include <{{.}}>
+{{/headers}}
+
 using namespace Urho3D;
 
 EMBINDCEFV8_DECLARE_CLASS(Context, void);

@@ -152,7 +152,9 @@ def clang_default_include():
 
 def start_process(rule):
     headers = []
-    for subdir, dirs, files in os.walk(rule['root']):
+    real_root = os.path.realpath(rule['root'])
+    include_relative = os.path.realpath(rule['include-relative'])
+    for subdir, dirs, files in os.walk(real_root):
         for file in files:
             file_name = subdir + os.sep + file
             for file_rule in rule['files']:
@@ -160,14 +162,14 @@ def start_process(rule):
                     if 'excluded-files' in rule:
                         for excluded_file_rule in rule['excluded-files']:
                             if not fnmatch.fnmatch(file_name, excluded_file_rule):
-                                headers.append(file_name)
+                                headers.append(os.path.relpath(os.path.realpath(file_name), include_relative))
                     else:
-                        headers.append(file_name)
+                        headers.append(os.path.relpath(os.path.realpath(file_name), include_relative))
 
     file_path = "/tmp/gen-bindings.cpp"
     out = open(file_path, "wb")
     for header in headers:
-        out.write("#include \"" + os.path.realpath(header) + "\"\n")
+        out.write("#include \"" + header + "\"\n")
     out.write("int main(int argc, char *argv[]) { return EXIT_SUCCESS; }")
     out.close()
 
@@ -179,6 +181,7 @@ def start_process(rule):
 
     compiler_command_line = [
         '-I', clang_default_include(),
+        '-I', include_relative
         ]
 
     for include_dir in rule['include-dirs']:

@@ -1,6 +1,7 @@
 [
     {
         "root": "../../deps/common/Urho3D/build/linux/release/",
+        "include-relative": "../../deps/common/Urho3D/Source",
         "include-dirs": [
             "../../deps/common/Urho3D/build/linux/release/include",
             "../../deps/common/Urho3D/build/linux/release/include/Urho3D/ThirdParty"
