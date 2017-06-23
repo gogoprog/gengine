@@ -1,7 +1,7 @@
 if os.is("linux") then
     local getcxxflags = premake.gcc.getcxxflags;
     function premake.gcc.getcxxflags(cfg)
-        local cxxflags = { Cxx11 = "-std=c++11" }
+        local cxxflags = { Cxx11 = "-std=c++14" }
         local r = getcxxflags(cfg);
         local r2 = table.translate(cfg.flags, cxxflags);
         for _,v in ipairs(r2) do table.insert(r, v) end
