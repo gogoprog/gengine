@@ -9,6 +9,7 @@ namespace Urho3D
     class IntVector2;
     class Rect;
     class Color;
+    class Quaternion;
 }
 
 EMBINDCEFV8_DECLARE_VALUE_OBJECT(Urho3D::Vector2);
@@ -16,3 +17,4 @@ EMBINDCEFV8_DECLARE_VALUE_OBJECT(Urho3D::Vector3);
 EMBINDCEFV8_DECLARE_VALUE_OBJECT(Urho3D::IntVector2);
 EMBINDCEFV8_DECLARE_VALUE_OBJECT(Urho3D::Rect);
 EMBINDCEFV8_DECLARE_VALUE_OBJECT(Urho3D::Color);
+EMBINDCEFV8_DECLARE_VALUE_OBJECT(Urho3D::Quaternion);

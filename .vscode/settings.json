@@ -2,6 +2,7 @@
     "python.pythonPath": "/bin/python2",
     "files.associations": {
         "functional": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "type_traits": "cpp"
     }
 }
