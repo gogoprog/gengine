@@ -39,6 +39,15 @@ class ExtractedArgument(object):
 
         return self._type
 
+    def argument_type_pascal_case(self):
+        rtype = self._type
+        if 'types' in context.current_output:
+            types = context.current_output['types']
+            if rtype in types:
+                return types[rtype]
+
+        return self._type[:1].upper() + self._type[1:]
+
     def argument_full_type(self):
         return self._full_type
 
@@ -64,6 +73,9 @@ class ExtractedMethod(object):
 
     def method_other_name_camel_case(self):
         return self._other_name[:1].lower() + self._other_name[1:]
+
+    def method_return(self):
+        return "return " if self._result_type != "void" else ""
 
     def result_type(self):
         return self._result_type
@@ -224,11 +236,13 @@ def process_class_cursor(cursor):
 
 def get_type_name(input_type):
     if input_type.get_pointee().spelling != "":
-        return input_type.get_pointee().get_declaration().spelling
+        decl = input_type.get_pointee().get_declaration().spelling 
+        return decl if decl != "" else input_type.spelling 
     elif input_type.get_declaration().spelling != "":
         return input_type.get_declaration().spelling
     else:
         return input_type.spelling
+
     return None
 
 def process_method_cursor(cursor, extracted_class):

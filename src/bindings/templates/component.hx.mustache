@@ -1,10 +1,25 @@
 package gengine.components;
 
-class {{class_name}}
+import gengine.math.*;
+import gengine.graphics.*;
+
+class {{class_name}} extends {{class_base_name}}
 {
-    {{#methods}}
-    inline public function {{method_name_camel_case}}({{#arguments}}{{argument_name}}:{{argument_type}}{{comma}}{{/arguments}}):{{result_type_pascal_case}}
+    public inline function new()
     {
+        if(object == null)
+        {
+            untyped __js__("this.object = new Module.{{class_name}}(gengine.getContext())");
+            untyped __js__("window.dummyNode.addComponent(this.object, 0, 0);");
+        }
+
+        super();
+    }
+
+    {{#methods}}
+    inline public function {{method_other_name_camel_case}}({{#arguments}}{{argument_name}}:{{argument_type_pascal_case}}{{comma}}{{/arguments}}):{{result_type_pascal_case}}
+    {
+        {{method_return}}this.object.{{method_name_camel_case}}({{#arguments}}{{argument_name}}{{comma}}{{/arguments}});
     }
 
     {{/methods}}
