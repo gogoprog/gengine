@@ -5,7 +5,7 @@ import gengine.graphics.*;
 
 class {{class_name}} extends {{class_base_name}}
 {
-    public inline function new()
+    public function new()
     {
         if(object == null)
         {
@@ -19,7 +19,7 @@ class {{class_name}} extends {{class_base_name}}
     {{#methods}}
     inline public function {{method_other_name_camel_case}}({{#arguments}}{{argument_name}}:{{argument_type_pascal_case}}{{comma}}{{/arguments}}):{{result_type_pascal_case}}
     {
-        {{method_return}}this.object.{{method_name_camel_case}}({{#arguments}}{{argument_name}}{{comma}}{{/arguments}});
+        {{method_return}}this.object.{{method_other_name_camel_case}}({{#arguments}}{{argument_name}}{{comma}}{{/arguments}});
     }
 
     {{/methods}}

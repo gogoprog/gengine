@@ -118,6 +118,7 @@ class ExtractedMethod(object):
 class ExtractedClass(object):
     def __init__(self, name):
         self._name = name
+        self.base_name = None
         self.base = None
         self.methods = []
 
@@ -125,7 +126,7 @@ class ExtractedClass(object):
         return self._name
 
     def class_base_name(self):
-        return self.base if self.base != None else "void"
+        return self.base_name if self.base_name != None else "void"
 
     def class_name_camel_case(self):
         return self._name[:1].lower() + self._name[1:]
@@ -133,16 +134,37 @@ class ExtractedClass(object):
     def methods(self):
         return self._methods
 
+    def has_method(self, name):
+        mlen = len(self.methods)
+        for i in range(0, mlen): 
+            if self.methods[i]._other_name == name:
+                return True
+        
+        if self.base != None:
+            return self.base.has_method(name)
+
+        return False
+
     def setup(self):
         mlen = len(self.methods)
         for i in range(0, mlen):
-            dup = 1
-            for j in range(0, mlen):
-                if i != j:
-                    if self.methods[i]._other_name == self.methods[j]._other_name:
-                        self.methods[j]._other_name = self.methods[i]._name + str(dup)
-                        dup += 1
+            dup = 0
+            valid = False
+            while not valid:
+                dup += 1
+                valid = True
 
+                if self.base != None and self.base.has_method(self.methods[i]._other_name):
+                    self.methods[i]._other_name = self.methods[i]._name + str(dup)
+                    valid = False
+                    continue
+
+                for j in range(0, mlen):
+                    if i != j:
+                        if self.methods[i]._other_name == self.methods[j]._other_name:
+                            self.methods[i]._other_name = self.methods[i]._name + str(dup)
+                            valid = False
+                            continue
 
 class Extraction(object):
     def __init__(self):
@@ -219,6 +241,7 @@ def process_cursor(cursor, parent_cursor=None):
 
 def process_class_cursor(cursor):
     extracted_class = ExtractedClass(cursor.spelling)
+    context.class_map[cursor.spelling] = extracted_class
 
     for child_cursor in cursor.get_children():
         if child_cursor.access_specifier == AccessSpecifier.PUBLIC:
@@ -227,7 +250,9 @@ def process_class_cursor(cursor):
                 process_method_cursor(child_cursor, extracted_class)
         if child_cursor.kind == CursorKind.CXX_BASE_SPECIFIER:
             definition = child_cursor.get_definition()
-            extracted_class.base = definition.spelling
+            extracted_class.base_name = definition.spelling
+            if definition.spelling in context.class_map:
+                extracted_class.base = context.class_map[definition.spelling]
 
     extracted_class.setup()
     rule = context.current_rule
@@ -247,6 +272,7 @@ def get_type_name(input_type):
 
 def process_method_cursor(cursor, extracted_class):
     extracted_method = ExtractedMethod(cursor.spelling)
+    extracted_method.cursor = cursor
     extracted_method._result_type = get_type_name(cursor.result_type)
     extracted_method._result_full_type = cursor.result_type.spelling
 
@@ -286,6 +312,7 @@ def has_base(cursor, base):
     return False
 
 def begin_generation(rule):
+    context.class_map = {}
     for output in rule['output']:
         with codecs.open(bindings_path + output['template'], 'r', "utf-8") as data_file:
             output['parsed-template'] = pystache.parse(data_file.read())
