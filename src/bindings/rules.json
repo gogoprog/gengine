@@ -67,7 +67,8 @@
             "Deserializer",
             "XMLElement",
             "JSONValue",
-            "VariantVector"
+            "VariantVector",
+            "Zone"
         ]
     }
 ]
