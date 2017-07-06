@@ -7,7 +7,8 @@
             "../../deps/common/Urho3D/build/linux/release/include/Urho3D/ThirdParty"
         ],
         "files": [
-            "*/Urho3D/Graphics/*.h"
+            "*/Urho3D/Graphics/*.h",
+            "*/Urho3D/Urho2D/*.h"
         ],
         "excluded-files": [
             "*Direct3D*",
