@@ -213,7 +213,6 @@ def start_process(rule):
     for output in rule['output']:
         output['extraction'].headers = headers
 
-    #file_path = bindings_path + "main.cpp"
     index = clang.cindex.Index.create()
 
     compiler_command_line = [

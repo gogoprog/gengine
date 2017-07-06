@@ -25,10 +25,6 @@ solution "gengine"
             "../deps/common/libembindcefv8/src/*.*"
             }
 
-        excludes {
-            "../src/bindings/main.cpp",
-        }
-
         includedirs {
             "../src/application",
             "../src/gui",
