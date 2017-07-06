@@ -10,7 +10,8 @@
             "*/Urho3D/Graphics/*.h"
         ],
         "excluded-files": [
-            "*Direct3D*"
+            "*Direct3D*",
+            "*Zone*"
         ],
         "base": "Component",
         "output":[

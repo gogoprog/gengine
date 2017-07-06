@@ -194,9 +194,12 @@ def start_process(rule):
             for file_rule in rule['files']:
                 if fnmatch.fnmatch(file_name, file_rule):
                     if 'excluded-files' in rule:
+                        must_append = True
                         for excluded_file_rule in rule['excluded-files']:
-                            if not fnmatch.fnmatch(file_name, excluded_file_rule):
-                                headers.append(os.path.relpath(os.path.realpath(file_name), include_relative))
+                            if fnmatch.fnmatch(file_name, excluded_file_rule):
+                                must_append = False
+                        if must_append:
+                            headers.append(os.path.relpath(os.path.realpath(file_name), include_relative))
                     else:
                         headers.append(os.path.relpath(os.path.realpath(file_name), include_relative))
 
@@ -240,6 +243,11 @@ def process_cursor(cursor, parent_cursor=None):
         process_cursor(child_cursor, cursor)
 
 def process_class_cursor(cursor):
+    if 'excluded-types' in context.current_rule:
+        excludes = context.current_rule['excluded-types']
+        if cursor.spelling in excludes:
+            return False
+
     extracted_class = ExtractedClass(cursor.spelling)
     context.class_map[cursor.spelling] = extracted_class
 
