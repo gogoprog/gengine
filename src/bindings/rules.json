@@ -23,13 +23,17 @@
                 "types":
                 {
                     "unsigned int" : "Int",
+                    "const int": "Int",
                     "unsigned char": "Int",
                     "LightType": "Int",
                     "AnimationBlendMode": "Int",
+                    "BlendMode": "Int",
                     "FaceCameraMode": "Int",
                     "AutoRemoveMode": "Int",
                     "TrailType": "Int",
-                    "FillMode": "Int"
+                    "FillMode": "Int",
+                    "BodyType2D": "Int",
+                    "LoopMode2D": "Int"
                 }
             },
             {
@@ -70,7 +74,10 @@
             "XMLElement",
             "JSONValue",
             "VariantVector",
-            "Zone"
+            "Zone",
+            "b2Body",
+            "b2Joint",
+            "b2Fixture"
         ]
     }
 ]
