@@ -10,7 +10,7 @@ extern class ResourceCache
     public function getMaterial(filename:String, ?sendEventOnFailure:Bool):Material;
     public function getAnimation(filename:String, ?sendEventOnFailure:Bool):Animation;
     public function getSound(filename:String, ?sendEventOnFailure:Bool):Dynamic;
-    public function getParticleEffect2D(filename:String, ?sendEventOnFailure:Bool):Dynamic;
+    public function getParticleEffect2D(filename:String, ?sendEventOnFailure:Bool):ParticleEffect2D;
     public function getTmxFile2D(filename:String, ?sendEventOnFailure:Bool):Dynamic;
     public function getImage(filename:String, ?sendEventOnFailure:Bool):Image;
 }
