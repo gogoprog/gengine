@@ -257,9 +257,10 @@ def process_class_cursor(cursor):
                 process_method_cursor(child_cursor, extracted_class)
         if child_cursor.kind == CursorKind.CXX_BASE_SPECIFIER:
             definition = child_cursor.get_definition()
-            extracted_class.base_name = definition.spelling
-            if definition.spelling in context.class_map:
-                extracted_class.base = context.class_map[definition.spelling]
+            if extracted_class.base_name == None:
+                extracted_class.base_name = definition.spelling
+                if definition.spelling in context.class_map:
+                    extracted_class.base = context.class_map[definition.spelling]
 
     extracted_class.setup()
     rule = context.current_rule
