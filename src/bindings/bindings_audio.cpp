@@ -1,4 +1,4 @@
-#include "script.h"
+#include "bindings.h"
 
 #include <Urho3D/Scene/Component.h>
 #include <Urho3D/Audio/Sound.h>

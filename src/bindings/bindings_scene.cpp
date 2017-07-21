@@ -1,4 +1,4 @@
-#include "script.h"
+#include "bindings.h"
 
 #include <Urho3D/Scene/Node.h>
 #include <Urho3D/Scene/Scene.h>
