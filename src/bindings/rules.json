@@ -77,7 +77,13 @@
             "Zone",
             "b2Body",
             "b2Joint",
-            "b2Fixture"
+            "b2Fixture",
+            "b2Contact",
+            "b2Color",
+            "b2Vec2",
+            "b2Transform",
+            "b2World",
+            "DelayedWorldTransform2D"
         ]
     }
 ]
