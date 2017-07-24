@@ -11,7 +11,7 @@ class {{class_name}} extends {{class_base_name}}
         if(object == null)
         {
             untyped __js__("this.object = new Module.{{class_name}}(gengine.getContext())");
-            untyped __js__("window.dummyNode.addComponent(this.object, 0, 0);");
+            untyped __js__("if('{{class_name}}' == 'ParticleEmitter2D') { window.dummyNode.addComponent(this.object, 0, 0); }");
         }
 
         super();
