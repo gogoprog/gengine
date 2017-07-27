@@ -22,17 +22,6 @@ using namespace Urho3D;
 
 EMBINDCEFV8_DECLARE_STRING(String, CString);
 EMBINDCEFV8_DECLARE_CLASS(Context, void);
-EMBINDCEFV8_DECLARE_CLASS(Component, void);
-EMBINDCEFV8_DECLARE_CLASS(RigidBody2D, Component);
-EMBINDCEFV8_DECLARE_CLASS(StaticSprite2D, Component);
-EMBINDCEFV8_DECLARE_CLASS(AnimatedSprite2D, Component);
-EMBINDCEFV8_DECLARE_CLASS(CollisionBox2D, Component);
-EMBINDCEFV8_DECLARE_CLASS(CollisionCircle2D, Component);
-EMBINDCEFV8_DECLARE_CLASS(ParticleEmitter2D, Component);
-EMBINDCEFV8_DECLARE_CLASS(TileMap2D, Component);
-EMBINDCEFV8_DECLARE_ENUM(LoopMode2D);
-EMBINDCEFV8_DECLARE_ENUM(BlendMode);
-EMBINDCEFV8_DECLARE_ENUM(BodyType2D);
 EMBINDCEFV8_DECLARE_ENUM(TextureAddressMode);
 EMBINDCEFV8_DECLARE_ENUM(TextureCoordinate);
 
@@ -49,69 +38,6 @@ EMBINDCEFV8_BINDINGS(urho2d)
     embindcefv8::Class<AnimationSet2D>("AnimationSet2D")
         ;
 
-    embindcefv8::Class<StaticSprite2D>("StaticSprite2D")
-        .constructor<Context*>()
-        .method("setSprite", &StaticSprite2D::SetSprite)
-        .method("setEnabled", static_cast<void (StaticSprite2D::*)(bool)>(&StaticSprite2D::SetEnabled))
-        .method("setDrawRect", &StaticSprite2D::SetDrawRect)
-        .method("getDrawRect", &StaticSprite2D::GetDrawRect)
-        .method("setTextureRect", &StaticSprite2D::SetTextureRect)
-        .method("getTextureRect", &StaticSprite2D::GetTextureRect)
-        .method("setUseDrawRect", &StaticSprite2D::SetUseDrawRect)
-        .method("getUseDrawRect", &StaticSprite2D::GetUseDrawRect)
-        .method("setUseTextureRect", &StaticSprite2D::SetUseTextureRect)
-        .method("getUseTextureRect", &StaticSprite2D::GetUseTextureRect)
-        .method("setColor", &StaticSprite2D::SetColor)
-        .method("setAlpha", &StaticSprite2D::SetAlpha)
-        .method("setHotSpot", &StaticSprite2D::SetHotSpot)
-        .method("setUseHotSpot", &StaticSprite2D::SetUseHotSpot)
-        .method("setBlendMode", &StaticSprite2D::SetBlendMode)
-        .method("remove", static_cast<void (StaticSprite2D::*)()>(&StaticSprite2D::Remove))
-        .method("setLayer", static_cast<void (StaticSprite2D::*)(int)>(&StaticSprite2D::SetLayer))
-        .method("setOrderInLayer", static_cast<void (StaticSprite2D::*)(int)>(&StaticSprite2D::SetOrderInLayer))
-        .method("getLayer", static_cast<int (StaticSprite2D::*)() const>(&StaticSprite2D::GetLayer))
-        .method("getOrderInLayer", static_cast<int (StaticSprite2D::*)() const>(&StaticSprite2D::GetOrderInLayer))
-        ;
-
-    embindcefv8::Class<AnimatedSprite2D>("AnimatedSprite2D")
-        .constructor<Context*>()
-        .method("setAnimation", &AnimatedSprite2D::SetAnimation)
-        .method("setAnimationSet", &AnimatedSprite2D::SetAnimationSet)
-        .method("remove", static_cast<void (AnimatedSprite2D::*)()>(&AnimatedSprite2D::Remove))
-        .method("setLayer", static_cast<void (AnimatedSprite2D::*)(int)>(&AnimatedSprite2D::SetLayer))
-        .method("setOrderInLayer", static_cast<void (AnimatedSprite2D::*)(int)>(&AnimatedSprite2D::SetOrderInLayer))
-        .method("getLayer", static_cast<int (AnimatedSprite2D::*)() const>(&AnimatedSprite2D::GetLayer))
-        .method("getOrderInLayer", static_cast<int (AnimatedSprite2D::*)() const>(&AnimatedSprite2D::GetOrderInLayer))
-        .method("setEntity", &AnimatedSprite2D::SetEntity)
-        .method("setLoopMode", &AnimatedSprite2D::SetLoopMode)
-        .method("setSpeed", &AnimatedSprite2D::SetSpeed)
-        .method("getBonePosition", &AnimatedSprite2D::GetBonePosition)
-        .method("setColor", static_cast<void (AnimatedSprite2D::*)(const Color &)>(&AnimatedSprite2D::SetColor))
-        .method("setAlpha", static_cast<void (AnimatedSprite2D::*)(float)>(&AnimatedSprite2D::SetAlpha))
-        ;
-
-    embindcefv8::Class<RigidBody2D>("RigidBody2D")
-        .constructor<Context*>()
-        .method("setBodyType", &RigidBody2D::SetBodyType)
-        .method("setMass", &RigidBody2D::SetMass)
-        .method("setInertia", &RigidBody2D::SetInertia)
-        .method("setMassCenter", &RigidBody2D::SetMassCenter)
-        .method("setLinearDamping", &RigidBody2D::SetLinearDamping)
-        .method("setAngularDamping", &RigidBody2D::SetAngularDamping)
-        .method("setFixedRotation", &RigidBody2D::SetFixedRotation)
-        .method("setBullet", &RigidBody2D::SetBullet)
-        .method("setGravityScale", &RigidBody2D::SetGravityScale)
-        .method("setAwake", &RigidBody2D::SetAwake)
-        .method("setLinearVelocity", &RigidBody2D::SetLinearVelocity)
-        .method("setAngularVelocity", &RigidBody2D::SetAngularVelocity)
-        .method("applyForce", &RigidBody2D::ApplyForce)
-        .method("applyForceToCenter", &RigidBody2D::ApplyForceToCenter)
-        .method("applyTorque", &RigidBody2D::ApplyTorque)
-        .method("applyLinearImpulse", &RigidBody2D::ApplyLinearImpulse)
-        .method("applyAngularImpulse", &RigidBody2D::ApplyAngularImpulse)
-        .method("getID", static_cast<unsigned (RigidBody2D::*)() const>(&RigidBody2D::GetID))
-        ;
-
     embindcefv8::Class<PhysicsRaycastResult2D>("PhysicsRaycastResult2D")
         .constructor<>()
         .property("position", &PhysicsRaycastResult2D::position_)
@@ -120,63 +46,9 @@ EMBINDCEFV8_BINDINGS(urho2d)
         // .property("body", &PhysicsRaycastResult2D::body_) // :todo: support for emscripten
         ;
 
-    embindcefv8::Class<PhysicsWorld2D>("PhysicsWorld2D")
-        .constructor<Context*>()
-        .method("setGravity", &PhysicsWorld2D::SetGravity)
-        .method("setContinuousPhysics", &PhysicsWorld2D::SetContinuousPhysics)
-        .method("setSubStepping", &PhysicsWorld2D::SetSubStepping)
-        .method("drawDebugGeometry", &PhysicsWorld2D::DrawDebugGeometry)
-        .method("raycastSingle", &PhysicsWorld2D::RaycastSingle)
-        .method("getRigidBody", static_cast<RigidBody2D* (PhysicsWorld2D::*)(const Vector2&, unsigned)>(&PhysicsWorld2D::GetRigidBody))
-        ;
-
-    embindcefv8::Class<CollisionBox2D>("CollisionBox2D")
-        .constructor<Context*>()
-        .method("setSize", static_cast<void (CollisionBox2D::*)(const Vector2&)>(&CollisionBox2D::SetSize))
-        .method("setCenter", static_cast<void (CollisionBox2D::*)(const Vector2&)>(&CollisionBox2D::SetCenter))
-        .method("setAngle", static_cast<void (CollisionBox2D::*)(float)>(&CollisionBox2D::SetAngle))
-        .method("setDensity", static_cast<void (CollisionBox2D::*)(float)>(&CollisionBox2D::SetDensity))
-        .method("setFriction", static_cast<void (CollisionBox2D::*)(float)>(&CollisionBox2D::SetFriction))
-        .method("setRestitution", static_cast<void (CollisionBox2D::*)(float)>(&CollisionBox2D::SetRestitution))
-        .method("setTrigger", static_cast<void (CollisionBox2D::*)(bool)>(&CollisionBox2D::SetTrigger))
-        .method("setCategoryBits", static_cast<void (CollisionBox2D::*)(int)>(&CollisionBox2D::SetCategoryBits))
-        .method("setMaskBits", static_cast<void (CollisionBox2D::*)(int)>(&CollisionBox2D::SetMaskBits))
-        .method("setGroupIndex", static_cast<void (CollisionBox2D::*)(int)>(&CollisionBox2D::SetGroupIndex))
-        ;
-
-    embindcefv8::Class<CollisionCircle2D>("CollisionCircle2D")
-        .constructor<Context*>()
-        .method("setRadius", &CollisionCircle2D::SetRadius)
-        .method("setCenter", static_cast<void (CollisionCircle2D::*)(const Vector2&)>(&CollisionCircle2D::SetCenter))
-        .method("setDensity", static_cast<void (CollisionCircle2D::*)(float)>(&CollisionCircle2D::SetDensity))
-        .method("setFriction", static_cast<void (CollisionCircle2D::*)(float)>(&CollisionCircle2D::SetFriction))
-        .method("setRestitution", static_cast<void (CollisionCircle2D::*)(float)>(&CollisionCircle2D::SetRestitution))
-        .method("setTrigger", static_cast<void (CollisionCircle2D::*)(bool)>(&CollisionCircle2D::SetTrigger))
-        .method("setCategoryBits", static_cast<void (CollisionCircle2D::*)(int)>(&CollisionCircle2D::SetCategoryBits))
-        .method("setMaskBits", static_cast<void (CollisionCircle2D::*)(int)>(&CollisionCircle2D::SetMaskBits))
-        .method("setGroupIndex", static_cast<void (CollisionCircle2D::*)(int)>(&CollisionCircle2D::SetGroupIndex))
-        ;
-
     embindcefv8::Class<ParticleEffect2D>("ParticleEffect2D")
         ;
 
-    embindcefv8::Class<ParticleEmitter2D>("ParticleEmitter2D")
-        .constructor<Context*>()
-        .method("setEffect", &ParticleEmitter2D::SetEffect)
-        .method("setSprite", &ParticleEmitter2D::SetSprite)
-        .method("setBlendMode", &ParticleEmitter2D::SetBlendMode)
-        .method("setMaxParticles", &ParticleEmitter2D::SetMaxParticles)
-        .method("setLayer", static_cast<void (ParticleEmitter2D::*)(int)>(&ParticleEmitter2D::SetLayer))
-        .method("setOrderInLayer", static_cast<void (ParticleEmitter2D::*)(int)>(&ParticleEmitter2D::SetOrderInLayer))
-        .method("getLayer", static_cast<int (ParticleEmitter2D::*)() const>(&ParticleEmitter2D::GetLayer))
-        .method("getOrderInLayer", static_cast<int (ParticleEmitter2D::*)() const>(&ParticleEmitter2D::GetOrderInLayer))
-        ;
-
     embindcefv8::Class<TmxFile2D>("TmxFile2D")
-        ;
-
-    embindcefv8::Class<TileMap2D>("TileMap2D")
-        .constructor<Context*>()
-        .method("setTmxFile", &TileMap2D::SetTmxFile)
         ;
 }

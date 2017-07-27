@@ -83,7 +83,8 @@
             "b2Vec2",
             "b2Transform",
             "b2World",
-            "DelayedWorldTransform2D"
+            "DelayedWorldTransform2D",
+            "int &"
         ]
     }
 ]

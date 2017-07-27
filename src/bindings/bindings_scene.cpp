@@ -67,5 +67,6 @@ EMBINDCEFV8_BINDINGS(scene)
         ;
 
     embindcefv8::Class<Component>("Component")
+        .method("getID", &Component::GetID)
         ;
 }
