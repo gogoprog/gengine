@@ -8,7 +8,9 @@
         ],
         "files": [
             "*/Urho3D/Graphics/*.h",
-            "*/Urho3D/Urho2D/*.h"
+            "*/Urho3D/Urho2D/*.h",
+            "*/Urho3D/Physics/*.h",
+            "*/Urho3D/Audio/*.h"
         ],
         "excluded-files": [
             "*Direct3D*",
@@ -33,7 +35,10 @@
                     "TrailType": "Int",
                     "FillMode": "Int",
                     "BodyType2D": "Int",
-                    "LoopMode2D": "Int"
+                    "LoopMode2D": "Int",
+                    "ShapeType": "Int",
+                    "ConstraintType": "Int",
+                    "CollisionEventMode": "Int"
                 }
             },
             {
@@ -84,7 +89,22 @@
             "b2Transform",
             "b2World",
             "DelayedWorldTransform2D",
-            "int &"
+            "int &",
+            "volatile signed char *",
+            "btCollisionShape",
+            "btTypedConstraint",
+            "btTransform",
+            "btRigidBody",
+            "btCompoundShape",
+            "CustomGeometryVertex",
+            "CollisionGeometryData",
+            "const char *",
+            "btVector3",
+            "btScalar",
+            "btDiscreteDynamicsWorld",
+            "DelayedWorldTransform",
+            "HashMap",
+            "PrimitiveType"
         ]
     }
 ]
