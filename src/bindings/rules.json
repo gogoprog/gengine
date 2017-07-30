@@ -91,6 +91,8 @@
             "DelayedWorldTransform2D",
             "int &",
             "volatile signed char *",
+            "signed char *",
+            "int *",
             "btCollisionShape",
             "btTypedConstraint",
             "btTransform",
@@ -104,7 +106,8 @@
             "btDiscreteDynamicsWorld",
             "DelayedWorldTransform",
             "HashMap",
-            "PrimitiveType"
+            "PrimitiveType",
+            "SoundStream"
         ]
     }
 ]

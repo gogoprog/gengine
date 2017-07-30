@@ -38,7 +38,7 @@ class GameSystem extends System
 
         if(Gengine.getInput().getMouseButtonPress(1))
         {
-            soundNode.source.play(Gengine.getResourceCache().getSound("sound.ogg", true));
+            soundNode.source.play1(Gengine.getResourceCache().getSound("sound.ogg", true));
         }
     }
 
@@ -68,7 +68,8 @@ class Application
 
         var e:Entity = new Entity();
 
-        var staticSprite2D = new StaticSprite2D(Gengine.getResourceCache().getSprite2D('Textures/Spot.png', true));
+        var staticSprite2D = new StaticSprite2D();
+        staticSprite2D.setSprite(Gengine.getResourceCache().getSprite2D('Textures/Spot.png', true));
         staticSprite2D.setDrawRect(new Rect(new Vector2(-32, -32), new Vector2(32, 32)));
 
         e.add(staticSprite2D);
