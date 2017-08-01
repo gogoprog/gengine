@@ -14,6 +14,7 @@
 #include <Urho3D/Graphics/Zone.h>
 #include <Urho3D/Graphics/Terrain.h>
 #include <Urho3D/Graphics/Skybox.h>
+#include <Urho3D/Graphics/ParticleEffect.h>
 
 using namespace Urho3D;
 
@@ -32,6 +33,9 @@ EMBINDCEFV8_BINDINGS(graphics)
         ;
 
     embindcefv8::Class<Animation>("Animation")
+        ;
+
+    embindcefv8::Class<ParticleEffect>("ParticleEffect")
         ;
 
     embindcefv8::Class<AnimationState>("AnimationState")

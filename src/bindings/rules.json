@@ -10,6 +10,7 @@
             "*/Urho3D/Graphics/*.h",
             "*/Urho3D/Urho2D/*.h",
             "*/Urho3D/Physics/*.h",
+            "*/Urho3D/Scene/LogicComponent.h",
             "*/Urho3D/Audio/*.h"
         ],
         "excluded-files": [
@@ -38,7 +39,9 @@
                     "LoopMode2D": "Int",
                     "ShapeType": "Int",
                     "ConstraintType": "Int",
-                    "CollisionEventMode": "Int"
+                    "CollisionEventMode": "Int",
+                    "TileMapLayerType2D": "Int",
+                    "TileMapObjectType2D": "Int"
                 }
             },
             {
@@ -107,7 +110,15 @@
             "DelayedWorldTransform",
             "HashMap",
             "PrimitiveType",
-            "SoundStream"
+            "SoundStream",
+            "Node",
+            "Polyhedron",
+            "TmxLayer2D",
+            "Tile2D",
+            "TileMapObject2D",
+            "TileMapInfo2D",
+            "Billboard",
+            "Bone"
         ]
     }
 ]

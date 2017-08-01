@@ -1,5 +1,6 @@
 -cp ../../deps/common/Ash-Haxe/src/
 -cp ../../src/haxe/
+-cp ../../src/bindings/generated/haxe/
 -cp ./src/
 -D doc-gen
 --macro include('gengine')
