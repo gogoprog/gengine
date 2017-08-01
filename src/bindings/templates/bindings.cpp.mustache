@@ -1,0 +1,61 @@
+#include "embindcefv8.h"
+
+#include <Urho3D/Core/Context.h>
+#include <Urho3D/Graphics/StaticModel.h>
+#include <Urho3D/Graphics/AnimatedModel.h>
+
+{{#headers}}
+#include <{{.}}>
+{{/headers}}
+
+using namespace Urho3D;
+
+EMBINDCEFV8_DECLARE_VALUE_OBJECT(Vector2);
+EMBINDCEFV8_DECLARE_VALUE_OBJECT(Vector3);
+EMBINDCEFV8_DECLARE_VALUE_OBJECT(IntVector2);
+EMBINDCEFV8_DECLARE_VALUE_OBJECT(Rect);
+EMBINDCEFV8_DECLARE_VALUE_OBJECT(Color);
+EMBINDCEFV8_DECLARE_VALUE_OBJECT(Quaternion);
+
+EMBINDCEFV8_DECLARE_ENUM(LightType);
+EMBINDCEFV8_DECLARE_ENUM(AnimationBlendMode);
+EMBINDCEFV8_DECLARE_ENUM(FaceCameraMode);
+EMBINDCEFV8_DECLARE_ENUM(AutoRemoveMode);
+EMBINDCEFV8_DECLARE_ENUM(TrailType);
+EMBINDCEFV8_DECLARE_ENUM(FillMode);
+EMBINDCEFV8_DECLARE_ENUM(Orientation2D);
+EMBINDCEFV8_DECLARE_ENUM(TileMapLayerType2D);
+EMBINDCEFV8_DECLARE_ENUM(TileMapObjectType2D);
+EMBINDCEFV8_DECLARE_ENUM(LoopMode2D);
+EMBINDCEFV8_DECLARE_ENUM(BlendMode);
+EMBINDCEFV8_DECLARE_ENUM(BodyType2D);
+EMBINDCEFV8_DECLARE_ENUM(TextureAddressMode);
+EMBINDCEFV8_DECLARE_ENUM(TextureCoordinate);
+EMBINDCEFV8_DECLARE_ENUM(CollisionEventMode);
+EMBINDCEFV8_DECLARE_ENUM(ShapeType);
+EMBINDCEFV8_DECLARE_ENUM(ConstraintType);
+
+EMBINDCEFV8_DECLARE_STRING(String, CString);
+EMBINDCEFV8_DECLARE_CLASS(Context, void);
+EMBINDCEFV8_DECLARE_CLASS(Component, void);
+{{#classes}}
+EMBINDCEFV8_DECLARE_CLASS({{class_name}}, {{class_base_name}});
+{{/classes}}
+
+#define NO_CONSTRUCTOR_Drawable
+#define NO_CONSTRUCTOR_Drawable2D
+#define NO_CONSTRUCTOR_CollisionShape2D
+
+EMBINDCEFV8_BINDINGS(components)
+{
+    {{#classes}}
+    embindcefv8::Class<{{class_name}}>("{{class_name}}")
+        #ifndef NO_CONSTRUCTOR_{{class_name}}
+        .constructor<Context*>()
+        #endif
+        {{#methods}}
+        .method("{{method_other_name_camel_case}}", static_cast<{{{result_full_type}}} ({{class_name}}::*)({{#arguments}}{{{argument_full_type}}}{{comma}}{{/arguments}}){{method_const_qualifier}}>(&{{class_name}}::{{method_name}}))
+        {{/methods}}
+        ;
+    {{/classes}}
+}

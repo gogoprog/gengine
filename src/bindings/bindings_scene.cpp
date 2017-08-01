@@ -1,4 +1,4 @@
-#include "script.h"
+#include "bindings.h"
 
 #include <Urho3D/Scene/Node.h>
 #include <Urho3D/Scene/Scene.h>
@@ -67,5 +67,6 @@ EMBINDCEFV8_BINDINGS(scene)
         ;
 
     embindcefv8::Class<Component>("Component")
+        .method("getID", &Component::GetID)
         ;
 }

@@ -3,7 +3,7 @@ package gengine.components;
 import gengine.math.*;
 
 @:dox(hide)
-class UrhoComponent
+class Component
 {
     public var object:Dynamic;
 

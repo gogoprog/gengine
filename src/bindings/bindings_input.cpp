@@ -1,4 +1,4 @@
-#include "script.h"
+#include "bindings.h"
 
 #include <Urho3D/Input/Input.h>
 

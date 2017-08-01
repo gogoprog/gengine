@@ -1,6 +1,6 @@
 package gengine;
 
-import gengine.components.UrhoComponent;
+import gengine.components.Component;
 import gengine.math.*;
 
 class Entity extends ash.core.Entity
@@ -29,9 +29,9 @@ class Entity extends ash.core.Entity
 
     override public function add<T>(component:T, componentClass:Class<Dynamic> = null):ash.core.Entity
     {
-        if(Std.is(component, UrhoComponent))
+        if(Std.is(component, Component))
         {
-            this.node.addComponent(cast(component, UrhoComponent).object, 0, 0);
+            this.node.addComponent(cast(component, Component).object, 0, 0);
         }
 
         return super.add(component, componentClass);
@@ -41,9 +41,9 @@ class Entity extends ash.core.Entity
     {
         var component = super.remove(componentClass);
 
-        if(component != null && Std.is(component, UrhoComponent))
+        if(component != null && Std.is(component, Component))
         {
-            this.node.removeComponent(cast(component, UrhoComponent).object);
+            this.node.removeComponent(cast(component, Component).object);
         }
 
         return component;

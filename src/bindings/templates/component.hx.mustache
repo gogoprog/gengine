@@ -1,0 +1,28 @@
+package gengine.components;
+
+import gengine.math.*;
+import gengine.graphics.*;
+import gengine.physics.*;
+import gengine.audio.*;
+
+class {{class_name}} extends {{class_base_name}}
+{
+    public function new()
+    {
+        if(object == null)
+        {
+            untyped __js__("this.object = new Module.{{class_name}}(gengine.getContext())");
+            untyped __js__("if('{{class_name}}' == 'ParticleEmitter2D') { window.dummyNode.addComponent(this.object, 0, 0); }");
+        }
+
+        super();
+    }
+
+    {{#methods}}
+    inline public function {{method_other_name_camel_case}}({{#arguments}}{{argument_name}}:{{argument_type_pascal_case}}{{comma}}{{/arguments}}):{{result_type_pascal_case}}
+    {
+        {{method_return}}this.object.{{method_other_name_camel_case}}({{#arguments}}{{argument_name}}{{comma}}{{/arguments}});
+    }
+
+    {{/methods}}
+}

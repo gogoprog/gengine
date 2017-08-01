@@ -1,4 +1,4 @@
-#include "script.h"
+#include "bindings.h"
 
 #include <Urho3D/Math/Vector3.h>
 #include <Urho3D/Math/Vector2.h>

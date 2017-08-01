@@ -181,7 +181,7 @@ def compile():
 
     if not os.path.exists(targetDir + "/build.hxml"):
         log("Compiling : Running haxe default command line...")
-        os.system("haxe -cp " +  os.environ['GENGINE'] + "/deps/common/Ash-Haxe/src/ -cp " +  os.environ['GENGINE'] + "/src/haxe/ -cp " + targetDir +  " -cp " + targetDir + "/src -main gengine.Main -js " + targetDir + "generated/main.js")
+        os.system("haxe -cp " +  os.environ['GENGINE'] + "/deps/common/Ash-Haxe/src/" + " -cp " +  os.environ['GENGINE'] + "/src/haxe/" + " -cp " +  os.environ['GENGINE'] + "/src/bindings/generated/haxe/" + " -cp " + targetDir +  " -cp " + targetDir + "/src -main gengine.Main -js " + targetDir + "generated/main.js")
     else:
         log("Compiling : Running haxe with build.hxml...")
         currentDir = os.getcwd()

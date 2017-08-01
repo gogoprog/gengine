@@ -1,0 +1,113 @@
+[
+    {
+        "root": "../../deps/common/Urho3D/build/linux/release/",
+        "include-relative": "../../deps/common/Urho3D/Source",
+        "include-dirs": [
+            "../../deps/common/Urho3D/build/linux/release/include",
+            "../../deps/common/Urho3D/build/linux/release/include/Urho3D/ThirdParty"
+        ],
+        "files": [
+            "*/Urho3D/Graphics/*.h",
+            "*/Urho3D/Urho2D/*.h",
+            "*/Urho3D/Physics/*.h",
+            "*/Urho3D/Audio/*.h"
+        ],
+        "excluded-files": [
+            "*Direct3D*",
+            "*Zone*"
+        ],
+        "base": "Component",
+        "output":[
+            {
+                "template": "templates/component.hx.mustache",
+                "rule": "file-per-class",
+                "path": "generated/haxe/gengine/components/{{class_name}}.hx",
+                "types":
+                {
+                    "unsigned int" : "Int",
+                    "const int": "Int",
+                    "unsigned char": "Int",
+                    "LightType": "Int",
+                    "AnimationBlendMode": "Int",
+                    "BlendMode": "Int",
+                    "FaceCameraMode": "Int",
+                    "AutoRemoveMode": "Int",
+                    "TrailType": "Int",
+                    "FillMode": "Int",
+                    "BodyType2D": "Int",
+                    "LoopMode2D": "Int",
+                    "ShapeType": "Int",
+                    "ConstraintType": "Int",
+                    "CollisionEventMode": "Int"
+                }
+            },
+            {
+                "template": "templates/bindings.cpp.mustache",
+                "rule": "single-file",
+                "path": "generated/cpp/bindings.cpp"
+            }
+        ],
+        "excluded-types":[
+            "RayOctreeQuery",
+            "Geometry",
+            "FrameInfo",
+            "UpdateGeometryType",
+            "OctreeQuery",
+            "StringHash",
+            "TypeInfo",
+            "AttributeInfo",
+            "const void *",
+            "OcclusionBuffer",
+            "DebugRenderer",
+            "Plane",
+            "BoundingBox",
+            "Vector",
+            "Matrix4",
+            "Octant",
+            "Frustum",
+            "PODVector",
+            "Matrix3x4",
+            "Ray",
+            "FocusParameters",
+            "Vector4",
+            "LightBatchQueue",
+            "SharedArrayPtr",
+            "VertexBuffer",
+            "ResourceRef",
+            "ResourceRefList",
+            "Deserializer",
+            "XMLElement",
+            "JSONValue",
+            "VariantVector",
+            "Zone",
+            "b2Body",
+            "b2Joint",
+            "b2Fixture",
+            "b2Contact",
+            "b2Color",
+            "b2Vec2",
+            "b2Transform",
+            "b2World",
+            "DelayedWorldTransform2D",
+            "int &",
+            "volatile signed char *",
+            "signed char *",
+            "int *",
+            "btCollisionShape",
+            "btTypedConstraint",
+            "btTransform",
+            "btRigidBody",
+            "btCompoundShape",
+            "CustomGeometryVertex",
+            "CollisionGeometryData",
+            "const char *",
+            "btVector3",
+            "btScalar",
+            "btDiscreteDynamicsWorld",
+            "DelayedWorldTransform",
+            "HashMap",
+            "PrimitiveType",
+            "SoundStream"
+        ]
+    }
+]

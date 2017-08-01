@@ -65,3 +65,4 @@ valgrind*
 vgcore*
 
 /dist
+tags
