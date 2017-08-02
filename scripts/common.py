@@ -144,6 +144,9 @@ def build():
 
     current_dir = os.getcwd()
 
+    if not distributed and not os.path.exists(os.environ['GENGINE'] + '/src/bindings/generated'):
+        os.system("gengine-gen-bindings")
+
     if not html5Mode:
         getDeps()
 
