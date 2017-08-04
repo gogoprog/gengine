@@ -1,13 +1,13 @@
 if os.is("linux") then
     local getcxxflags = premake.gcc.getcxxflags;
     function premake.gcc.getcxxflags(cfg)
-        local cxxflags = { Cxx11 = "-std=c++14" }
+        local cxxflags = { Cxx17 = "-std=c++1z" }
         local r = getcxxflags(cfg);
         local r2 = table.translate(cfg.flags, cxxflags);
         for _,v in ipairs(r2) do table.insert(r, v) end
         return r;
     end
-    table.insert(premake.fields.flags.allowed, "Cxx11");
+    table.insert(premake.fields.flags.allowed, "Cxx17");
 end
 
 solution "gengine"
@@ -48,7 +48,7 @@ solution "gengine"
 
         if os.is("linux") then
             defines { "_LINUX" }
-            flags { "Cxx11" }
+            flags { "Cxx17" }
             buildoptions { "-Wno-error=unused-variable -Wno-error=unused-parameter -Wno-strict-aliasing -Wno-sign-compare" }
             linkoptions { "-Wl,-rpath=../deps/linux/lib64/"}
         elseif os.is("windows") then
