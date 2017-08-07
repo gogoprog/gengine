@@ -8,3 +8,6 @@
 	path = deps/common/Urho3D
 	url = https://github.com/gogoprog/Urho3D.git
 	branch = gengine
+[submodule "deps/common/tbing"]
+	path = deps/common/tbing
+	url = https://github.com/gogoprog/tbing.git
