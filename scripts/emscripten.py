@@ -8,14 +8,30 @@ import multiprocessing
 import os.path
 import common
 
+def emcc(appDir, outputDir, includeEmptyData):
+    previous_dir = os.getcwd()
+    os.chdir(os.environ['GENGINE']+"/build")
+    cmd = "emcc "
+    cmd += "" if common.debugMode else "-O3"
+    cmd += " --bind gengine" + ('d' if common.debugMode else '') + ".bc"
+    cmd += " -o " + outputDir + "/index.html"
+    cmd += " --preload-file " + common.rootPath + "/res/coreData@coreData"
+    if includeEmptyData:
+        cmd += " --preload-file " + common.rootPath + "/res/data@data "
+    else:
+        cmd += " --preload-file " + appDir + "/data@data "
+    cmd += " --use-preload-plugins -s TOTAL_MEMORY=134217728 -s TOTAL_STACK=1048576"
+    cmd += " --shell-file " + common.rootPath + "/src/shell.html"
+    os.system(cmd)
+    os.chdir(previous_dir)
+
 def build(targetDir):
     common.log("Running emcc...")
-    currentDir = os.getcwd()
+    current_dir = os.getcwd()
     os.chdir(targetDir)
     os.system("rm -rf index.data index.html index.js index.html.mem")
-    os.chdir(os.environ['GENGINE']+"/build")
-    os.system("emcc " + ('' if common.debugMode else '-O3') + " --bind gengine" + ('d' if common.debugMode else '') + ".bc -o " + targetDir + "/index.html --preload-file " + common.rootPath + "/res/coreData@coreData " + "--preload-file " + common.rootPath + "/res/data@data " + "--use-preload-plugins -s TOTAL_MEMORY=134217728 -s TOTAL_STACK=1048576 --shell-file " + common.rootPath + "/src/shell.html")
-    os.chdir(currentDir)
+    emcc(current_dir, current_dir, True)
+    os.chdir(current_dir)
 
 def runServer(targetDir):
     os.chdir(targetDir)

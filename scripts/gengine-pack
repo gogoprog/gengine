@@ -4,14 +4,14 @@ import os
 import common
 import tempfile
 import shutil
+import emscripten
 
 def packHtml():
     common.log("Packing in HTML5 mode...")
     current_dir = os.getcwd()
     os.system("rm -rf packed-html5/*")
     os.system("mkdir -p packed-html5")
-    os.chdir(os.environ['GENGINE']+"/build")
-    os.system("emcc " + ('' if common.debugMode else '-O3') + " --bind gengine" + ('d' if common.debugMode else '') + ".bc -o " + current_dir + "/packed-html5/index.html --preload-file " + common.targetDir + "data@data " + "--preload-file " + common.rootPath + "/res/coreData@coreData " + "--use-preload-plugins -s TOTAL_MEMORY=67108864 -s TOTAL_STACK=1048576 --shell-file " + common.rootPath + "/src/shell.html")
+    emscripten.emcc(common.targetDir, common.targetDir + '/packed-html5', False)
     os.chdir(current_dir)
     os.system("cp -rf " + common.targetDir + "gui packed-html5/gui")
     os.system("cp -rf " + common.targetDir + "generated packed-html5/generated")
