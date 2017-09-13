@@ -34,6 +34,7 @@ public:
     void runFrame();
     void stop();
     void exit();
+    void takeScreenshot(const Urho3D::String & filename);
     void setGuiFilename(const Urho3D::String & filename);
 
 

@@ -26,6 +26,7 @@ class GameSystem extends System
     {
         if(Gengine.getInput().getScancodePress(41))
         {
+            Gengine.takeScreenshot("screenshot.png");
             trace('Escaped just pressed.');
             Gengine.exit();
         }

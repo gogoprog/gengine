@@ -145,6 +145,13 @@ void App::exit()
     engine_->Exit();
 }
 
+void App::takeScreenshot(const Urho3D::String & filename)
+{
+    Image screenshot(context_);
+    GetSubsystem<Graphics>()->TakeScreenShot(screenshot);
+    screenshot.SavePNG(filename);
+}
+
 void App::setGuiFilename(const Urho3D::String & filename)
 {
     guiFilename = filename;

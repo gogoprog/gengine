@@ -57,7 +57,7 @@ debug.log
 generated
 /test/packed-*
 /test/index.*
-
+/test/screenshot.png
 /doc/pages
 
 callgrind*
