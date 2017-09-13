@@ -19,7 +19,7 @@ distDir = common.rootPath + "/dist"
 targetDir = distDir + "/build"
 shutil.rmtree(distDir, True)
 os.makedirs(targetDir)
-emscripten.build(targetDir)
+emscripten.build(targetDir, targetDir)
 shutil.copytree(common.rootPath + "/scripts", distDir + "/scripts")
 
 os.makedirs(distDir + "/deps/common/Ash-Haxe")

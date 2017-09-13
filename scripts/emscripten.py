@@ -25,12 +25,12 @@ def emcc(appDir, outputDir, includeEmptyData):
     os.system(cmd)
     os.chdir(previous_dir)
 
-def build(targetDir):
+def build(appDir, outputDir):
     common.log("Running emcc...")
     current_dir = os.getcwd()
-    os.chdir(targetDir)
+    os.chdir(appDir)
     os.system("rm -rf index.data index.html index.js index.html.mem")
-    emcc(current_dir, current_dir, True)
+    emcc(current_dir, outputDir, True)
     os.chdir(current_dir)
 
 def runServer(targetDir):

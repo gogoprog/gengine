@@ -14,7 +14,7 @@ def run():
         os.system(command)
     else:
         if not common.distributed:
-            emscripten.build(common.targetDir)
+            emscripten.build(common.targetDir, common.targetDir)
         else:
             os.chdir(common.targetDir)
             os.system("cp -f " + common.rootPath + "/build/index.* .")
