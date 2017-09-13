@@ -28,6 +28,9 @@ shutil.copytree(common.rootPath + "/deps/common/Ash-Haxe/src", distDir + "/deps/
 os.makedirs(distDir + "/src")
 shutil.copytree(common.rootPath + "/src/haxe", distDir + "/src/haxe")
 
+os.makedirs(distDir + "/src/bindings/generated/haxe")
+shutil.copytree(common.rootPath + "/src/bindings/generated/haxe/gengine", distDir + "/src/bindings/generated/haxe/gengine")
+
 shutil.copy2(common.rootPath + "/scripts/dist/gengine.sh", distDir)
 shutil.copy2(common.rootPath + "/scripts/dist/gengine-run.sh", distDir)
 shutil.copy2(common.rootPath + "/scripts/dist/gengine-run.bat", distDir)
