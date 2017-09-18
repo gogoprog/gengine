@@ -201,9 +201,17 @@
       function loadFile(filePath) {
         $("#gui").load(filePath, function() {
           setupListeners();
-          Main.onGuiLoaded();
+          onGuiLoaded();
         });
       }
+
+        function onGuiLoaded() {
+            if(Main.$startCalled == null){
+                setTimeout(onGuiLoaded, 500);
+            } else {
+                Main.onGuiLoaded();
+            }
+        }
 
       function gengineInitialize(width, height, fullscreen)
       {
