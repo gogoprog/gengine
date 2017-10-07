@@ -38,6 +38,7 @@ EMBINDCEFV8_BINDINGS(application)
         .method("getAudio", &App::getAudio)
         .method("isRunning", &App::isRunning)
         .method("setWindowTitle", &App::setWindowTitle)
+        .method("takeScreenshot", &App::takeScreenshot)
         .method("setGuiFilename", &App::setGuiFilename)
         .method("setWindowSize", &App::setWindowSize)
         ;

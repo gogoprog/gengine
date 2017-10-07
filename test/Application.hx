@@ -34,6 +34,7 @@ class GameSystem extends System
         {
             var p = Gengine.getInput().getMousePosition();
             trace('Mouse position : ' + p.x + ', ' + p.y);
+            Gengine.takeScreenshot("screenshot.png");
         }
 
         if(Gengine.getInput().getMouseButtonPress(1))
