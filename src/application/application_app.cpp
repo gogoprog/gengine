@@ -6,6 +6,9 @@
 #include <fstream>
 #include <sstream>
 
+#define URHO3D_LOGGING
+
+#include <Urho3D/IO/Log.h>
 #include <Urho3D/Core/CoreEvents.h>
 #include <Urho3D/Core/Timer.h>
 #include <Urho3D/Core/Thread.h>
@@ -147,6 +150,7 @@ void App::exit()
 
 void App::takeScreenshot(const Urho3D::String & filename)
 {
+    URHO3D_LOGDEBUG("Saving screenshot " + filename);
     Image screenshot(context_);
     GetSubsystem<Graphics>()->TakeScreenShot(screenshot);
     screenshot.SavePNG(filename);

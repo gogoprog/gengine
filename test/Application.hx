@@ -26,7 +26,6 @@ class GameSystem extends System
     {
         if(Gengine.getInput().getScancodePress(41))
         {
-            Gengine.takeScreenshot("screenshot.png");
             trace('Escaped just pressed.');
             Gengine.exit();
         }
@@ -35,6 +34,7 @@ class GameSystem extends System
         {
             var p = Gengine.getInput().getMousePosition();
             trace('Mouse position : ' + p.x + ', ' + p.y);
+            Gengine.takeScreenshot("screenshot.png");
         }
 
         if(Gengine.getInput().getMouseButtonPress(1))
