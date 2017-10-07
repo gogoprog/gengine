@@ -84,7 +84,7 @@ void App::Start()
 
 #ifdef EMSCRIPTEN
     SubscribeToEvent(Urho3D::E_UPDATE, URHO3D_HANDLER(App, update));
-    embindcefv8::executeJavaScript("Main.start();");
+    embindcefv8::executeJavaScript("Main.start(); Main.$startCalled = true;");
 #endif
 
     SubscribeToEvent(Urho3D::E_PHYSICSBEGINCONTACT2D, URHO3D_HANDLER(App, onPhysicsBeginContact2D));
