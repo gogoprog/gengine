@@ -21,7 +21,6 @@ public:
     void update();
     void loadFile(const char *file_path);
     void executeScript(const char *code);
-    void showPage(const char *name, const char *effect, const int duration);
 
 #ifndef EMSCRIPTEN
     Handler & getHandler() { return * handler; }

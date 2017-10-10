@@ -164,6 +164,11 @@ void App::setGuiFilename(const Urho3D::String & filename)
 #endif
 }
 
+void App::setStartupString(const Urho3D::String & str)
+{
+    startupString = str;
+}
+
 gui::System & App::getGui()
 {
     return gui::System::getInstance();

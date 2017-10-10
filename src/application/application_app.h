@@ -37,7 +37,6 @@ public:
     void takeScreenshot(const Urho3D::String & filename);
     void setGuiFilename(const Urho3D::String & filename);
 
-
     inline Urho3D::Context& getContext() { return *context_; }
     inline Urho3D::Engine * getEngine() { return engine_; }
     inline Urho3D::UI & getUI() { return *GetSubsystem<Urho3D::UI>(); }
@@ -60,6 +59,8 @@ public:
     void setWindowSize(const Urho3D::IntVector2 & size) { windowSize = size; }
     void setWindowTitle(const Urho3D::String & title) { windowTitle = title; }
     const Urho3D::String & getGuiFilename() { return guiFilename; }
+    void setStartupString(const Urho3D::String & str);
+    const Urho3D::String & getStartupString() { return startupString; }
 
     void update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
     void onPhysicsBeginContact2D(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
@@ -70,7 +71,8 @@ private:
 
     Urho3D::String
         windowTitle,
-        guiFilename;
+        guiFilename,
+        startupString;
     bool
         fullscreen;
     Urho3D::IntVector2
