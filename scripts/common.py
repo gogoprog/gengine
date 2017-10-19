@@ -180,7 +180,10 @@ def compile():
     if skipHaxe:
         return
 
-    os.system("rm -rf " + targetDir + "generated/main.js")
+    try:
+        os.remove(targetDir + "generated/main.js")
+    except OSError:
+        pass
 
     if not os.path.exists(targetDir + "/build.hxml"):
         log("Compiling : Running haxe default command line...")
