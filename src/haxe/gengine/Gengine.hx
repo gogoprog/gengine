@@ -20,6 +20,8 @@ extern class Gengine
     static public function getRenderer():Renderer;
     static public function getAudio():Audio;
 
+    static public function getStartupString():String;
+
     static public function setWindowSize(size:IntVector2):Void;
     static public function setWindowTitle(title:String):Void;
 

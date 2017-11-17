@@ -19,8 +19,7 @@ namespace application
 void loadScriptFile(const char *filename, const char *additional_code)
 {
     std::ifstream in(filename);
-    std::string contents((std::istreambuf_iterator<char>(in)),
-    std::istreambuf_iterator<char>());
+    std::string contents((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
 
     contents += additional_code;
 

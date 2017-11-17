@@ -19,6 +19,12 @@ int main(int argc, char *argv[])
 
     mainApp = new gengine::application::App();
 
+    auto startupString = ::getenv("GENGINE_STARTUP");
+    if(startupString)
+    {
+        mainApp->setStartupString(startupString);
+    }
+
     embindcefv8::addGlobalObject(*mainApp, "gengine");
 
     gengine::gui::System::getInstance().init(argc, argv);
@@ -43,6 +49,7 @@ int main(int argc, char *argv[])
 
     mainApp->run();
 #else
+
     auto engine = mainApp->getEngine();
     while(!engine->IsExiting())
     {
