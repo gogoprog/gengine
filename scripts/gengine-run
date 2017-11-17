@@ -3,6 +3,7 @@
 import os
 import common
 import emscripten
+import shutil
 
 def run():
     if not common.html5Mode:
@@ -17,7 +18,10 @@ def run():
             emscripten.build(common.targetDir, common.targetDir)
         else:
             os.chdir(common.targetDir)
-            os.system("cp -f " + common.rootPath + "/build/index.* .")
+            shutil.copy2(common.rootPath + "/build/index.html", ".")
+            shutil.copy2(common.rootPath + "/build/index.js", ".")
+            shutil.copy2(common.rootPath + "/build/index.html.mem", ".")
+            shutil.copy2(common.rootPath + "/build/index.data", ".")
 
         emscripten.runServer(common.targetDir)
 

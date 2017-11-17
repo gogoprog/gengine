@@ -40,5 +40,6 @@ shutil.copy2(common.rootPath + "/scripts/dist/gengine-compile.bat", distDir)
 os.chdir(distDir)
 version = input("Enter version: ")
 fileName = "gengine-" + version + ".zip"
+os.system("echo " + version + " > " + distDir + "/VERSION.txt")
 os.system("zip -r " + fileName + " *")
 os.system("git tag " + version)
