@@ -28,6 +28,7 @@
 #include <Urho3D/Urho2D/PhysicsEvents2D.h>
 #include <Urho3D/Urho2D/RigidBody2D.h>
 #include <Urho3D/Urho2D/StaticSprite2D.h>
+#include <SDL/SDL.h>
 
 #define STRING(src) \
     #src
@@ -177,6 +178,11 @@ gui::System & App::getGui()
 Node & App::createNode()
 {
     return * scene->CreateChild();
+}
+
+void App::setKeyboardElement(const Urho3D::String & str)
+{
+    SDL_SetHint(SDL_HINT_EMSCRIPTEN_KEYBOARD_ELEMENT, str.CString());
 }
 
 void App::update(StringHash eventType, VariantMap& eventData)

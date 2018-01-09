@@ -62,6 +62,8 @@ public:
     void setStartupString(const Urho3D::String & str);
     const Urho3D::String & getStartupString() { return startupString; }
 
+    void setKeyboardElement(const Urho3D::String & str);
+
     void update(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
     void onPhysicsBeginContact2D(Urho3D::StringHash eventType, Urho3D::VariantMap& eventData);
 

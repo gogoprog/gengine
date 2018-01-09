@@ -25,6 +25,8 @@ extern class Gengine
     static public function setWindowSize(size:IntVector2):Void;
     static public function setWindowTitle(title:String):Void;
 
+    static public function setKeyboardElement(element:String):Void;
+
     static public function takeScreenshot(filename:String):Void;
     static public function setGuiFilename(filename:String):Void;
 

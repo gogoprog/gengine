@@ -42,5 +42,6 @@ EMBINDCEFV8_BINDINGS(application)
         .method("takeScreenshot", &App::takeScreenshot)
         .method("setGuiFilename", &App::setGuiFilename)
         .method("setWindowSize", &App::setWindowSize)
+        .method("setKeyboardElement", &App::setKeyboardElement)
         ;
 }
