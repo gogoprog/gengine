@@ -115,8 +115,8 @@ void System::updateInput()
             static bool mouseWasDown = false;
 
             static std::vector<std::string> chars {
-                "qwertyuiopasdfghjklzxcvbnm1234567890_+[]/<> '",
-                "QWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()-={}?,. \""
+                "qwertyuiopasdfghjklzxcvbnm1234567890_+[]/<> ;'",
+                "QWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()-={}?,. :\""
             };
 
             static int charsCount = chars[0].length();
@@ -197,14 +197,10 @@ void System::updateInput()
                     key_event.native_key_code = key.nativeCode;
                     key_event.windows_key_code = key.windowsCode;
                     browser->GetHost()->SendKeyEvent(key_event);
-
-                    if(key.character)
-                    {
-                        key_event.type = KEYEVENT_CHAR;
-                        key_event.character = key.character;
-                        key_event.unmodified_character = key.character;
-                        browser->GetHost()->SendKeyEvent(key_event);
-                    }
+                    key_event.type = KEYEVENT_CHAR;
+                    key_event.character = key.character;
+                    key_event.unmodified_character = key.character;
+                    browser->GetHost()->SendKeyEvent(key_event);
                 }
             }
         }
