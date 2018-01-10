@@ -136,6 +136,7 @@ void App::runFrame()
 
 #ifdef CEF
     gengine::gui::System::getInstance().getHandler().updateTexture();
+    gengine::gui::System::getInstance().updateInput();
 #endif
 }
 

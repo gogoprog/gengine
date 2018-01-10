@@ -28,6 +28,14 @@ namespace gengine
 namespace gui
 {
 
+struct LocalKey
+{
+    int scanCode;
+    int nativeCode;
+    int windowsCode;
+    char character;
+};
+
 void System::preinit(int argc, char *argv[])
 {
     #ifndef EMSCRIPTEN
@@ -95,9 +103,38 @@ void System::finalize()
 void System::update()
 {
     #ifndef EMSCRIPTEN
+        CefDoMessageLoopWork();
+    #endif
+}
+
+void System::updateInput()
+{
+    #ifndef EMSCRIPTEN
     {
         {
             static bool mouseWasDown = false;
+
+            static std::vector<std::string> chars {
+                "qwertyuiopasdfghjklzxcvbnm1234567890_+[]/<> '",
+                "QWERTYUIOPASDFGHJKLZXCVBNM!@#$%^&*()-={}?,. \""
+            };
+
+            static int charsCount = chars[0].length();
+
+            static std::vector<LocalKey> keys{
+                {SDL_SCANCODE_RETURN, 65293, 13, '\r'},
+                {SDL_SCANCODE_BACKSPACE, 65288, 8, 0},
+                {SDL_SCANCODE_UP, 65362, 273, 0},
+                {SDL_SCANCODE_DOWN, 65364, 274, 0},
+                {SDL_SCANCODE_LEFT, 65361, 276, 0},
+                {SDL_SCANCODE_RIGHT, 65363, 275, 0},
+                {SDL_SCANCODE_INSERT, 65379, 277, 0},
+                {SDL_SCANCODE_DELETE, 65535, 127, 0},
+                {SDL_SCANCODE_HOME, 65360, 278, 0},
+                {SDL_SCANCODE_END, 65367, 279, 0},
+                {SDL_SCANCODE_PAGEUP, 65365, 280, 0},
+                {SDL_SCANCODE_PAGEDOWN, 65366, 281, 0},
+            };
 
             CefMouseEvent mouse_event;
             const auto & input = gengine::application::get().getInput();
@@ -126,9 +163,51 @@ void System::update()
             }
 
             browser->GetHost()->SendMouseMoveEvent(mouse_event, false);
-        }
 
-        CefDoMessageLoopWork();
+            CefKeyEvent key_event;
+
+            bool shift = input.GetKeyDown(SDLK_RSHIFT) || input.GetKeyDown(SDLK_LSHIFT);
+            key_event.modifiers = shift ? EVENTFLAG_SHIFT_DOWN : 0;
+
+            for(int i=0; i<charsCount;++i)
+            {
+                for(int s = 0; s < 2; ++s)
+                {
+                    char key = chars[s][i];
+
+                    if(input.GetKeyPress(key))
+                    {
+                        key = shift ? chars[1-s][i] : key;
+                        key_event.type = KEYEVENT_CHAR;
+                        key_event.native_key_code = key;
+                        key_event.character = key;
+
+                        browser->GetHost()->SendKeyEvent(key_event);
+
+                        break;
+                    }
+                }
+            }
+
+            for(auto & key : keys)
+            {
+                if(input.GetScancodePress(key.scanCode))
+                {
+                    key_event.type = KEYEVENT_RAWKEYDOWN;
+                    key_event.native_key_code = key.nativeCode;
+                    key_event.windows_key_code = key.windowsCode;
+                    browser->GetHost()->SendKeyEvent(key_event);
+
+                    if(key.character)
+                    {
+                        key_event.type = KEYEVENT_CHAR;
+                        key_event.character = key.character;
+                        key_event.unmodified_character = key.character;
+                        browser->GetHost()->SendKeyEvent(key_event);
+                    }
+                }
+            }
+        }
     }
     #endif
 }

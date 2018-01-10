@@ -19,6 +19,7 @@ public:
     void init(int argc, char *argv[]);
     void finalize();
     void update();
+    void updateInput();
     void loadFile(const char *file_path);
     void executeScript(const char *code);
 
